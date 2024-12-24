@@ -1,0 +1,7 @@
+A reference on this stopping time analysis
+A reference on using this type of stopping time analysis: 
+http://arxiv.org/pdf/1307.2559v1.pdf
+
+Here’s the journal version of that arXiv paper: "Concentrated hitting times of randomized search heuristics with variable drift", by Lehre, Per Kristian and Witt, Carsten.
+
+I learned about it from Neal Young's algorithms notes, see algnotes.info
