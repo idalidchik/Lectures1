@@ -1,0 +1,1262 @@
+WEBVTT
+
+1
+00:00:01.587 --> 00:00:04.977
+[MUSIC]
+
+2
+00:00:07.555 --> 00:00:13.500
+So far, we have designed a simple
+algorithm for the multiway cut problem.
+
+3
+00:00:13.500 --> 00:00:16.370
+Now, let us try a more sophisticated, and
+
+4
+00:00:16.370 --> 00:00:20.800
+better algorithm based on an interesting
+linear programming relaxation.
+
+5
+00:00:22.350 --> 00:00:25.540
+As usual,
+we start by designing an integer program.
+
+6
+00:00:27.780 --> 00:00:33.630
+How do we design an integer programming
+model for the multi-way cut problem?
+
+7
+00:00:33.630 --> 00:00:36.190
+We have to define some variables.
+
+8
+00:00:36.190 --> 00:00:41.610
+If we think about multi-way cut,
+it's a partition of the graph into
+
+9
+00:00:41.610 --> 00:00:47.240
+Classes for the vertices, each vertex is
+associated to one particular terminal.
+
+10
+00:00:47.240 --> 00:00:52.900
+These vertices go with terminal a1,
+those vertices go with terminal a2,
+
+11
+00:00:52.900 --> 00:00:55.210
+and those vertices go with terminal a3.
+
+12
+00:00:56.230 --> 00:01:01.170
+So, this suggests having one variable for
+each vertex.
+
+13
+00:01:01.170 --> 00:01:02.080
+And each terminal.
+
+14
+00:01:03.150 --> 00:01:06.680
+For each graph vertex, u, and terminal,
+
+15
+00:01:06.680 --> 00:01:11.330
+i, we will define a variable Xsub u,i,
+
+16
+00:01:11.330 --> 00:01:18.870
+whose interpretation is this X = 1 if
+vertex u is the cluster of terminal i.
+
+17
+00:01:20.840 --> 00:01:24.670
+Okay, so with the Xui's then,
+
+18
+00:01:24.670 --> 00:01:28.830
+we get to have a partition of
+the vertices into clusters.
+
+19
+00:01:30.000 --> 00:01:34.010
+Now, we want to capture the value
+of the resulting multi-way cut.
+
+20
+00:01:35.270 --> 00:01:41.130
+That is, we want to compute the sum of the
+weights of the edges that cross the cuts.
+
+21
+00:01:41.130 --> 00:01:42.540
+All the edges that are drawn here.
+
+22
+00:01:43.810 --> 00:01:50.990
+So, we will have a variable for each edge
+e telling us whether it crosses the cut.
+
+23
+00:01:50.990 --> 00:01:52.440
+And how do we do it?
+
+24
+00:01:52.440 --> 00:01:54.790
+We will do it in a slightly manner.
+
+25
+00:01:54.790 --> 00:01:58.940
+That is, for every edge e, for
+
+26
+00:01:58.940 --> 00:02:04.040
+every terminal i,
+we will have a variable z sub ei.
+
+27
+00:02:04.040 --> 00:02:05.620
+That will be set to one.
+
+28
+00:02:05.620 --> 00:02:10.990
+If, and
+only if this edge goes out of cluster i.
+
+29
+00:02:10.990 --> 00:02:15.600
+In other words, here,
+this edge e has Ze a1
+
+30
+00:02:16.600 --> 00:02:20.930
+equals 1,
+because it goes out of cluster 1.
+
+31
+00:02:20.930 --> 00:02:23.810
+Ze 2 equals 1.
+
+32
+00:02:23.810 --> 00:02:29.240
+Because as E goes out of cluster two it
+goes between cluster one and cluster two.
+
+33
+00:02:29.240 --> 00:02:34.310
+But Ze3 will be 0 because this
+edge does not leave cluster three.
+
+34
+00:02:35.930 --> 00:02:37.580
+Why do we do this?
+
+35
+00:02:37.580 --> 00:02:42.220
+Because we will be able to capture
+this with some constraints.
+
+36
+00:02:42.220 --> 00:02:43.689
+So, let's move on to the constraints.
+
+37
+00:02:45.550 --> 00:02:47.032
+The constraints of our integer program.
+
+38
+00:02:47.032 --> 00:02:54.401
+First, every Ze,i and
+every Xu,i must be 0,1.
+
+39
+00:02:54.401 --> 00:02:57.510
+Second, if you look at terminal ai,
+
+40
+00:02:57.510 --> 00:03:02.490
+terminal ai is in its own cluster
+in cluster ai, obviously.
+
+41
+00:03:02.490 --> 00:03:03.610
+What does this mean?
+
+42
+00:03:03.610 --> 00:03:08.260
+It means that Xai,i must be equal to 1.
+
+43
+00:03:08.260 --> 00:03:13.520
+So, every vertex is in exactly 1 cluster.
+
+44
+00:03:13.520 --> 00:03:17.790
+Every vertex u belongs to some cluster,
+exactly 1.
+
+45
+00:03:17.790 --> 00:03:23.780
+So, the some of x u i over every terminal,
+must be equal to 1.
+
+46
+00:03:23.780 --> 00:03:26.295
+One of these is 1, all the others are 0.
+
+47
+00:03:28.030 --> 00:03:34.450
+With these constraints, we have captured
+the [INAUDIBLE] x must define with
+
+48
+00:03:34.450 --> 00:03:39.860
+partition of the [INAUDIBLE] into parts
+such that i contains terminal ai.
+
+49
+00:03:41.210 --> 00:03:47.160
+Finally, how do we capture the fact
+that an edge goes across the coaster?
+
+50
+00:03:48.180 --> 00:03:52.772
+Well, when does the edge e equals u v,
+
+51
+00:03:52.772 --> 00:03:58.960
+when does it cross between cluster i and
+cluster j?
+
+52
+00:03:58.960 --> 00:04:05.879
+We can see that because vertex u is
+in cluster i, vertex v in cluster j.
+
+53
+00:04:05.879 --> 00:04:11.649
+We can see that because Xui is 1,
+
+54
+00:04:11.649 --> 00:04:17.223
+xuj is 0, xvi is 0, xvj is 1.
+
+55
+00:04:17.223 --> 00:04:22.086
+In other words,
+if Xui is different from Xvi,
+
+56
+00:04:22.086 --> 00:04:26.584
+one of these two is 0, the other one is 1.
+
+57
+00:04:26.584 --> 00:04:30.787
+One of these two vortexes,
+u and v, is in cluster i.
+
+58
+00:04:30.787 --> 00:04:32.725
+The other one is not in cluster i.
+
+59
+00:04:32.725 --> 00:04:39.645
+Therefore, this is exactly the situation
+when edge uv crosses out of cluster i.
+
+60
+00:04:39.645 --> 00:04:48.330
+Okay, so this is not a condition
+that is easy to express linearly.
+
+61
+00:04:48.330 --> 00:04:49.667
+We will see that in a minute.
+
+62
+00:04:49.667 --> 00:04:54.827
+So, we're still left with this constraint
+that we don't quite know how to express,
+
+63
+00:04:54.827 --> 00:04:58.480
+but before we express it,
+let's write the objective.
+
+64
+00:04:58.480 --> 00:04:59.380
+That is the easy part.
+
+65
+00:05:01.060 --> 00:05:07.620
+At e, if we look at the sum over every
+i of Zei, what will this be equal to?
+
+66
+00:05:08.680 --> 00:05:10.130
+It depends.
+
+67
+00:05:10.130 --> 00:05:17.400
+If the edge is internal to a cluster,
+then all those seen as o will return to 0.
+
+68
+00:05:17.400 --> 00:05:17.900
+Good.
+
+69
+00:05:19.290 --> 00:05:23.950
+If the edge is between two clusters,
+like this one here, then,
+
+70
+00:05:25.410 --> 00:05:29.500
+with Zei will be 1 once fine, and
+
+71
+00:05:29.500 --> 00:05:33.150
+one another time for
+J .so will pass 2 of them.
+
+72
+00:05:33.150 --> 00:05:38.100
+So, if you multiply by 1 /2
+the contribution will be o1/2 C of B.
+
+73
+00:05:38.100 --> 00:05:42.970
+So, the objective is exactly one half
+spends the sum over every edge E.
+
+74
+00:05:42.970 --> 00:05:45.470
+Sum over every term I.
+
+75
+00:05:45.470 --> 00:05:47.460
+Of Z sub e, Z sub ei.
+
+76
+00:05:49.165 --> 00:05:52.490
+So,we have our variables
+we have our objectives
+
+77
+00:05:52.490 --> 00:05:56.630
+we have started our constraints
+we left with this slightly
+
+78
+00:05:56.630 --> 00:05:59.390
+mysterious constraint that we're
+not quite done dealing with yet.
+
+79
+00:06:00.560 --> 00:06:01.560
+Lets finish this.
+
+80
+00:06:02.930 --> 00:06:05.210
+How do we express this?
+
+81
+00:06:05.210 --> 00:06:08.035
+This can be written with absolute values.
+
+82
+00:06:08.035 --> 00:06:13.410
+Zuv,i must be at least
+
+83
+00:06:13.410 --> 00:06:18.490
+the absolute value of the difference
+between Xu,i and Xv,i.
+
+84
+00:06:18.490 --> 00:06:19.850
+Consider this, what does it mean?
+
+85
+00:06:21.200 --> 00:06:24.666
+If U and V are in the same constraint.
+
+86
+00:06:24.666 --> 00:06:26.808
+Xu,i = Xv,i.
+
+87
+00:06:26.808 --> 00:06:33.640
+Their difference is 0 and this constraint
+says Ze,i is greater than recall to 0.
+
+88
+00:06:33.640 --> 00:06:36.870
+It doesn't add any
+constraint to the problem.
+
+89
+00:06:36.870 --> 00:06:37.370
+Good.
+
+90
+00:06:39.250 --> 00:06:44.080
+If u and v are in different clusters
+than one of these 2 variables is 0 and
+
+91
+00:06:44.080 --> 00:06:48.570
+1 of them is 1,the absolute value
+of the difference is exactly 1,
+
+92
+00:06:48.570 --> 00:06:53.290
+so this says Ze,i must be at least 1.
+
+93
+00:06:53.290 --> 00:06:59.020
+So, with this absolute value we had
+exactly expressed this condition
+
+94
+00:06:59.020 --> 00:07:06.190
+that Zuv,i is 1, if and only if Xu,i
+is different than Xv,i, and finally,
+
+95
+00:07:06.190 --> 00:07:12.230
+how do we transform this absolute
+value into linear inequalities?
+
+96
+00:07:12.230 --> 00:07:20.500
+We can just write, Ze,i must be
+greater than both Xu,i minus Xv,i.
+
+97
+00:07:20.500 --> 00:07:25.020
+And, the opposite Xv,i- Xu,i, indeed.
+
+98
+00:07:25.020 --> 00:07:28.010
+If Ze,i is greater than both, then,
+
+99
+00:07:28.010 --> 00:07:30.080
+it's greater than the max
+of these two quantities.
+
+100
+00:07:31.220 --> 00:07:34.490
+And the max of these two quantities
+is exactly the absolute value.
+
+101
+00:07:35.690 --> 00:07:40.020
+So, this condition,
+Z greater than an absolute value,
+
+102
+00:07:40.020 --> 00:07:42.190
+is equivalent to two linear conditions.
+
+103
+00:07:44.160 --> 00:07:45.030
+Beware.
+
+104
+00:07:45.030 --> 00:07:49.080
+You cannot always get rid of
+absolute values in this way.
+
+105
+00:07:49.080 --> 00:07:53.535
+You're lucky here that the inequality
+is greater than the absolute value.
+
+106
+00:07:53.535 --> 00:07:55.985
+If it said less than an absolute value,
+
+107
+00:07:55.985 --> 00:07:58.892
+then we would not be able
+to employ this trick.
+
+108
+00:07:58.892 --> 00:08:03.269
+Because when you do the max,
+it doesn't work anymore.
+
+109
+00:08:03.269 --> 00:08:06.040
+The inequalities would go
+in the wrong direction.
+
+110
+00:08:06.040 --> 00:08:07.930
+So, here we're just lucky.
+
+111
+00:08:09.490 --> 00:08:15.530
+Okay, so now we have an integer
+program for the problem.
+
+112
+00:08:15.530 --> 00:08:17.615
+Here it is, to summarize, to recap.
+
+113
+00:08:17.615 --> 00:08:24.220
+Variables, xu,i,
+ze,i that have values 0 or 1.
+
+114
+00:08:25.390 --> 00:08:28.870
+For terminal ai, xai,i is equal to 1.
+
+115
+00:08:28.870 --> 00:08:33.600
+For other terminals,
+the sum of every i must be equal to 1.
+
+116
+00:08:33.600 --> 00:08:40.914
+ze,i is greater than both xu,i minus
+xv,i and xv,i minus xu,i if e is auv.
+
+117
+00:08:40.914 --> 00:08:46.316
+And the objective is to
+minimize one-half of the sum
+
+118
+00:08:46.316 --> 00:08:51.490
+over every e and
+i of the cost of that e times ze,i.
+
+119
+00:08:52.590 --> 00:08:57.820
+This is an integer programming
+formulation of the multi-wicket problem.
+
+120
+00:08:59.990 --> 00:09:00.620
+Now what do we do?
+
+121
+00:09:01.670 --> 00:09:03.590
+We do a linear programming relaxation.
+
+122
+00:09:03.590 --> 00:09:04.710
+How do we do that?
+
+123
+00:09:04.710 --> 00:09:05.488
+We know how to do this.
+
+124
+00:09:07.988 --> 00:09:08.488
+There.
+
+125
+00:09:09.540 --> 00:09:14.860
+I took this line xu,e ze,i equal to 0,1.
+
+126
+00:09:14.860 --> 00:09:20.750
+Replaced it by xu,e ze,i real
+numbers between 0 and 1.
+
+127
+00:09:20.750 --> 00:09:22.610
+The rest is identical.
+
+128
+00:09:23.930 --> 00:09:25.462
+Unchanged.
+
+129
+00:09:25.462 --> 00:09:28.916
+It's all the same and so
+that's our linear programming relaxation.
+
+130
+00:09:28.916 --> 00:09:33.319
+And what is interesting about this,
+this is just a slightly more
+
+131
+00:09:33.319 --> 00:09:37.735
+complicated variant of what we
+have seen in previous chapters.
+
+132
+00:09:37.735 --> 00:09:41.696
+So, what's interesting about
+this is we do not stop here.
+
+133
+00:09:41.696 --> 00:09:46.989
+We study it, and we see it
+
+134
+00:09:46.989 --> 00:09:52.040
+as a geometric object.
+
+135
+00:09:57.420 --> 00:09:59.990
+Let's do it.
+Let's do it.
+
+136
+00:09:59.990 --> 00:10:03.730
+For every vertex u,
+we can define the vector.
+
+137
+00:10:04.750 --> 00:10:11.250
+Vector xu of all the variables
+xu,i sitting in k dimensions.
+
+138
+00:10:11.250 --> 00:10:12.915
+k is the number of terminals.
+
+139
+00:10:12.915 --> 00:10:17.780
+xu,i, if you remember is 1.
+
+140
+00:10:17.780 --> 00:10:21.860
+iff vertex u belongs to
+the cluster of terminal ai.
+
+141
+00:10:21.860 --> 00:10:24.660
+So we have one dimension for
+each terminal.
+
+142
+00:10:26.270 --> 00:10:28.634
+And what is the sum of the xu,is?
+
+143
+00:10:29.690 --> 00:10:31.040
+We know it has to be 1.
+
+144
+00:10:31.040 --> 00:10:34.610
+But it's also the sum
+of the absolute values,
+
+145
+00:10:34.610 --> 00:10:38.360
+because all the xu,is are non-negative.
+
+146
+00:10:38.360 --> 00:10:39.690
+And what is this?
+
+147
+00:10:39.690 --> 00:10:44.010
+If you have a vector,
+xu with these coordinates and
+
+148
+00:10:44.010 --> 00:10:47.850
+you sum the absolute value of
+the coordinates, what do you get?
+
+149
+00:10:47.850 --> 00:10:52.560
+You get the, l1,
+the length of a vector in the l1 metric.
+
+150
+00:10:54.500 --> 00:10:59.180
+So we have vectors in k dimensions, and
+
+151
+00:10:59.180 --> 00:11:04.930
+we have a constraint that says that
+their l1 length must be equal to 1.
+
+152
+00:11:04.930 --> 00:11:07.091
+Let's keep going.
+
+153
+00:11:09.651 --> 00:11:10.800
+All right.
+
+154
+00:11:10.800 --> 00:11:13.060
+One dimension for each terminal.
+
+155
+00:11:13.060 --> 00:11:16.270
+Let's think about the case
+when k is equal to 3.
+
+156
+00:11:16.270 --> 00:11:18.880
+3 dimensions.
+
+157
+00:11:18.880 --> 00:11:21.940
+What can we say about terminal a1 say?
+
+158
+00:11:23.430 --> 00:11:28.183
+Terminal a1,
+we know that it's first coordinate x,a1,1
+
+159
+00:11:28.183 --> 00:11:31.420
+equals 1 xa1,2 is 0, xa1,3 is 0.
+
+160
+00:11:31.420 --> 00:11:33.670
+Here it is.
+
+161
+00:11:34.740 --> 00:11:38.830
+Terminal 1 corresponds to this vector,
+1,0,0.
+
+162
+00:11:38.830 --> 00:11:42.140
+Terminal 2 corresponds to that vector,
+0,1,0.
+
+163
+00:11:42.140 --> 00:11:47.060
+Terminal three corresponds to this vector,
+0,0,1.
+
+164
+00:11:47.060 --> 00:11:49.110
+What about all the other vectors?
+
+165
+00:11:50.120 --> 00:11:52.520
+The other vectors must satisfy,
+
+166
+00:11:53.740 --> 00:11:57.125
+the sum of their coordinates must be
+equal to 1, and then non-negative.
+
+167
+00:11:58.560 --> 00:12:02.729
+What object is defined and
+argued by these equations?
+
+168
+00:12:05.452 --> 00:12:06.595
+Exactly this.
+
+169
+00:12:06.595 --> 00:12:10.240
+A triangle, this is a triangle.
+
+170
+00:12:10.240 --> 00:12:13.100
+It's a two-dimensional object in r cubed.
+
+171
+00:12:13.100 --> 00:12:19.730
+A triangle of the equation
+x2 + x1 + x3 = 1.
+
+172
+00:12:19.730 --> 00:12:22.810
+And all the xis are greater than or
+equal to 0.
+
+173
+00:12:22.810 --> 00:12:29.980
+A triangle bounded by the three vertices
+corresponding to the three terminals.
+
+174
+00:12:32.000 --> 00:12:37.330
+So if we think about the constraint
+
+175
+00:12:37.330 --> 00:12:42.290
+that the sum of the xu,is
+must be equal to 1.
+
+176
+00:12:42.290 --> 00:12:46.800
+That says vertex u must
+be in this triangle.
+
+177
+00:12:46.800 --> 00:12:52.420
+Especially if we add xu,i is
+always greater than or equal to 0.
+
+178
+00:12:52.420 --> 00:12:57.740
+Then this can be translated
+geometrically into the vector
+
+179
+00:12:57.740 --> 00:13:02.620
+associated to vertex u must be
+somewhere in this triangle.
+
+180
+00:13:04.670 --> 00:13:09.561
+And the three terminals are the three
+corners of this triangle.
+
+181
+00:13:11.126 --> 00:13:13.690
+Now, what are we trying to minimize?
+
+182
+00:13:14.930 --> 00:13:19.481
+We tried to minimize ze,i,
+
+183
+00:13:19.481 --> 00:13:27.076
+where if edge e is at uv,
+ce,i is at least what?
+
+184
+00:13:27.076 --> 00:13:30.723
+The sum of xu1 minus xv1,
+
+185
+00:13:30.723 --> 00:13:35.010
+xu2 minus xv2, xu3- xv3.
+
+186
+00:13:35.010 --> 00:13:42.770
+This is no other than just the l1
+distance between xu and xv.
+
+187
+00:13:42.770 --> 00:13:48.408
+So we can write the objective
+as one-half of the sum
+
+188
+00:13:48.408 --> 00:13:55.770
+over every edge uv of cuv times
+the l1 metric of the vector xu-xv.
+
+189
+00:13:58.960 --> 00:14:03.885
+So now, the problem is to embed
+the graph vertices inside
+
+190
+00:14:03.885 --> 00:14:07.690
+the triangle, to minimize this quantity.
+
+191
+00:14:09.450 --> 00:14:11.200
+Let's think about this triangle some more.
+
+192
+00:14:13.270 --> 00:14:18.210
+What can we say about the coordinates
+of the points on this triangle?
+
+193
+00:14:18.210 --> 00:14:21.320
+Let's first look at an edge
+along this triangle.
+
+194
+00:14:21.320 --> 00:14:27.810
+This edge is bounded by the two
+vertices 0,0,1 and 0,1,0.
+
+195
+00:14:27.810 --> 00:14:33.590
+It contains all the linear combinations,
+convex combinations, of these two points.
+
+196
+00:14:33.590 --> 00:14:39.580
+In other words, all the vertices on
+this edge have x1 is equal to 0.
+
+197
+00:14:39.580 --> 00:14:45.530
+That's true for this vertex, true for
+that one, true everywhere in between.
+
+198
+00:14:46.740 --> 00:14:50.894
+And then if we look at the coordinates
+x2 and x3, they sum to 1.
+
+199
+00:14:50.894 --> 00:14:55.110
+x2+x3 is 1, x2+x3 is 1.
+
+200
+00:14:55.110 --> 00:14:58.870
+So that's what this line is about.
+
+201
+00:15:00.030 --> 00:15:03.522
+What about the line parallel to this,
+but inside the triangle?
+
+202
+00:15:03.522 --> 00:15:06.526
+What about this line?
+
+203
+00:15:06.526 --> 00:15:10.140
+It goes from 0.6, 0, 0.4,
+
+204
+00:15:10.140 --> 00:15:14.335
+the sum most equal to 1,
+the second component must be equal to 0.
+
+205
+00:15:14.335 --> 00:15:17.333
+To 0.6, 0.4, 0.
+
+206
+00:15:17.333 --> 00:15:19.670
+The sum must be equal to 1,
+
+207
+00:15:19.670 --> 00:15:23.260
+the third coordinate must be
+0 because it's on this edge.
+
+208
+00:15:23.260 --> 00:15:24.570
+What is this?
+
+209
+00:15:24.570 --> 00:15:29.340
+This consists of all vertices
+that have x1 equal to 0.6,
+
+210
+00:15:29.340 --> 00:15:34.229
+and x2 plus x3 equal to 0.4.
+
+211
+00:15:35.460 --> 00:15:39.940
+So these are the coordinates on these
+parallel edges of this triangle.
+
+212
+00:15:44.360 --> 00:15:46.220
+Let's continue studying this triangle.
+
+213
+00:15:47.650 --> 00:15:50.985
+Take a particular vertex
+x in this triangle.
+
+214
+00:15:50.985 --> 00:15:55.904
+What can you say if you draw
+this line here you get to
+
+215
+00:15:55.904 --> 00:15:59.080
+the point where x1 is the same.
+
+216
+00:15:59.080 --> 00:16:01.360
+The first coordinate has not changed, x1.
+
+217
+00:16:02.520 --> 00:16:04.640
+The third coordinate must be zero.
+
+218
+00:16:04.640 --> 00:16:07.220
+So the second coordinate
+must be one minus x1.
+
+219
+00:16:08.320 --> 00:16:13.830
+So, the parallel projection
+of x along this edge
+
+220
+00:16:13.830 --> 00:16:18.340
+of the triangle has coordinates x1,
+one minus x1, zero.
+
+221
+00:16:19.490 --> 00:16:23.070
+Similarly if you do a parallel
+projection of x but
+
+222
+00:16:23.070 --> 00:16:26.980
+on this edge of the triangle
+you get zero x2, one minus x2.
+
+223
+00:16:26.980 --> 00:16:30.690
+And along the third edge one minus x3,
+zero x3,
+
+224
+00:16:30.690 --> 00:16:35.980
+so these are the coordinates of
+
+225
+00:16:35.980 --> 00:16:40.070
+the projections of x on
+the three sides of the triangle.
+
+226
+00:16:42.780 --> 00:16:45.500
+Let's continue looking at
+this triangle further.
+
+227
+00:16:45.500 --> 00:16:48.200
+So these are just
+elementary geometric facts.
+
+228
+00:16:49.620 --> 00:16:51.930
+Look at two vertices, x and y.
+
+229
+00:16:53.700 --> 00:16:57.990
+Look at their projections, x and y.
+
+230
+00:16:57.990 --> 00:17:00.480
+They both project on the bottom edge.
+
+231
+00:17:00.480 --> 00:17:05.060
+The projections are x1, one minus x1,
+zero, and y1, one minus y1, zero.
+
+232
+00:17:05.060 --> 00:17:12.036
+What is the distance between
+the two projections?
+
+233
+00:17:12.036 --> 00:17:17.793
+It's x1 minus y1 plus an absolute value,
+
+234
+00:17:17.793 --> 00:17:22.939
+plus one minus x1 minus one minus y1.
+
+235
+00:17:22.939 --> 00:17:28.907
+It's exactly two times x1 minus y1,
+absolute value.
+
+236
+00:17:31.346 --> 00:17:34.454
+If you look at the other edges you get,
+again,
+
+237
+00:17:34.454 --> 00:17:37.590
+two times the absolute
+value of x2 minus y2.
+
+238
+00:17:37.590 --> 00:17:40.780
+And two times the absolute
+value of x3 minus yx.
+
+239
+00:17:42.180 --> 00:17:45.950
+If you sum all these things,
+the length of this projection,
+
+240
+00:17:45.950 --> 00:17:51.210
+plus the length of that one, plus
+the length of this one, what do you get?
+
+241
+00:17:51.210 --> 00:17:56.775
+You get exactly two times the l1
+distance between x and y.
+
+242
+00:17:56.775 --> 00:17:57.275
+x minus y.
+
+243
+00:17:59.060 --> 00:18:03.310
+So that is the geometric
+interpretation of what
+
+244
+00:18:03.310 --> 00:18:06.850
+we're trying to minimize
+in our objective function.
+
+245
+00:18:09.770 --> 00:18:11.125
+What do we try to minimize?
+
+246
+00:18:11.125 --> 00:18:15.929
+One half times the sum
+over every edge uv of cuv
+
+247
+00:18:15.929 --> 00:18:20.920
+times the l1 distance between xu and xv.
+
+248
+00:18:20.920 --> 00:18:22.830
+And what is the l1 distance?
+
+249
+00:18:22.830 --> 00:18:26.760
+It is half of the sum of
+
+250
+00:18:26.760 --> 00:18:31.830
+the distance between the projections of xg
+one xv on the three sides of the triangle.
+
+251
+00:18:33.270 --> 00:18:34.166
+So with this,
+
+252
+00:18:34.166 --> 00:18:39.181
+we're well equipped to start thinking
+about this problem in geometric terms.
+
+253
+00:18:42.199 --> 00:18:46.992
+So in other words, the problem being
+solved by the linear programming
+
+254
+00:18:46.992 --> 00:18:51.474
+relaxation in the case where k is
+equal to three is the following.
+
+255
+00:18:53.111 --> 00:18:58.179
+The LP relaxation is positioning
+the graph vertices inside
+
+256
+00:18:58.179 --> 00:19:03.247
+this triangle with the three
+terminals at the three corners
+
+257
+00:19:03.247 --> 00:19:07.705
+of a triangle to minimize
+the weighted lengths of all
+
+258
+00:19:07.705 --> 00:19:13.360
+the projections of the edges
+on the sides of the triangle.
+
+259
+00:19:13.360 --> 00:19:16.530
+That is, what the LP relaxation is doing.
+
+260
+00:19:18.240 --> 00:19:23.330
+It's constrained to have the three
+terminals at the three corners.
+
+261
+00:19:23.330 --> 00:19:27.423
+And given that, it tries to
+position all the other vertices so
+
+262
+00:19:27.423 --> 00:19:31.372
+as to minimize the weighted
+lengths of their projections.
+
+263
+00:19:34.473 --> 00:19:39.788
+So again, let me repeat, the geometric
+interpretation for k equal to three
+
+264
+00:19:39.788 --> 00:19:44.689
+embed the graph vertices inside
+the triangle to minimize the weighted
+
+265
+00:19:44.689 --> 00:19:50.570
+lengths of the projections of the graph
+edges on the sides of the triangle.
+
+266
+00:19:50.570 --> 00:19:53.880
+Given that the three terminals
+are at the three corners.
+
+267
+00:19:54.960 --> 00:19:57.070
+Now there's nothing special
+about k equal to three.
+
+268
+00:19:57.070 --> 00:19:59.710
+We could also do everything
+we have done so far.
+
+269
+00:19:59.710 --> 00:20:02.540
+This reasoning could be done also for
+k equals to four.
+
+270
+00:20:02.540 --> 00:20:06.100
+We would have a tetrahedron
+instead of a triangle.
+
+271
+00:20:06.100 --> 00:20:07.190
+K equals to five.
+
+272
+00:20:07.190 --> 00:20:10.920
+And so on just by going to
+higher dimensional space.
+
+273
+00:20:10.920 --> 00:20:13.710
+But it's easier to visualize things for
+k equal to three.
+
+274
+00:20:15.870 --> 00:20:17.940
+Now we can think about rounding.
+
+275
+00:20:20.760 --> 00:20:23.976
+So this will be the object
+of our next section.

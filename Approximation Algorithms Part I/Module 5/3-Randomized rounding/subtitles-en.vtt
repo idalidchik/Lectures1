@@ -1,0 +1,906 @@
+WEBVTT
+
+1
+00:00:03.117 --> 00:00:08.874
+[MUSIC]
+
+2
+00:00:08.874 --> 00:00:13.292
+Now that we have set up linear
+programming relaxation for
+
+3
+00:00:13.292 --> 00:00:17.250
+the problem and
+seen a geometric interpretation,
+
+4
+00:00:17.250 --> 00:00:22.520
+we need to figure out how to round
+the solution of the LP relaxation.
+
+5
+00:00:22.520 --> 00:00:24.330
+So, how to round?
+
+6
+00:00:24.330 --> 00:00:27.640
+Geometrically, this can be
+seen as the following problem.
+
+7
+00:00:28.870 --> 00:00:33.010
+Let's take the case k equal to 3,
+3-way cut.
+
+8
+00:00:33.010 --> 00:00:37.230
+We want to partition
+the triangle into three areas.
+
+9
+00:00:37.230 --> 00:00:41.932
+One for vertex (0, 0, 1),
+one for vertex (1, 0,
+
+10
+00:00:41.932 --> 00:00:45.437
+0), and one for vertex (0, 1, 0).
+
+11
+00:00:45.437 --> 00:00:52.580
+Remember, every graph vertex is
+embedded onto the triangle and
+
+12
+00:00:52.580 --> 00:00:56.160
+the three terminals are mapped to
+the three corners of the triangle.
+
+13
+00:00:58.450 --> 00:01:04.250
+So, what we will do is partition
+the triangle into three areas.
+
+14
+00:01:04.250 --> 00:01:08.160
+Every vertex that is embedded
+in the first area there,
+
+15
+00:01:08.160 --> 00:01:11.900
+the black vertices,
+will go with terminal a1.
+
+16
+00:01:11.900 --> 00:01:15.200
+The red vertices will go with terminal a3,
+and
+
+17
+00:01:15.200 --> 00:01:18.040
+the green vertices will
+go with terminal a2.
+
+18
+00:01:19.260 --> 00:01:21.350
+So what happens when we do this?
+
+19
+00:01:21.350 --> 00:01:27.250
+This defines a partition of the vertices
+into three sets, one for each terminal.
+
+20
+00:01:27.250 --> 00:01:32.730
+And then we have the corresponding cost,
+which is the total cost of the edges
+
+21
+00:01:32.730 --> 00:01:38.220
+that cross that are dichromatic whose
+endpoints have different colors.
+
+22
+00:01:38.220 --> 00:01:44.090
+For example, edge uv there,
+u is associated to a1, v to a2.
+
+23
+00:01:44.090 --> 00:01:47.210
+u is black, v is green,
+they have different colors.
+
+24
+00:01:47.210 --> 00:01:54.410
+So after we do this partition, we'll
+have to pay cuv, the cost of edge uv.
+
+25
+00:01:55.660 --> 00:02:00.127
+So a good rounding is a small
+cost choice of partition of
+
+26
+00:02:00.127 --> 00:02:02.758
+the triangle into three areas.
+
+27
+00:02:05.546 --> 00:02:08.260
+So, how to think about this?
+
+28
+00:02:08.260 --> 00:02:14.720
+Remember, the LP relaxation can be seen
+as placing the vertices in the triangle,
+
+29
+00:02:14.720 --> 00:02:19.230
+so as to minimize the lengths of
+the edge projections on the sides.
+
+30
+00:02:20.550 --> 00:02:26.310
+Here, it is convenient to define
+the distance between two vertices as
+
+31
+00:02:26.310 --> 00:02:31.900
+one half of the l1 distance
+between their embedding.
+
+32
+00:02:31.900 --> 00:02:35.300
+One half of the l1 distance between xu and
+xv.
+
+33
+00:02:35.300 --> 00:02:36.680
+Why one half?
+
+34
+00:02:36.680 --> 00:02:42.440
+Because if you look at the terminals,
+the l1 distance between xa1 and
+
+35
+00:02:42.440 --> 00:02:47.570
+xa3, for example,
+is 2 one half of that is 1.
+
+36
+00:02:47.570 --> 00:02:50.310
+So these two vertices
+are a distance exactly 1.
+
+37
+00:02:50.310 --> 00:02:52.730
+Those are distance exactly 1, and so on.
+
+38
+00:02:53.990 --> 00:02:58.640
+So solving the LP relaxation,
+what we have done is we have found
+
+39
+00:02:58.640 --> 00:03:03.430
+an embedding of the vertices on the
+triangle with the terminals at the corners
+
+40
+00:03:03.430 --> 00:03:08.480
+to minimize the sum over every edge
+of cuv times the distance of uv.
+
+41
+00:03:10.050 --> 00:03:13.425
+With this now we need to
+figure out how to round.
+
+42
+00:03:15.656 --> 00:03:18.750
+Let's think a little bit more about this.
+
+43
+00:03:18.750 --> 00:03:21.551
+Let's think about projections.
+
+44
+00:03:21.551 --> 00:03:26.378
+So, consider vertex x, its projection onto
+
+45
+00:03:26.378 --> 00:03:31.205
+this side of a triangle
+has coordinates x3,
+
+46
+00:03:31.205 --> 00:03:39.729
+the third coordinate is unchanged because
+this is parallel to the bottom side.
+
+47
+00:03:41.145 --> 00:03:45.910
+0, because the second coordinate
+is 0 because it's on this edge
+
+48
+00:03:45.910 --> 00:03:48.090
+away from this vertex.
+
+49
+00:03:48.090 --> 00:03:50.610
+And then, since the sum of
+the three coordinates is 1,
+
+50
+00:03:50.610 --> 00:03:52.800
+the first coordinate must be 1- x3.
+
+51
+00:03:52.800 --> 00:03:58.070
+(1- x3, 0, x3), that's a projection here.
+
+52
+00:03:58.070 --> 00:04:03.750
+Similarly, the projection up on
+this edge is (0, x2, 1- x2).
+
+53
+00:04:03.750 --> 00:04:08.280
+And on the bottom edge, (x1, 1- x1, 0).
+
+54
+00:04:08.280 --> 00:04:13.906
+So what we can see is that the distance
+between x prime and y prime,
+
+55
+00:04:13.906 --> 00:04:19.960
+the two projections of x and
+y on the bottom edge is just |x1- y1|.
+
+56
+00:04:21.360 --> 00:04:26.352
+And d(u, v) = one half of
+the l1 distance between x and
+
+57
+00:04:26.352 --> 00:04:31.451
+y, (|x1- y1| + |x2- y2| + |x3- y3|).
+
+58
+00:04:31.451 --> 00:04:37.546
+That is one half (d(x prime,
+y prime) + d(x double prime,
+
+59
+00:04:37.546 --> 00:04:43.190
+y double prime) + d(x triple prime,
+y triple prime).
+
+60
+00:04:46.026 --> 00:04:47.950
+Now what do we do?
+
+61
+00:04:47.950 --> 00:04:51.050
+The hardest thing is not to get confused
+between all of these factors of two and
+
+62
+00:04:51.050 --> 00:04:53.320
+factors of one half,
+that come in all over the place.
+
+63
+00:04:55.420 --> 00:04:59.700
+What we're going to do is use some balls,
+balls in the l1 metric.
+
+64
+00:05:01.957 --> 00:05:07.070
+Consider the ball centered at
+vertex a1 and of radius r.
+
+65
+00:05:07.070 --> 00:05:13.250
+For example, let's take r = 0.7,
+about 70% of the way from a1 to a3.
+
+66
+00:05:13.250 --> 00:05:17.619
+Or from a1 to a2.
+
+67
+00:05:17.619 --> 00:05:19.590
+Okay, what is this ball?
+
+68
+00:05:19.590 --> 00:05:24.245
+Well, it's bounded by a line
+that is parallel to the third
+
+69
+00:05:24.245 --> 00:05:28.615
+side of the triangle, so
+here it is, this green area.
+
+70
+00:05:28.615 --> 00:05:34.429
+B(a1, r) = {u : d(a1,
+u) is less than or equal to r,
+
+71
+00:05:34.429 --> 00:05:39.570
+which is also this part of the big,
+purple triangle.
+
+72
+00:05:41.090 --> 00:05:42.190
+How are we going to use this?
+
+73
+00:05:43.240 --> 00:05:44.550
+Well, intuitively.
+
+74
+00:05:45.610 --> 00:05:49.610
+If a vertex is close to a1,
+then it should go with a1.
+
+75
+00:05:49.610 --> 00:05:51.750
+If it's close to a2, it should go with a2.
+
+76
+00:05:51.750 --> 00:05:53.500
+If it's close to a3, it should go with a3.
+
+77
+00:05:54.580 --> 00:05:59.410
+So we're going to basically
+give to a1 the vertices
+
+78
+00:05:59.410 --> 00:06:04.300
+that are close enough to a1 that are in
+the ball centered at a1 and of radius r.
+
+79
+00:06:05.850 --> 00:06:08.200
+The problem is that we cannot do this for
+
+80
+00:06:08.200 --> 00:06:11.240
+all vertices simultaneously,
+all three terminals.
+
+81
+00:06:11.240 --> 00:06:14.160
+So we need to do this in some order.
+
+82
+00:06:14.160 --> 00:06:18.330
+And also, the other problem is
+what should be the value of r?
+
+83
+00:06:18.330 --> 00:06:20.868
+What value should we choose for
+our radius, r?
+
+84
+00:06:20.868 --> 00:06:25.630
+We don’t know the answer to
+either of these questions.
+
+85
+00:06:25.630 --> 00:06:28.920
+We don’t know in what order we
+should consider the terminals.
+
+86
+00:06:28.920 --> 00:06:32.380
+We don’t know which value
+we should choose for r.
+
+87
+00:06:32.380 --> 00:06:34.860
+So when you don’t know,
+what is the solution?
+
+88
+00:06:36.140 --> 00:06:37.580
+Try to do it randomly.
+
+89
+00:06:39.695 --> 00:06:44.904
+Okay, so let's start with terminal a3.
+
+90
+00:06:44.904 --> 00:06:49.539
+Pick a random r,
+assign all the vertices in the ball,
+
+91
+00:06:49.539 --> 00:06:52.839
+centered at a3 and of radius r to a3.
+
+92
+00:06:52.839 --> 00:06:56.879
+So, a3 is up there.
+
+93
+00:06:56.879 --> 00:07:01.626
+The balls of radius r
+are limited by a horizontal
+
+94
+00:07:01.626 --> 00:07:05.220
+line,t his is when r is close to 0.
+
+95
+00:07:05.220 --> 00:07:06.315
+That's when r is close to 1.
+
+96
+00:07:07.500 --> 00:07:11.490
+You cut at r,
+you take the green rectangle and
+
+97
+00:07:11.490 --> 00:07:15.300
+all the vertices in there,
+they're going to go with a3.
+
+98
+00:07:15.300 --> 00:07:18.840
+So, let's look at the possibilities,
+
+99
+00:07:18.840 --> 00:07:21.910
+if we think about the particular
+pair of vertices, uv.
+
+100
+00:07:21.910 --> 00:07:24.630
+Probably linked by an edge
+in the underlying graph.
+
+101
+00:07:26.560 --> 00:07:32.970
+If r is small, if r is smaller
+than the distance from v to a3,
+
+102
+00:07:32.970 --> 00:07:37.210
+here in this example observe that
+v is closer to a3 than u is.
+
+103
+00:07:38.430 --> 00:07:42.410
+If r is less than
+the distances from v to a3 and
+
+104
+00:07:42.410 --> 00:07:47.660
+from u to a3, then this ball
+does not catch either v or u.
+
+105
+00:07:48.810 --> 00:07:49.560
+That's the first case.
+
+106
+00:07:51.460 --> 00:07:52.220
+Second case.
+
+107
+00:07:53.220 --> 00:07:57.060
+If r is between the distance
+from v to a3 and
+
+108
+00:07:57.060 --> 00:08:01.760
+the distance from u to a3, greater than
+the min, but smaller than the max,
+
+109
+00:08:01.760 --> 00:08:06.260
+then this ball contains v, but not u.
+
+110
+00:08:06.260 --> 00:08:13.630
+What this means is that when we assign
+the vertices in this ball to terminal a3,
+
+111
+00:08:13.630 --> 00:08:18.587
+then vertex v will go to terminal a3 but
+not vertex u.
+
+112
+00:08:18.587 --> 00:08:21.540
+Vertex u will go to one
+of the other terminals.
+
+113
+00:08:21.540 --> 00:08:23.830
+And f4, if there's an edge between u and
+
+114
+00:08:23.830 --> 00:08:29.300
+v, this edge will go between different
+parts, and will count in the cut.
+
+115
+00:08:29.300 --> 00:08:30.670
+And so we'll have to pay cuv.
+
+116
+00:08:32.180 --> 00:08:33.460
+Third case.
+
+117
+00:08:33.460 --> 00:08:35.950
+Third case, if r is big.
+
+118
+00:08:35.950 --> 00:08:42.880
+If r is bigger than the distance from u
+to a3, bigger than both of the distances.
+
+119
+00:08:42.880 --> 00:08:47.740
+Then both vertices u and
+v are inside the ball, so
+
+120
+00:08:47.740 --> 00:08:52.050
+both of them will get assigned to a3,
+so they have the same color.
+
+121
+00:08:52.050 --> 00:08:57.690
+And so, if there's a net between them,
+this edge will not be dichromatic.
+
+122
+00:08:57.690 --> 00:09:01.498
+Both of its vertices will
+be in the same part, and so
+
+123
+00:09:01.498 --> 00:09:04.343
+we will not pay the cost cuv of edge uv.
+
+124
+00:09:07.175 --> 00:09:09.730
+So, what do we do with this?
+
+125
+00:09:12.436 --> 00:09:13.546
+What do we do with this?
+
+126
+00:09:13.546 --> 00:09:15.520
+Let's look at these probabilities.
+
+127
+00:09:17.110 --> 00:09:22.140
+The probability that the first
+case happens, that neither u nor
+
+128
+00:09:22.140 --> 00:09:23.150
+v are in this ball.
+
+129
+00:09:24.450 --> 00:09:30.380
+That's the probability that the random
+r that we picked is less than dv a3.
+
+130
+00:09:33.130 --> 00:09:35.380
+What is the range of r?
+
+131
+00:09:35.380 --> 00:09:37.420
+r ranges from 0 to 1.
+
+132
+00:09:38.680 --> 00:09:44.440
+So the property that r is less than d(a3,
+v) is exactly the distance from v to a3.
+
+133
+00:09:46.330 --> 00:09:50.834
+The priority of a second case
+is the probability that r
+
+134
+00:09:50.834 --> 00:09:55.320
+falls between d(a3, u) and d(a3, v).
+
+135
+00:09:55.320 --> 00:10:00.230
+So it's the difference between these two
+distances, which is also the difference
+
+136
+00:10:00.230 --> 00:10:05.000
+between the third coordinates of u and
+v, |u3- v3|.
+
+137
+00:10:05.000 --> 00:10:08.990
+Finally, the probability that the ball
+contains both, the third case,
+
+138
+00:10:08.990 --> 00:10:12.087
+is the remainder 1- d(a3, u).
+
+139
+00:10:13.380 --> 00:10:16.500
+So these are the probabilities
+of the three cases.
+
+140
+00:10:18.040 --> 00:10:19.887
+How do we use this for rounding?
+
+141
+00:10:22.013 --> 00:10:28.476
+What we're going to do is, since we do not
+know how to assign vertices to terminals,
+
+142
+00:10:28.476 --> 00:10:34.590
+in what order to do it, we will
+consider terminals in random order.
+
+143
+00:10:34.590 --> 00:10:37.930
+We pick a random permutation,
+sigma 1, sigma 2, sigma 3,
+
+144
+00:10:37.930 --> 00:10:40.730
+among all six possibilities,
+random uniform.
+
+145
+00:10:40.730 --> 00:10:44.080
+Probability one-sixth, one-sixth,
+one-sixth, one-sixth, one-sixth.
+
+146
+00:10:44.080 --> 00:10:47.334
+Here it is, a sigma(1),
+a sigma(2), a sigma(3).
+
+147
+00:10:48.520 --> 00:10:51.380
+How do we assign the vertex u
+to one of the three terminals?
+
+148
+00:10:52.900 --> 00:10:56.080
+First, first priority, a sigma(1).
+
+149
+00:10:56.080 --> 00:11:01.370
+If u is in the ball,
+centered at a sigma(1) and
+
+150
+00:11:01.370 --> 00:11:04.602
+of radius r, this ball here.
+
+151
+00:11:04.602 --> 00:11:10.230
+Then we assign u to terminal a sigma(1),
+and we're done with the assignment of u.
+
+152
+00:11:11.540 --> 00:11:13.020
+What if not?
+
+153
+00:11:13.020 --> 00:11:15.940
+If not, we try again with a sigma(2).
+
+154
+00:11:15.940 --> 00:11:21.410
+We look at the ball centered
+at a sigma(2) and of radius r,
+
+155
+00:11:21.410 --> 00:11:25.280
+and if it's in there,
+we assign it to a sigma(2).
+
+156
+00:11:25.280 --> 00:11:27.780
+And otherwise we are gonna
+have one terminal left,
+
+157
+00:11:27.780 --> 00:11:29.680
+we'll assign it to a sigma(3).
+
+158
+00:11:29.680 --> 00:11:33.560
+So that is the randomized rounding.
+
+159
+00:11:33.560 --> 00:11:38.980
+That is the way in which we assign every
+vertex to one of our three terminals.
+
+160
+00:11:38.980 --> 00:11:42.950
+We use the geometric embedding,
+the geometric interpretation,
+
+161
+00:11:42.950 --> 00:11:47.550
+to decide how to round
+the solution of our LP relaxation.
+
+162
+00:11:49.840 --> 00:11:53.665
+So here's the Full Algorithm for
+3-way cut.
+
+163
+00:11:53.665 --> 00:11:56.790
+First, we solve the LP relaxation.
+
+164
+00:11:56.790 --> 00:12:00.010
+In other words, we embed for
+vertices in the triangle.
+
+165
+00:12:01.490 --> 00:12:04.750
+Then, we pick a random
+permutation of the terminals.
+
+166
+00:12:05.980 --> 00:12:10.980
+To the first terminal in the permutation,
+we assign all vertices in the ball
+
+167
+00:12:10.980 --> 00:12:16.830
+centered at the terminal and of radius r,
+where r is random uniform between [0, 1].
+
+168
+00:12:16.830 --> 00:12:21.600
+Then, among all unassigned
+vertices not yet
+
+169
+00:12:21.600 --> 00:12:26.040
+assigned, we assign all the ones in the
+ball centered at the second terminal, and
+
+170
+00:12:26.040 --> 00:12:28.870
+of radius r, to that second terminal.
+
+171
+00:12:28.870 --> 00:12:32.650
+Finally, we assign to the third
+terminal all remaining vertices.
+
+172
+00:12:33.750 --> 00:12:36.629
+That's the algorithm with
+which we will soon analyze.
+
+173
+00:12:39.250 --> 00:12:45.850
+So, the algorithm will use this LP
+relaxation which I rewrite again here.
+
+174
+00:12:45.850 --> 00:12:50.988
+So it can be written here for
+k general, not just k = 3.
+
+175
+00:12:50.988 --> 00:12:53.930
+So here I write it more mathematically and
+
+176
+00:12:53.930 --> 00:12:57.790
+I give to you for
+k not just equal to 3, but k general.
+
+177
+00:12:59.490 --> 00:13:00.830
+LP relaxation,
+
+178
+00:13:00.830 --> 00:13:05.470
+we embed the vertices in a k-simplex
+with the terminals at the corners.
+
+179
+00:13:05.470 --> 00:13:07.910
+So a triangle, if k equals 3, tetrahedron.
+
+180
+00:13:07.910 --> 00:13:09.330
+If k equals 4, and so on.
+
+181
+00:13:10.340 --> 00:13:14.900
+Define by xi greater than or
+equal to 0, sum of the xi = 1.
+
+182
+00:13:15.960 --> 00:13:19.440
+The LP relaxation can be seen as minimize
+
+183
+00:13:19.440 --> 00:13:24.440
+the weighted sum of distances between
+vertices that are end points of edges,
+
+184
+00:13:24.440 --> 00:13:29.260
+such that u is embedded in the k-simplex
+for every vertex u of the graph.
+
+185
+00:13:30.680 --> 00:13:34.680
+Then, we pick a random
+ordering of are k terminals,
+
+186
+00:13:35.760 --> 00:13:38.900
+we pick a random r in [0, 1],
+
+187
+00:13:38.900 --> 00:13:44.630
+our k terminals are at the k
+corners of our k-simplex.
+
+188
+00:13:44.630 --> 00:13:50.640
+And finally, for i going from 1 to k- 1,
+we assign to the case terminal,
+
+189
+00:13:50.640 --> 00:13:54.440
+to the i terminal in the random order,
+all not yet
+
+190
+00:13:54.440 --> 00:13:59.673
+assigned vertices that belong to the ball
+centered at a sigma(i) and of radius r.
+
+191
+00:14:01.730 --> 00:14:05.920
+The remaining vertices are assigned to
+the last terminal in the random ordering.
+
+192
+00:14:07.150 --> 00:14:07.910
+That's the algorithm.
+
+193
+00:14:09.630 --> 00:14:11.800
+So, what remains to be done?
+
+194
+00:14:11.800 --> 00:14:16.220
+It remains to analyze this algorithm
+to see the quality of approximation.

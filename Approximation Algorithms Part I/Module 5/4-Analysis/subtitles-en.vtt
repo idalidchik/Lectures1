@@ -1,0 +1,903 @@
+WEBVTT
+
+1
+00:00:03.227 --> 00:00:08.776
+[MUSIC]
+
+2
+00:00:08.776 --> 00:00:15.910
+Now that we have designed an algorithm for
+multiway cut, we need to analyze it.
+
+3
+00:00:17.230 --> 00:00:20.920
+First, it is clear that our
+algorithm runs in polynomial time.
+
+4
+00:00:21.950 --> 00:00:25.240
+Also, clear that it outputs
+a proper multiway cut.
+
+5
+00:00:25.240 --> 00:00:27.490
+So the question is,
+how good is the output?
+
+6
+00:00:29.500 --> 00:00:30.750
+How good is the output?
+
+7
+00:00:32.270 --> 00:00:37.060
+The value of the objective is
+the sum of every edge, of cuv
+
+8
+00:00:37.060 --> 00:00:42.900
+times 1, if and only if,
+the edge crosses the cut.
+
+9
+00:00:44.380 --> 00:00:47.270
+So, our algorithm is randomized.
+
+10
+00:00:47.270 --> 00:00:50.890
+As usual, we look at the expected
+value of the output.
+
+11
+00:00:50.890 --> 00:00:56.940
+By linearity of expectation, we can invert
+the summation and the expected sign.
+
+12
+00:00:58.470 --> 00:01:03.960
+So, the expected value of the output is
+the sum of every edge in the graph of
+
+13
+00:01:05.350 --> 00:01:09.990
+cuv times the expected value of
+the random variable, which is 1,
+
+14
+00:01:09.990 --> 00:01:12.460
+if and only if, the edge crosses the cut.
+
+15
+00:01:12.460 --> 00:01:13.770
+So what does this give us?
+
+16
+00:01:13.770 --> 00:01:16.390
+The probability that uv is in the output.
+
+17
+00:01:17.610 --> 00:01:19.310
+You should be used to this by now.
+
+18
+00:01:19.310 --> 00:01:21.600
+We have already used
+this trick several times.
+
+19
+00:01:21.600 --> 00:01:23.990
+The linearity of expectation is very,
+
+20
+00:01:23.990 --> 00:01:27.600
+very good to enable us to
+treat things independently.
+
+21
+00:01:28.690 --> 00:01:32.980
+So because of that, all we need to
+do is focus on the particular edge,
+
+22
+00:01:32.980 --> 00:01:34.820
+uv, in the graph.
+
+23
+00:01:34.820 --> 00:01:37.540
+A particular pair of vertices, u and v.
+
+24
+00:01:37.540 --> 00:01:42.260
+And look at the probability that uv,
+edge uv, is in the output cut.
+
+25
+00:01:43.460 --> 00:01:46.040
+So, we can forget about
+the rest of the embedding.
+
+26
+00:01:46.040 --> 00:01:47.140
+Just think about u and v.
+
+27
+00:01:48.650 --> 00:01:52.150
+Now, remember how our rounding works.
+
+28
+00:01:52.150 --> 00:01:52.920
+Our rounding,
+
+29
+00:01:52.920 --> 00:01:58.650
+in the case of k equal to three, chooses
+a random order of the three terminals.
+
+30
+00:01:58.650 --> 00:02:04.080
+Let's call a the first terminal, b,
+the second one, c, the third one.
+
+31
+00:02:04.080 --> 00:02:10.380
+It's easy in the case of k equal to 3,
+easier to use these kind of notations.
+
+32
+00:02:11.770 --> 00:02:18.830
+So in the case of a drawing,
+u belongs to the first ball centered at a.
+
+33
+00:02:18.830 --> 00:02:22.220
+v belongs to the third part centered at c,
+and
+
+34
+00:02:22.220 --> 00:02:26.850
+therefore, will have to pay the cost
+cuv because edge uv crosses the cut.
+
+35
+00:02:28.040 --> 00:02:31.950
+What is the condition, in general,
+for uv belonging to the output?
+
+36
+00:02:33.720 --> 00:02:38.410
+Well, either the first ball,
+
+37
+00:02:38.410 --> 00:02:43.080
+the green ball, contains exactly
+one of the two vertices, u and v.
+
+38
+00:02:43.080 --> 00:02:47.548
+That is, either the radius r,
+is between the min and
+
+39
+00:02:47.548 --> 00:02:54.128
+the max of the two distances
+from u to a and from v to a,
+
+40
+00:02:54.128 --> 00:03:00.020
+or neither u nor
+
+41
+00:03:00.020 --> 00:03:04.840
+v was placed in the first ball but exactly
+one of them is placed in the second ball.
+
+42
+00:03:06.120 --> 00:03:11.400
+That is, how can it be that neither u nor
+v are placed in the first ball?
+
+43
+00:03:11.400 --> 00:03:14.070
+It must be that r is small.
+
+44
+00:03:14.070 --> 00:03:19.167
+r, the radius of the first ball,
+is smaller than the main distance to a.
+
+45
+00:03:19.167 --> 00:03:26.480
+And then, it must be that r is in between,
+in terms of the second distances,
+
+46
+00:03:26.480 --> 00:03:30.720
+between the min and
+the max of their distances to terminal b.
+
+47
+00:03:32.130 --> 00:03:34.370
+So these are ideal conditions.
+
+48
+00:03:34.370 --> 00:03:37.275
+uv is in the output,
+if and only if, one or
+
+49
+00:03:37.275 --> 00:03:40.930
+the other of these two
+disjoint conditions are met.
+
+50
+00:03:42.320 --> 00:03:45.850
+So, now we need to analyze
+the probability of these two conditions.
+
+51
+00:03:48.660 --> 00:03:49.160
+Let's see.
+
+52
+00:03:50.880 --> 00:03:54.150
+How can it be that ai, terminal ai,
+
+53
+00:03:54.150 --> 00:03:59.220
+is the first one to catch u or v,
+and it catches exactly one of them?
+
+54
+00:04:01.080 --> 00:04:04.870
+Well, there's a particular
+terminal there that is lucky.
+
+55
+00:04:04.870 --> 00:04:06.189
+It has better luck than the others.
+
+56
+00:04:07.230 --> 00:04:12.120
+Let's look at the terminal that
+is closest to either u or v.
+
+57
+00:04:13.620 --> 00:04:19.580
+That is, for each terminal, let's look
+at the min distance from u to ai and
+
+58
+00:04:19.580 --> 00:04:24.050
+from v to ai,
+the min of these two quantities.
+
+59
+00:04:24.050 --> 00:04:28.430
+That's how big r needs to be in
+order to catch at least one of them.
+
+60
+00:04:30.230 --> 00:04:33.010
+Okay, look at this for every terminal, and
+
+61
+00:04:33.010 --> 00:04:37.250
+then look at the terminal
+that minimizes this quantity.
+
+62
+00:04:37.250 --> 00:04:38.880
+That's terminal l.
+
+63
+00:04:38.880 --> 00:04:43.830
+In the case of our drawing, v is quite
+close to this this terminal, so that's l.
+
+64
+00:04:45.420 --> 00:04:53.369
+And this is the min distance
+here from u or v to l.
+
+65
+00:04:53.369 --> 00:05:01.287
+So, r needs to be at least as big in order
+to have a chance of catching u or v.
+
+66
+00:05:01.287 --> 00:05:05.999
+Okay, so if we look at terminal i,
+
+67
+00:05:05.999 --> 00:05:10.872
+what are the chances that terminal i
+
+68
+00:05:10.872 --> 00:05:15.428
+will get one or the other of u or v?
+
+69
+00:05:15.428 --> 00:05:22.045
+First, in the random ordering,
+i must precede l.
+
+70
+00:05:22.045 --> 00:05:27.731
+It must precede l because if it comes
+after l in the order of the terminals in
+
+71
+00:05:27.731 --> 00:05:34.310
+the random permutation, then l will
+get first shot, will have priority.
+
+72
+00:05:34.310 --> 00:05:40.170
+And if l fails to catch them,
+then i will also fail to catch them.
+
+73
+00:05:40.170 --> 00:05:48.720
+Now, i has no chance to catch exactly
+one of them if l already didn't do it.
+
+74
+00:05:49.800 --> 00:05:50.760
+Okay.
+
+75
+00:05:50.760 --> 00:05:54.560
+So, i must have priority over l,
+i must precede l.
+
+76
+00:05:54.560 --> 00:05:58.530
+Moreover, the ball centered at ai and
+
+77
+00:05:58.530 --> 00:06:03.500
+of radius r must separate u from v,
+must catch exactly one of them.
+
+78
+00:06:04.700 --> 00:06:08.370
+So, they're not sufficient conditions
+because other terminals might come into
+
+79
+00:06:08.370 --> 00:06:13.730
+play, but certainly, these two conditions
+are necessary in order for one of the two
+
+80
+00:06:13.730 --> 00:06:19.430
+terminals to be in the ball centered
+at ai and the other one to be outside,
+
+81
+00:06:19.430 --> 00:06:25.144
+caught exactly at the time when
+we considered terminal ai.
+
+82
+00:06:25.144 --> 00:06:30.060
+All right, so
+now we know the probability of this event.
+
+83
+00:06:31.320 --> 00:06:32.530
+Why?
+
+84
+00:06:32.530 --> 00:06:38.150
+Because these two conditions, i precedes
+l and this ball separates vertices u and
+
+85
+00:06:38.150 --> 00:06:42.300
+v, these two conditions,
+they are independent of each other.
+
+86
+00:06:43.670 --> 00:06:48.270
+The first one, for a random ordering,
+i and l play the same role.
+
+87
+00:06:48.270 --> 00:06:51.184
+The probability that i precedes
+l is exactly one-half.
+
+88
+00:06:52.340 --> 00:06:56.460
+The second one, for r,
+a random radius between 0 and 1,
+
+89
+00:06:56.460 --> 00:07:01.960
+the probability that the ball centered
+at ai and of radius r separates u from v
+
+90
+00:07:01.960 --> 00:07:06.990
+is the difference between the two
+distances from ai to u and from ai to v.
+
+91
+00:07:08.790 --> 00:07:13.690
+So for every terminal i different from l,
+we have this upper
+
+92
+00:07:13.690 --> 00:07:18.650
+bound on the probability that when we deal
+with terminal i, we separate u from v.
+
+93
+00:07:21.570 --> 00:07:23.730
+Second case, i equal to l.
+
+94
+00:07:24.840 --> 00:07:31.490
+i equal to l, then how can it be
+that when we consider terminal l and
+
+95
+00:07:31.490 --> 00:07:36.760
+throw the ball centered at l and
+of radius r, we separate u from v?
+
+96
+00:07:38.280 --> 00:07:41.970
+Well, first l must not
+be the last terminal,
+
+97
+00:07:41.970 --> 00:07:44.478
+because the last terminal doesn't
+have a chance to draw ball.
+
+98
+00:07:44.478 --> 00:07:50.990
+Okay, and then when it comes up,
+its ball must separate u from v.
+
+99
+00:07:52.580 --> 00:07:55.970
+Again, these two events
+are independent of one another.
+
+100
+00:07:57.080 --> 00:08:02.050
+What is the probability that
+l is not the last terminal?
+
+101
+00:08:02.050 --> 00:08:05.450
+For k equal to 3, it's two-thirds.
+
+102
+00:08:05.450 --> 00:08:07.500
+We have a random permutation.
+
+103
+00:08:07.500 --> 00:08:10.430
+For k general, it's 1 minus 1 over k.
+
+104
+00:08:12.050 --> 00:08:15.590
+Then, what is the probability
+that the ball separates them?
+
+105
+00:08:15.590 --> 00:08:18.530
+Again, it's the difference between
+the two distances from al.
+
+106
+00:08:19.970 --> 00:08:24.760
+So, now we have our expressions where
+we have used these joint events,
+
+107
+00:08:24.760 --> 00:08:28.620
+independent events,
+multiplying probabilities, summing,
+
+108
+00:08:28.620 --> 00:08:32.080
+we can proceed together.
+
+109
+00:08:33.350 --> 00:08:40.495
+Together the probability that uv is in
+the output is cuz of the terminal l.
+
+110
+00:08:40.495 --> 00:08:45.890
+1 minus 1 over k times the difference
+of distances from u and
+
+111
+00:08:45.890 --> 00:08:51.090
+v to al plus, for
+every terminal i different from l,
+
+112
+00:08:52.210 --> 00:08:57.150
+the sum of 1/2 times the difference
+of distances from ai to u and to v.
+
+113
+00:08:59.850 --> 00:09:05.900
+Now, what is nice is that here, what we
+see is we almost have the entire sum.
+
+114
+00:09:05.900 --> 00:09:08.540
+So, let's do a little bit
+of a calculation here.
+
+115
+00:09:09.870 --> 00:09:13.670
+Let's take part of this quantity here,
+
+116
+00:09:13.670 --> 00:09:18.830
+let's take 1/2 out of this,
+and let's bring it in here.
+
+117
+00:09:18.830 --> 00:09:22.920
+This way we'll have a sum,
+not just over i different from l, but
+
+118
+00:09:22.920 --> 00:09:28.228
+over every i, i equal to l, i different
+from l, all possible terminals.
+
+119
+00:09:28.228 --> 00:09:33.085
+So, the right-hand side will become
+sum over all possible terminals of
+
+120
+00:09:33.085 --> 00:09:38.036
+1/2 times the difference of distances,
+and the left-hand
+
+121
+00:09:38.036 --> 00:09:42.604
+side becomes the first part of
+the expression, becomes what's left.
+
+122
+00:09:42.604 --> 00:09:47.300
+That is,
+1/2(1- 2/k) times this difference.
+
+123
+00:09:49.420 --> 00:09:52.780
+Okay, so now what is this?
+
+124
+00:09:53.830 --> 00:09:56.430
+The second part is nice,
+the last expression.
+
+125
+00:09:57.520 --> 00:09:58.020
+What is it?
+
+126
+00:09:59.020 --> 00:10:05.008
+It is the sum over i of 1/2 times the
+difference between the ith coordinates,
+
+127
+00:10:05.008 --> 00:10:07.770
+d l1 metric.
+
+128
+00:10:07.770 --> 00:10:13.180
+So, this is very close to the objective
+function of the LP relaxation.
+
+129
+00:10:13.180 --> 00:10:14.130
+We are in good shape here.
+
+130
+00:10:15.950 --> 00:10:17.310
+What about the first term?
+
+131
+00:10:17.310 --> 00:10:22.820
+The first term, well again, we have
+the difference between the l coordinates
+
+132
+00:10:22.820 --> 00:10:26.370
+of the two embedded vertices u and v.
+
+133
+00:10:27.870 --> 00:10:29.970
+So, we need to do a little bit more work.
+
+134
+00:10:29.970 --> 00:10:34.950
+For that,
+we need to analyze this expression ul- vl.
+
+135
+00:10:34.950 --> 00:10:36.160
+How can we upper bound it?
+
+136
+00:10:38.520 --> 00:10:39.020
+Observe.
+
+137
+00:10:40.450 --> 00:10:44.030
+Observe, you have this triangle.
+
+138
+00:10:44.030 --> 00:10:49.487
+All the vertices on the triangle satisfy
+the sum of the coordinates are equal to 1.
+
+139
+00:10:49.487 --> 00:10:55.250
+It's true for u, it's true for v.
+
+140
+00:10:55.250 --> 00:11:02.339
+So, if you look at ul- vl,
+the difference between their coordinates,
+
+141
+00:11:02.339 --> 00:11:08.750
+the l coordinates,
+it's at most one-half of the l1 distance.
+
+142
+00:11:10.440 --> 00:11:13.954
+Why?
+Well, with so many examples of this,
+
+143
+00:11:13.954 --> 00:11:18.730
+imagine, for example,
+that ul is 0.6, vl is 0.5.
+
+144
+00:11:18.730 --> 00:11:23.762
+ul- vl is 0.1.
+
+145
+00:11:23.762 --> 00:11:29.597
+Even if they're as equal as
+possible in the other coordinates,
+
+146
+00:11:29.597 --> 00:11:35.441
+the other coordinates must sum to 0.4 for
+ul, 0.5 for vl.
+
+147
+00:11:35.441 --> 00:11:42.105
+For example, u could be 0.6, 0.4, 0.0.
+
+148
+00:11:42.105 --> 00:11:46.261
+v could be 0.5, 0.5, 0.0.
+
+149
+00:11:46.261 --> 00:11:46.973
+And then what do we have?
+
+150
+00:11:46.973 --> 00:11:51.750
+ul- vl is 0.1, but
+
+151
+00:11:51.750 --> 00:11:58.050
+the l1 distance is 0.1 plus 0.1 plus 0,
+two times 0.1.
+
+152
+00:11:58.050 --> 00:12:01.550
+And actually, that's the best you can do.
+
+153
+00:12:01.550 --> 00:12:07.080
+ul- vl can never be more than half
+of the sum of the ui's- vi's,
+
+154
+00:12:07.080 --> 00:12:09.370
+can never be more than
+half of the l1 distance.
+
+155
+00:12:10.500 --> 00:12:13.658
+So let's take this upper bound and
+plug it into our calculation.
+
+156
+00:12:16.421 --> 00:12:21.322
+Together, the probability that at uv is in
+
+157
+00:12:21.322 --> 00:12:26.632
+the output is (1/2- 1/k) times (ul-
+
+158
+00:12:26.632 --> 00:12:31.410
+vl) + 1/2 of the sum over i of ui- vi.
+
+159
+00:12:33.280 --> 00:12:37.360
+Replace ul- vl by half of the l1 distance.
+
+160
+00:12:39.090 --> 00:12:42.982
+Half times one-half, basically,
+let's ignore the 1/k for a moment,
+
+161
+00:12:42.982 --> 00:12:46.150
+half times one-half, that's one-quarter.
+
+162
+00:12:46.150 --> 00:12:50.706
+So, we have one-quarter here,
+one-half there, so
+
+163
+00:12:50.706 --> 00:12:55.661
+that's three-quarters,
+three-quarters of the sum of i
+
+164
+00:12:55.661 --> 00:13:00.230
+of ui- vi plus a little bit
+left over that depends on k.
+
+165
+00:13:02.190 --> 00:13:09.978
+So, what we get is (3/2- 1/k)
+* 1/2 of the l1 distance.
+
+166
+00:13:09.978 --> 00:13:12.970
+Again, these one-halves,
+these vectors of two,
+
+167
+00:13:12.970 --> 00:13:16.038
+they're kind of a bother to deal with.
+
+168
+00:13:16.038 --> 00:13:20.690
+There kind of a bother, because you're
+almost sure to forget one along the way.
+
+169
+00:13:20.690 --> 00:13:22.370
+It's a little bit like programming.
+
+170
+00:13:22.370 --> 00:13:25.910
+Doing this proof that this calculation,
+it's a little like coding.
+
+171
+00:13:25.910 --> 00:13:28.040
+You have to be careful.
+
+172
+00:13:28.040 --> 00:13:31.790
+Every step, you have to make sure
+you never forget a factor of 2,
+
+173
+00:13:31.790 --> 00:13:33.760
+otherwise your final result will be wrong.
+
+174
+00:13:33.760 --> 00:13:40.730
+But the idea is still correct, but
+big deal if you can't really prove it.
+
+175
+00:13:40.730 --> 00:13:42.170
+Okay, so let's put all this together.
+
+176
+00:13:43.770 --> 00:13:46.470
+The expected value of the output
+is the sum of every edge
+
+177
+00:13:46.470 --> 00:13:49.840
+in the graph of cuv times the probability
+that uv is in the output.
+
+178
+00:13:51.280 --> 00:13:55.772
+The probability that uv is in
+the output is at most (3/2-
+
+179
+00:13:55.772 --> 00:13:59.750
+1/k) * 1/2 of the l1
+distance between u and v.
+
+180
+00:14:01.390 --> 00:14:05.358
+Now, let's take out the 3/2- 1/k.
+
+181
+00:14:05.358 --> 00:14:07.430
+And what do we get?
+
+182
+00:14:07.430 --> 00:14:09.335
+We get the objective function.
+
+183
+00:14:09.335 --> 00:14:12.540
+We'd get exactly the objective
+of the LP relaxation.
+
+184
+00:14:13.780 --> 00:14:14.730
+So we know,
+
+185
+00:14:14.730 --> 00:14:19.720
+by definition of the relaxation,
+that that value is at most, OPT.
+
+186
+00:14:21.300 --> 00:14:23.900
+And so, what we have proved is
+
+187
+00:14:23.900 --> 00:14:28.163
+the expected value of the output
+is at most 3/2- 1/k * OPT.
+
+188
+00:14:31.630 --> 00:14:35.090
+And so,
+what have we proved in this analysis?
+
+189
+00:14:35.090 --> 00:14:38.336
+We've proved that by doing
+linear programming and
+
+190
+00:14:38.336 --> 00:14:43.320
+randomized rounding guided by the
+geometric interpretation of the problem,
+
+191
+00:14:43.320 --> 00:14:48.090
+we can get the 3/2- 1/k approximation for
+the multiway cut problem.
+
+192
+00:14:49.370 --> 00:14:51.690
+Now, what do we need to do next?
+
+193
+00:14:51.690 --> 00:14:53.530
+We're going to try to do better, and
+
+194
+00:14:53.530 --> 00:14:57.090
+we're going to see the story
+behind this problem.
