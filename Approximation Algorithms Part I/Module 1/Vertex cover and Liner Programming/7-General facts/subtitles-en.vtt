@@ -1,0 +1,393 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.673
+[MUSIC]
+
+2
+00:00:04.673 --> 00:00:08.970
+We have done so
+far a detailed study of vertex cover.
+
+3
+00:00:08.970 --> 00:00:11.850
+But that's not really what
+this course is about.
+
+4
+00:00:11.850 --> 00:00:12.370
+It's not so
+
+5
+00:00:12.370 --> 00:00:17.410
+much about solving specific problems
+as it is about developing techniques.
+
+6
+00:00:18.440 --> 00:00:23.210
+Teaching how to solve problems,
+teaching a methodology.
+
+7
+00:00:23.210 --> 00:00:26.630
+So, let us review what we have learned so
+far in that respect.
+
+8
+00:00:28.760 --> 00:00:32.610
+What is the method that we applied
+in the case of our desk cover?
+
+9
+00:00:35.080 --> 00:00:36.550
+Designing an algorithm.
+
+10
+00:00:38.220 --> 00:00:43.040
+We have seen on this example
+how to do it in three steps.
+
+11
+00:00:44.330 --> 00:00:47.920
+First, find a integer
+program to model the problem.
+
+12
+00:00:49.060 --> 00:00:51.730
+Second solve a linear
+programming relaxation.
+
+13
+00:00:53.040 --> 00:00:56.900
+Third round the solution
+to get an integer solution.
+
+14
+00:00:58.140 --> 00:01:05.410
+That is a standard algorithm technique
+used for approximation algorithms.
+
+15
+00:01:05.410 --> 00:01:09.430
+We will see this over and
+over again in this course and
+
+16
+00:01:09.430 --> 00:01:12.500
+it is good to remember this
+as a standard technique.
+
+17
+00:01:14.090 --> 00:01:17.880
+How do we analyze such an algorithm?
+
+18
+00:01:17.880 --> 00:01:19.740
+There are three things
+that need to be done.
+
+19
+00:01:21.070 --> 00:01:23.860
+First, when you try to
+get such an algorithm,
+
+20
+00:01:23.860 --> 00:01:27.570
+you need to verify that
+it really is correct.
+
+21
+00:01:27.570 --> 00:01:30.500
+That the output really
+satisfies the conditions.
+
+22
+00:01:31.590 --> 00:01:36.910
+Second, you must verify that it
+really is efficient, where efficient
+
+23
+00:01:36.910 --> 00:01:42.130
+in this class means polynomial time,
+the run time must be polynomial.
+
+24
+00:01:42.130 --> 00:01:47.760
+Some people are not so happy with such
+a definition, but we are theoreticians.
+
+25
+00:01:47.760 --> 00:01:51.180
+We want polynomial run time,
+that's our definition of efficiency.
+
+26
+00:01:52.450 --> 00:01:56.430
+Third and
+most importantly how good is the solution?
+
+27
+00:01:56.430 --> 00:01:59.590
+You must analyze the value
+of the output solution and
+
+28
+00:01:59.590 --> 00:02:02.930
+show that it is within a certain
+factor of the optimal value.
+
+29
+00:02:03.930 --> 00:02:07.890
+Here the fact that we
+showed was a factor of two.
+
+30
+00:02:07.890 --> 00:02:11.390
+Soon, we will see an algorithm where
+the factor is one plus epsilon.
+
+31
+00:02:11.390 --> 00:02:14.849
+Sometimes it can be login
+sometimes it could much worse.
+
+32
+00:02:17.586 --> 00:02:20.261
+Finally, for this kind of algorithm,
+
+33
+00:02:20.261 --> 00:02:26.180
+there's a particular method to try to
+analyze the quality of the output.
+
+34
+00:02:26.180 --> 00:02:31.310
+The method is to go as an intermediate
+step through the LP value.
+
+35
+00:02:32.500 --> 00:02:37.410
+You must, on the one hand,
+relate the output to the LP value.
+
+36
+00:02:37.410 --> 00:02:41.910
+On the other hand relate
+OPT to the LP value and
+
+37
+00:02:41.910 --> 00:02:44.910
+then it only remains to
+combine the two things.
+
+38
+00:02:46.230 --> 00:02:50.200
+The method for the analysis of
+the quality of a solution is
+
+39
+00:02:50.200 --> 00:02:53.100
+focus on the value of the linear program.
+
+40
+00:02:54.660 --> 00:02:57.340
+Now let me say a few more
+words about vertex cover.
+
+41
+00:02:58.340 --> 00:03:01.570
+We could say many more things about
+the vertex cover problem, but
+
+42
+00:03:01.570 --> 00:03:06.800
+let me just address the question of
+the quality of approximation, this factor.
+
+43
+00:03:06.800 --> 00:03:08.530
+We have a two approximation.
+
+44
+00:03:09.770 --> 00:03:14.970
+How much better could we hope to
+get as an approximation algorithm?
+
+45
+00:03:16.300 --> 00:03:18.260
+Could we solve vertex cover optimally?
+
+46
+00:03:22.580 --> 00:03:25.650
+No.
+Dick Karp in 1972 proved that vertex cover
+
+47
+00:03:25.650 --> 00:03:27.020
+is NP-complete.
+
+48
+00:03:27.020 --> 00:03:32.240
+This was one of his original NP-complete
+problems in his famous paper where
+
+49
+00:03:32.240 --> 00:03:37.454
+he listed a few problems from diverse
+areas and proved them all NP-complete.
+
+50
+00:03:39.580 --> 00:03:43.570
+Then, can we hope to get something
+arbitrarily close to one?
+
+51
+00:03:43.570 --> 00:03:46.550
+An approximation that is one
+plus epsilon for every epsilon?
+
+52
+00:03:47.790 --> 00:03:49.635
+An approximation scheme, as we call it.
+
+53
+00:03:49.635 --> 00:03:51.650
+No, impossible.
+
+54
+00:03:51.650 --> 00:03:52.156
+Why?
+
+55
+00:03:52.156 --> 00:03:55.510
+Christos Papadimitriu.
+
+56
+00:03:55.510 --> 00:03:57.200
+Mihalis Yanakakis.
+
+57
+00:03:57.200 --> 00:04:02.150
+In 1991, they proved that
+you cannot get better than
+
+58
+00:04:02.150 --> 00:04:07.480
+some very small number,
+something like 1.001 of the optimal value.
+
+59
+00:04:07.480 --> 00:04:11.870
+Getting bellow that is anti-complete.
+
+60
+00:04:11.870 --> 00:04:13.577
+So if p is different from np,
+
+61
+00:04:13.577 --> 00:04:16.970
+of course, you cannot hope to
+get arbitrarily close to one.
+
+62
+00:04:18.040 --> 00:04:19.930
+But that number is really quite small.
+
+63
+00:04:20.940 --> 00:04:23.540
+Can't you prove something
+better than this?
+
+64
+00:04:23.540 --> 00:04:24.770
+Yes.
+
+65
+00:04:24.770 --> 00:04:28.620
+In the early 2000s, Yacreet Dinur and
+
+66
+00:04:28.620 --> 00:04:33.432
+Moolie Safra showed that you
+cannot hope to get better
+
+67
+00:04:33.432 --> 00:04:38.351
+than 1.36 approximation for
+vertex cover if p is different from np.
+
+68
+00:04:39.770 --> 00:04:42.000
+To date, it's the best result,
+
+69
+00:04:42.000 --> 00:04:45.675
+assuming p is different from
+np with no other assumptions.
+
+70
+00:04:46.730 --> 00:04:50.560
+But, we also have another result,
+a conditional result.
+
+71
+00:04:51.650 --> 00:04:55.930
+If a certain conjecture is true,
+the unique games conjecture,
+
+72
+00:04:57.630 --> 00:05:01.770
+then our two approximation
+algorithm is optimal.
+
+73
+00:05:01.770 --> 00:05:05.850
+It is impossible to get in polynomial
+time something that would be
+
+74
+00:05:06.930 --> 00:05:10.882
+strictly less than two,
+a 1.999 approximation.
+
+75
+00:05:10.882 --> 00:05:16.600
+This is a result by Subash Khot and
+Regev from 2003.
+
+76
+00:05:17.860 --> 00:05:19.500
+So what can we say?
+
+77
+00:05:19.500 --> 00:05:22.550
+Vertex cover is hard in the worst case.
+
+78
+00:05:24.930 --> 00:05:30.180
+Finally, to conclude this part of
+the class, I would say that we have so
+
+79
+00:05:30.180 --> 00:05:34.750
+far designed a method for
+approximation algorithms,
+
+80
+00:05:34.750 --> 00:05:38.550
+applied it to vertex cover, and
+proved that it's a two approximation.
+
+81
+00:05:39.550 --> 00:05:43.190
+On the way to doing that, we have
+had a little fun with vertex cover.
+
+82
+00:05:43.190 --> 00:05:46.197
+I could say many more things about it,
+but this is enough for
+
+83
+00:05:46.197 --> 00:05:47.590
+this particular problem.

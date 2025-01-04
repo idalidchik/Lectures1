@@ -1,0 +1,542 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.285
+[MUSIC]
+
+2
+00:00:07.285 --> 00:00:12.310
+Hello and welcome to the coursera
+course on approximation algorithms.
+
+3
+00:00:12.310 --> 00:00:14.220
+This is a two part course.
+
+4
+00:00:14.220 --> 00:00:18.040
+And I would like to tell you about
+the first part of this course.
+
+5
+00:00:18.040 --> 00:00:22.920
+These algorithms are for dealing with
+problems from combinatorial optimization.
+
+6
+00:00:24.430 --> 00:00:27.680
+Combinatorial optimization problems
+come up all the time in daily life.
+
+7
+00:00:28.780 --> 00:00:30.800
+For example, scheduling classes.
+
+8
+00:00:31.860 --> 00:00:36.330
+You want to schedule classes to avoid
+overlap when students are sign up for
+
+9
+00:00:36.330 --> 00:00:39.980
+several different classes to make
+sure that there are always classrooms
+
+10
+00:00:39.980 --> 00:00:42.030
+available for your classes and
+
+11
+00:00:42.030 --> 00:00:46.100
+to take into account various constraints
+having to do with your school.
+
+12
+00:00:47.360 --> 00:00:51.560
+Or perhaps you own a truck company and
+you need to plan delivery routes for
+
+13
+00:00:51.560 --> 00:00:53.000
+your trucks.
+
+14
+00:00:53.000 --> 00:00:54.970
+What kind of delivery routes?
+
+15
+00:00:54.970 --> 00:00:59.150
+You need to deliver your goods to all
+the customers who ask for them, and
+
+16
+00:00:59.150 --> 00:01:04.750
+perhaps you wish to minimize the amount
+of fuel spent by your trucks.
+
+17
+00:01:04.750 --> 00:01:08.220
+There are many other instances of
+combinatorial optimization problems.
+
+18
+00:01:09.350 --> 00:01:14.140
+Unfortunately most of them are NP-hard,
+
+19
+00:01:14.140 --> 00:01:17.980
+meaning ST is different from NP.
+
+20
+00:01:17.980 --> 00:01:22.430
+There is no hope for finding
+an efficient solution in all cases.
+
+21
+00:01:23.720 --> 00:01:27.770
+Polynomial time solution for
+all instances in the worst case.
+
+22
+00:01:29.030 --> 00:01:30.678
+So, what to do?
+
+23
+00:01:30.678 --> 00:01:36.790
+Dealing with NP-hard problems can
+be done in several different ways.
+
+24
+00:01:38.330 --> 00:01:40.600
+Number one, give up.
+
+25
+00:01:40.600 --> 00:01:42.210
+This problem is impossible.
+
+26
+00:01:42.210 --> 00:01:44.910
+You cannot hope to find a good
+solution in reasonable time.
+
+27
+00:01:46.080 --> 00:01:50.040
+All right, this is not an option when you
+have to deal with real life problems.
+
+28
+00:01:51.510 --> 00:01:54.650
+Option number two, roll up our sleeves.
+
+29
+00:01:54.650 --> 00:01:59.940
+Okay, let's try to look at all
+possibilities and take the best one.
+
+30
+00:01:59.940 --> 00:02:04.819
+Yes, it will take a long time but let's
+just be brave and roll up our sleeves.
+
+31
+00:02:05.820 --> 00:02:09.520
+Well unfortunately this is
+about the same as giving up.
+
+32
+00:02:09.520 --> 00:02:14.420
+Because on many instances as soon
+as they become a little bit large
+
+33
+00:02:14.420 --> 00:02:18.196
+this will take you forever, and you
+won't be able to give the best solution.
+
+34
+00:02:18.196 --> 00:02:19.837
+All right.
+
+35
+00:02:19.837 --> 00:02:22.090
+Third option.
+
+36
+00:02:22.090 --> 00:02:26.660
+Perhaps you're just going to try
+something and hope to be lucky.
+
+37
+00:02:26.660 --> 00:02:28.202
+For example, delivery routes.
+
+38
+00:02:28.202 --> 00:02:32.390
+You'll say okay, let me try to
+send one truck here, there, there,
+
+39
+00:02:32.390 --> 00:02:36.790
+and there and another truck to
+another sequence of customers and
+
+40
+00:02:36.790 --> 00:02:39.070
+maybe, maybe your solution will be good.
+
+41
+00:02:40.250 --> 00:02:42.960
+This, for a theoretician, like myself,
+
+42
+00:02:42.960 --> 00:02:47.960
+is not acceptable because you have
+no control over your solution.
+
+43
+00:02:47.960 --> 00:02:52.120
+This design of heuristics is not
+the kind of things we are striving for.
+
+44
+00:02:53.340 --> 00:02:59.080
+Fourth solution, let's try to do a rough,
+but good enough, job.
+
+45
+00:02:59.080 --> 00:02:59.720
+What does it mean?
+
+46
+00:03:00.820 --> 00:03:06.175
+First, we limit ourselves
+to work in polynomial time.
+
+47
+00:03:06.175 --> 00:03:10.750
+Second, We give up on
+finding the optimal solution.
+
+48
+00:03:10.750 --> 00:03:15.080
+Instead, we try to find
+a good enough solution.
+
+49
+00:03:15.080 --> 00:03:16.610
+What does good enough mean?
+
+50
+00:03:16.610 --> 00:03:21.040
+It means there's a certain objective we
+have in mind, and our goal is to find
+
+51
+00:03:21.040 --> 00:03:28.520
+the solution whose value is not too
+much worse than the optimal solution.
+
+52
+00:03:28.520 --> 00:03:32.060
+Provably within a small factor
+of the optimal solution.
+
+53
+00:03:34.470 --> 00:03:38.280
+So how do we go about designing
+approximation algorithms?
+
+54
+00:03:40.020 --> 00:03:44.800
+First we recognize that real
+life problems are too complex.
+
+55
+00:03:44.800 --> 00:03:48.820
+This is out of our reach for
+most real life problems.
+
+56
+00:03:48.820 --> 00:03:52.530
+Instead, what we will do in order
+to be able to prove things,
+
+57
+00:03:52.530 --> 00:03:56.200
+is study idealized versions
+of the problems that come up.
+
+58
+00:03:57.860 --> 00:04:00.740
+Idealized version of the knapsack problem,
+for example,.
+
+59
+00:04:01.950 --> 00:04:05.684
+And then,
+on these simple idealized problems,
+
+60
+00:04:05.684 --> 00:04:09.580
+with few parameters defining the input.
+
+61
+00:04:09.580 --> 00:04:12.540
+We can hopefully prove theorems.
+
+62
+00:04:12.540 --> 00:04:16.000
+These theorems give us new algorithmic and
+
+63
+00:04:16.000 --> 00:04:19.450
+structural insights on
+the difficulty of the problems.
+
+64
+00:04:21.400 --> 00:04:25.260
+And so,
+we start from real-life situations.
+
+65
+00:04:25.260 --> 00:04:31.620
+We distill the difficulties to
+define basic theoretical primes.
+
+66
+00:04:31.620 --> 00:04:37.860
+On those problems, we do theory we
+design a solution, an algorithm.
+
+67
+00:04:37.860 --> 00:04:39.630
+We prove some theorems about it.
+
+68
+00:04:41.160 --> 00:04:45.610
+On the route to doing that,
+we get some new ideas.
+
+69
+00:04:45.610 --> 00:04:49.140
+Then we have to go back to real life and
+
+70
+00:04:49.140 --> 00:04:52.210
+apply that theory to
+the real life situation.
+
+71
+00:04:53.610 --> 00:04:58.080
+In this course, I will focus on
+the theory for basic problems.
+
+72
+00:04:59.220 --> 00:05:01.690
+I will not talk about going back and
+
+73
+00:05:01.690 --> 00:05:06.910
+forth between real life and
+to theory and back to real life.
+
+74
+00:05:06.910 --> 00:05:12.630
+I will be focused solely on the theory
+of approximation algorithms for
+
+75
+00:05:12.630 --> 00:05:13.560
+basic problems.
+
+76
+00:05:15.350 --> 00:05:17.870
+So what problems are we going to study?
+
+77
+00:05:18.980 --> 00:05:21.600
+The choice of problems is
+guided by two concerns.
+
+78
+00:05:22.730 --> 00:05:25.138
+One, I want famous problems.
+
+79
+00:05:25.138 --> 00:05:29.090
+Well-studied problems that
+you would like to know about.
+
+80
+00:05:29.090 --> 00:05:32.400
+It's good for your culture to
+have heard about these problems.
+
+81
+00:05:32.400 --> 00:05:37.160
+Two, I would like problems each
+of which gives you an opportunity
+
+82
+00:05:37.160 --> 00:05:40.910
+to learn about techniques for
+the design of approximation algorithms.
+
+83
+00:05:42.110 --> 00:05:45.320
+In this part of the course,
+the first part of the course,
+
+84
+00:05:45.320 --> 00:05:49.230
+there are five chapters
+corresponding to five problems,
+
+85
+00:05:49.230 --> 00:05:54.460
+five different techniques in the design or
+in the analysis.
+
+86
+00:05:54.460 --> 00:05:55.882
+First, vertex cover.
+
+87
+00:05:55.882 --> 00:05:58.530
+Second, knapsack.
+
+88
+00:05:58.530 --> 00:06:01.368
+Third, bin packing.
+
+89
+00:06:01.368 --> 00:06:04.042
+Fourth, set cover.
+
+90
+00:06:04.042 --> 00:06:08.130
+Five the most difficult problem
+in this part of the course,
+
+91
+00:06:08.130 --> 00:06:09.130
+the multiway cut problem.
+
+92
+00:06:10.970 --> 00:06:14.910
+So I will start shortly with
+the first problem in our list,
+
+93
+00:06:14.910 --> 00:06:16.540
+the vertex cover problem.
+
+94
+00:06:16.540 --> 00:06:21.500
+And it will be a chance to introduce
+one important technique in a design of
+
+95
+00:06:21.500 --> 00:06:26.440
+approximation algorithms, having a linear
+programming relaxation for the problem.
+
+96
+00:06:27.920 --> 00:06:30.120
+But before I start with
+the technical part,
+
+97
+00:06:30.120 --> 00:06:33.906
+let me introduce all the staff
+that is helping with this course.
+
+98
+00:06:33.906 --> 00:06:37.350
+Vincent Cohen-Addad,
+Frederik Mallmann-Trenn, and
+
+99
+00:06:37.350 --> 00:06:40.620
+Victor Verdugo,
+the three teaching assistants.
+
+100
+00:06:40.620 --> 00:06:46.360
+Unfortunately, Victor Is here, Vincent
+is here, but Frederik is not here today.
+
+101
+00:06:46.360 --> 00:06:51.260
+He's out sick, but Vincent and
+Victor can both introduce themselves.
+
+102
+00:06:51.260 --> 00:06:54.785
+Vincent would you like to say
+a few words about yourself?
+
+103
+00:06:54.785 --> 00:06:55.917
+>> Sure.
+Thanks.
+
+104
+00:06:55.917 --> 00:06:57.840
+Hi, I'm Vincent Cohen-Addad.
+
+105
+00:06:57.840 --> 00:07:03.070
+I'm a PhD student here at TNS
+working on approximation algorithm.
+
+106
+00:07:03.070 --> 00:07:06.240
+I'm very happy to be a teaching
+assistant for this course airamook.
+
+107
+00:07:07.630 --> 00:07:08.780
+>> Thank you, Vincent.
+
+108
+00:07:08.780 --> 00:07:09.630
+Victor?
+
+109
+00:07:09.630 --> 00:07:11.850
+Would you like to say a few
+words about yourself?
+
+110
+00:07:11.850 --> 00:07:14.000
+>> Hola, I'm Victor Verdugo.
+
+111
+00:07:14.000 --> 00:07:18.680
+I'm from Chile, and I'm currently
+working in Paris for my PhD thesis.
+
+112
+00:07:19.890 --> 00:07:23.050
+I'm very glad to be part of this
+course airamook as teaching assistant.
+
+113
+00:07:24.620 --> 00:07:25.860
+Thank you Victor.
+
+114
+00:07:25.860 --> 00:07:29.550
+Let me also mention,
+our film director, Naudie and
+
+115
+00:07:29.550 --> 00:07:34.260
+our cameraman, Joe who,
+unfortunately, are both camera shy.
+
+116
+00:07:34.260 --> 00:07:39.437
+Once again, welcome to the Coursera course
+on Approximation Algorithms, Part One.

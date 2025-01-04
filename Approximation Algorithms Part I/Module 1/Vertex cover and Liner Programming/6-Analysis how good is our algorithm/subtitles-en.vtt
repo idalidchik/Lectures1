@@ -1,0 +1,444 @@
+WEBVTT
+
+1
+00:00:00.100 --> 00:00:04.227
+[MUSIC]
+
+2
+00:00:04.227 --> 00:00:08.075
+So far, we have designed
+an approximation algorithm for
+
+3
+00:00:08.075 --> 00:00:12.020
+vertex cover and
+we have proved that it is correct.
+
+4
+00:00:12.020 --> 00:00:16.130
+That is, the output really
+is a proper vertex cover.
+
+5
+00:00:16.130 --> 00:00:19.040
+We have also verified that
+it runs in polynomial time.
+
+6
+00:00:20.040 --> 00:00:24.620
+The only thing remaining is we need
+to analyze the quality of the output.
+
+7
+00:00:26.640 --> 00:00:28.850
+How good is the output?
+
+8
+00:00:28.850 --> 00:00:36.150
+We need to relate it to the unknown value
+of the unknown optimal vertex cover.
+
+9
+00:00:36.150 --> 00:00:37.790
+This is what we will now proceed to do.
+
+10
+00:00:39.150 --> 00:00:40.060
+Start from the output.
+
+11
+00:00:41.980 --> 00:00:44.450
+Let us try to express it's value.
+
+12
+00:00:45.760 --> 00:00:47.310
+What is the output?
+
+13
+00:00:47.310 --> 00:00:52.530
+It is the set of vertices u,
+subset variable z sub u equals 1.
+
+14
+00:00:52.530 --> 00:00:57.420
+The z sub u are the rounded values
+obtained from the LP solution.
+
+15
+00:00:59.230 --> 00:01:02.280
+Well, the output cost is
+the sum of the weights
+
+16
+00:01:02.280 --> 00:01:05.920
+of all vertices that are chosen
+in our vertex cover.
+
+17
+00:01:05.920 --> 00:01:09.860
+It can be written as sum over u of wu zu.
+
+18
+00:01:11.150 --> 00:01:14.510
+This is an algebraic expression for
+the cost of the output.
+
+19
+00:01:14.510 --> 00:01:19.580
+So to analyze the output,
+we need to analyze this quantity.
+
+20
+00:01:19.580 --> 00:01:20.700
+Upper bound, its cost.
+
+21
+00:01:22.580 --> 00:01:27.900
+Second, now we have expressed
+the output cost in terms of z sub u.
+
+22
+00:01:27.900 --> 00:01:32.460
+Let us try to relate the value
+of z sub u to something else.
+
+23
+00:01:32.460 --> 00:01:35.080
+To the LP variables that it came from.
+
+24
+00:01:37.350 --> 00:01:39.300
+How was z sub u defined?
+
+25
+00:01:39.300 --> 00:01:44.900
+It was the rounded value
+obtained from variable xu star.
+
+26
+00:01:44.900 --> 00:01:47.420
+xu star was a real number between 0 and 1.
+
+27
+00:01:47.420 --> 00:01:50.440
+z sub u is rounded to 1 or to 0.
+
+28
+00:01:51.930 --> 00:01:52.430
+Observe.
+
+29
+00:01:54.320 --> 00:01:58.820
+z sub u is always at most 2 times xu star.
+
+30
+00:02:00.450 --> 00:02:03.750
+There's a factor of 2 between z sub u and
+xu star.
+
+31
+00:02:04.840 --> 00:02:07.720
+Sometimes this can be very pessimistic.
+
+32
+00:02:07.720 --> 00:02:10.278
+Sometimes z sub u is 0.
+
+33
+00:02:10.278 --> 00:02:13.765
+But in any case,
+regardless of the value of xu star,
+
+34
+00:02:13.765 --> 00:02:16.710
+z sub u is at most twice as much.
+
+35
+00:02:16.710 --> 00:02:20.910
+The factor of 2 is reached exactly
+when xu star equals one half.
+
+36
+00:02:23.040 --> 00:02:26.470
+Next, what do we do with these xu stars?
+
+37
+00:02:26.470 --> 00:02:29.130
+We need to relate the xu stars
+
+38
+00:02:29.130 --> 00:02:31.760
+to the value of the value of
+the unknown optimal vertex cover.
+
+39
+00:02:33.190 --> 00:02:37.650
+For this we will go back to
+the definition of the linear program.
+
+40
+00:02:37.650 --> 00:02:42.390
+And remember that it is a relaxation of
+an integer program for a vertex cover.
+
+41
+00:02:43.510 --> 00:02:46.710
+Compare the integer program and
+the linear program.
+
+42
+00:02:46.710 --> 00:02:51.252
+Put them side by side,
+you can see that the only difference is xu
+
+43
+00:02:51.252 --> 00:02:54.827
+is 0,1 in the integer program.
+
+44
+00:02:54.827 --> 00:03:01.770
+xu star is between 0 and
+1 in the linear program.
+
+45
+00:03:01.770 --> 00:03:03.270
+What does this mean?
+
+46
+00:03:03.270 --> 00:03:08.680
+This means that the linear program is
+less constraining than the program.
+
+47
+00:03:08.680 --> 00:03:10.670
+So when you're trying to minimize,
+
+48
+00:03:10.670 --> 00:03:15.520
+the linear program can give you
+something smaller than the program.
+
+49
+00:03:15.520 --> 00:03:18.910
+And so what this means is that,
+if you look at the optimal value
+
+50
+00:03:18.910 --> 00:03:24.020
+of the linear program,
+it's value of sum of w sub u xu star.
+
+51
+00:03:24.020 --> 00:03:29.510
+It is smaller than the optimal value of
+the integer program, smaller than OPT.
+
+52
+00:03:31.590 --> 00:03:37.320
+Now we have step by step, starting from
+the output cost, related it to OPT.
+
+53
+00:03:37.320 --> 00:03:41.770
+It only remains to combine
+our various observations, and
+
+54
+00:03:41.770 --> 00:03:42.820
+we will obtain the proof.
+
+55
+00:03:45.260 --> 00:03:45.760
+There you go.
+
+56
+00:03:46.970 --> 00:03:47.470
+Look.
+
+57
+00:03:48.710 --> 00:03:53.750
+The output cost is equal to
+a weighted sum of z sub u's,
+
+58
+00:03:53.750 --> 00:03:59.540
+which is at most 2 times
+the sum of w sub u, x u star.
+
+59
+00:03:59.540 --> 00:04:01.210
+And the sum is at most OPT.
+
+60
+00:04:02.550 --> 00:04:04.920
+We have proved a theorem.
+
+61
+00:04:04.920 --> 00:04:11.930
+The output of our algorithm is a vertex
+cover who's value is at most 2 times OPT.
+
+62
+00:04:13.100 --> 00:04:17.280
+It's a factor of 2 approximation for
+vertex cover.
+
+63
+00:04:19.190 --> 00:04:21.360
+But is this analysis tight?
+
+64
+00:04:21.360 --> 00:04:22.930
+Is this factor of 2 necessary?
+
+65
+00:04:24.150 --> 00:04:26.260
+Unfortunately yes.
+
+66
+00:04:27.460 --> 00:04:31.590
+There are some cases where
+it's really effective too.
+
+67
+00:04:31.590 --> 00:04:33.440
+Let me give you an example.
+
+68
+00:04:33.440 --> 00:04:37.110
+Consider this cycle, length 8.
+
+69
+00:04:37.110 --> 00:04:41.470
+Take every other vertex along this cycle.
+
+70
+00:04:42.510 --> 00:04:45.590
+You get a vertex cover of value 4.
+
+71
+00:04:47.310 --> 00:04:49.730
+Solve the linear program
+to execute the algorithm.
+
+72
+00:04:49.730 --> 00:04:50.380
+What do you see?
+
+73
+00:04:51.570 --> 00:04:55.070
+It is possible that it will give you,
+for every xu star 0.5.
+
+74
+00:04:55.070 --> 00:04:58.380
+What does the rounding do next?
+
+75
+00:04:58.380 --> 00:05:02.970
+Every 0.5 is replaced by 1,
+1, 1, 8 times 1.
+
+76
+00:05:02.970 --> 00:05:04.940
+The cost is 8.
+
+77
+00:05:06.190 --> 00:05:07.840
+The optimal cost is 4.
+
+78
+00:05:07.840 --> 00:05:09.660
+The output cost is 8.
+
+79
+00:05:09.660 --> 00:05:12.818
+So we really have lost a factor of 2.
+
+80
+00:05:12.818 --> 00:05:14.860
+Our analysis tight.
+
+81
+00:05:14.860 --> 00:05:17.815
+The algorithm is no better
+then the two approximations.
+
+82
+00:05:22.348 --> 00:05:24.910
+Except we're talking
+about worst-case here.
+
+83
+00:05:26.620 --> 00:05:29.454
+The typical performance, I have been told,
+
+84
+00:05:29.454 --> 00:05:35.270
+is usually within 10% of optimum.
+
+85
+00:05:35.270 --> 00:05:40.600
+And the nice thing about this algorithm
+is that in the cases when it really is
+
+86
+00:05:40.600 --> 00:05:42.750
+close to optimum, you can tell.
+
+87
+00:05:42.750 --> 00:05:44.240
+You can see it.
+
+88
+00:05:45.650 --> 00:05:46.190
+How do you know?
+
+89
+00:05:48.370 --> 00:05:54.880
+You can just compare the value of your
+output to the value of the linear program.
+
+90
+00:05:54.880 --> 00:05:58.160
+You have the linear program so
+you know this expression.
+
+91
+00:05:58.160 --> 00:06:00.900
+And so you have the output,
+so you know its value, so
+
+92
+00:06:00.900 --> 00:06:05.710
+you can see when the output
+is within 10% of the value.
+
+93
+00:06:05.710 --> 00:06:09.210
+And then you know you have a proof
+that in that specific instance,
+
+94
+00:06:09.210 --> 00:06:13.060
+you're output is within 10% of OPT.
+
+95
+00:06:13.060 --> 00:06:17.799
+In this part, we have completed
+the analysis of a vertex cover algorithm,
+
+96
+00:06:17.799 --> 00:06:22.050
+and we have proved that it is
+within a factor of 2 of optimal.
+
+97
+00:06:22.050 --> 00:06:25.980
+Now all that remains is to
+summarize our approach, and
+
+98
+00:06:25.980 --> 00:06:28.680
+to see the vertex cover
+program in general.

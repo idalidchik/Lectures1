@@ -1,0 +1,684 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:08.955
+[MUSIC]
+
+2
+00:00:08.955 --> 00:00:12.487
+Hello, I am so happy that you're
+interested in this course and
+
+3
+00:00:12.487 --> 00:00:15.687
+that you have been trying to
+do the first assignment, and
+
+4
+00:00:15.687 --> 00:00:20.240
+that you have some questions about this
+assignment that I am now going to answer.
+
+5
+00:00:22.630 --> 00:00:27.150
+In the assignment we said, consider
+the linear programming relaxation for
+
+6
+00:00:27.150 --> 00:00:31.340
+the vertex cover problem, and
+let us assume that we have a solution
+
+7
+00:00:31.340 --> 00:00:36.150
+such that every coordinate is
+either zero or one half, or one.
+
+8
+00:00:37.300 --> 00:00:39.310
+And you had some questions.
+
+9
+00:00:39.310 --> 00:00:43.820
+You asked is this a special property,
+or is it always true?
+
+10
+00:00:44.950 --> 00:00:46.860
+I said, yes, it's always true.
+
+11
+00:00:47.970 --> 00:00:51.620
+Then you said, but then,
+is there an algorithm for
+
+12
+00:00:51.620 --> 00:00:55.320
+computing such a solution,
+or is it hard to calculate?
+
+13
+00:00:55.320 --> 00:00:58.750
+And I said yes, there is an algorithm.
+
+14
+00:00:58.750 --> 00:01:02.480
+And now, given that you seem to
+be interested in this question,
+
+15
+00:01:02.480 --> 00:01:05.600
+I thought it would be worth
+giving you a little proof.
+
+16
+00:01:05.600 --> 00:01:07.798
+So, that is what this video is about.
+
+17
+00:01:07.798 --> 00:01:12.609
+The theorem is: there exists
+an optimal solution of
+
+18
+00:01:12.609 --> 00:01:15.889
+the LP relaxation forward x cover,
+
+19
+00:01:15.889 --> 00:01:20.915
+such that every coordinate x
+sub u is either 0 or .5 or
+
+20
+00:01:20.915 --> 00:01:26.960
+1, and there is a polynomial-time
+algorithm to construct it.
+
+21
+00:01:28.750 --> 00:01:30.208
+Let's do this algorithm.
+
+22
+00:01:30.208 --> 00:01:35.850
+The algorithm, first solves the LP.
+
+23
+00:01:37.480 --> 00:01:41.306
+That gives it an optimal solution, xu*,
+
+24
+00:01:41.306 --> 00:01:46.624
+that satisfies all the constraints and
+such that the weight
+
+25
+00:01:46.624 --> 00:01:51.766
+of the resulting fractional
+vertex cover is minimized.
+
+26
+00:01:51.766 --> 00:01:55.980
+But, possibly, these variables,
+they're between zero and
+
+27
+00:01:55.980 --> 00:02:00.230
+one, but possibly, they're not all equal
+to zero, or to one-half, or to one.
+
+28
+00:02:01.950 --> 00:02:03.200
+So what do we do?
+
+29
+00:02:03.200 --> 00:02:07.270
+We gradually modify
+the solution to have more and
+
+30
+00:02:07.270 --> 00:02:10.570
+more coordinates equal to zero or
+to one-half or to one.
+
+31
+00:02:12.290 --> 00:02:17.300
+First, all the variables that
+already have value in 0, .5, and
+
+32
+00:02:17.300 --> 00:02:20.140
+1, or 1, we freeze them.
+
+33
+00:02:20.140 --> 00:02:22.070
+We will not change them anymore.
+
+34
+00:02:22.070 --> 00:02:23.730
+They already have the value we want.
+
+35
+00:02:25.220 --> 00:02:28.700
+Second, consider the remaining variables.
+
+36
+00:02:28.700 --> 00:02:30.075
+There are two possibilities.
+
+37
+00:02:30.075 --> 00:02:31.533
+Large.
+
+38
+00:02:31.533 --> 00:02:32.991
+Small.
+
+39
+00:02:32.991 --> 00:02:39.690
+Large between .5 and 1, strictly.
+
+40
+00:02:41.120 --> 00:02:45.360
+Small, between 0 and .5, strictly.
+
+41
+00:02:45.360 --> 00:02:49.460
+Every variable is either frozen or
+large or small.
+
+42
+00:02:51.160 --> 00:02:59.833
+Now, there's an interesting property due
+to the constraints of the LP relaxation.
+
+43
+00:02:59.833 --> 00:03:03.751
+If u is small, and
+if we have an edge from u to v,
+
+44
+00:03:03.751 --> 00:03:07.380
+then we only have two possibilities for v.
+
+45
+00:03:08.510 --> 00:03:14.227
+Either v is large,
+as in here u has value 0.4 x* u is 0.4.
+
+46
+00:03:14.227 --> 00:03:19.470
+V has value 0.7,
+the sum is greater than or equal to 1.
+
+47
+00:03:19.470 --> 00:03:25.701
+Or the value for v is 1, 0.4 plus 1.
+
+48
+00:03:25.701 --> 00:03:32.880
+But what we cannot have is two small
+vertices adjacent to one another.
+
+49
+00:03:32.880 --> 00:03:35.026
+If u is 0.4 strictly less than 0.5.
+
+50
+00:03:35.026 --> 00:03:39.804
+If v is strictly less than 0.5, then there
+sum would be strictly less than 1 and
+
+51
+00:03:39.804 --> 00:03:41.780
+that would be not feasible.
+
+52
+00:03:41.780 --> 00:03:42.770
+That is not possible.
+
+53
+00:03:43.820 --> 00:03:49.390
+So, if a vertex is small,
+then it's neighbors cannot be small.
+
+54
+00:03:51.100 --> 00:03:51.750
+Now what do we do.
+
+55
+00:03:54.030 --> 00:03:55.500
+We try two things.
+
+56
+00:03:57.220 --> 00:04:01.490
+The first thing we try,
+is to do a small local modification.
+
+57
+00:04:02.900 --> 00:04:08.270
+We take a very small epsilon,
+very small positive epsilon.
+
+58
+00:04:08.270 --> 00:04:11.630
+We take every small value, x to star.
+
+59
+00:04:12.680 --> 00:04:14.800
+And try to increment it by epsilon.
+
+60
+00:04:15.850 --> 00:04:20.520
+Every large value, and
+try to decrement it by epsilon.
+
+61
+00:04:22.120 --> 00:04:23.930
+What does that give us?
+
+62
+00:04:25.120 --> 00:04:30.629
+What this means is that, if we have an
+edge, we have a small adjacent to a large,
+
+63
+00:04:30.629 --> 00:04:36.583
+the small increased a little bit going
+say from .4 to .41, if epsilon is .01.
+
+64
+00:04:36.583 --> 00:04:42.400
+The large decreased a little bit by the
+same amount and the sum does not change.
+
+65
+00:04:42.400 --> 00:04:47.217
+So it was greater than or equal to 1
+before, it's still greater than or
+
+66
+00:04:47.217 --> 00:04:48.935
+equal to 1 afterwards.
+
+67
+00:04:48.935 --> 00:04:53.770
+Even if the sum was exactly 1 before,
+it's still exactly one afterwards.
+
+68
+00:04:53.770 --> 00:04:55.620
+So it still satisfies the constraint.
+
+69
+00:04:56.830 --> 00:05:01.901
+Or if the two vertices were both large,
+then they both
+
+70
+00:05:01.901 --> 00:05:09.013
+decrease by epsilon 0.7 because 0.69,
+0.6 because 0.59.
+
+71
+00:05:09.013 --> 00:05:13.930
+So there's some decreases, but
+the sum, was strictly more than one.
+
+72
+00:05:13.930 --> 00:05:17.110
+If you have two numbers that
+are both strictly more than 0.5,
+
+73
+00:05:17.110 --> 00:05:19.520
+their sum is strictly more than one.
+
+74
+00:05:19.520 --> 00:05:22.076
+So when you do a little
+change of an epsilon.
+
+75
+00:05:22.076 --> 00:05:25.160
+Now the sum decreases by two epsilon, and
+
+76
+00:05:25.160 --> 00:05:28.390
+for epsilon small enough,
+it's still greater than or equal to one.
+
+77
+00:05:30.100 --> 00:05:33.130
+So what this means is that for
+epsilon small enough,
+
+78
+00:05:34.490 --> 00:05:38.890
+this y vector is still feasible,
+
+79
+00:05:38.890 --> 00:05:43.000
+it's still a feasible vertex cover.
+
+80
+00:05:43.000 --> 00:05:44.090
+That's the first thing we tried.
+
+81
+00:05:46.140 --> 00:05:48.040
+Two, we tried to do the opposite.
+
+82
+00:05:49.800 --> 00:05:53.620
+The small vertices will
+decrease by epsilon.
+
+83
+00:05:53.620 --> 00:05:55.570
+The large vertices will
+increase by epsilon.
+
+84
+00:05:57.670 --> 00:06:02.890
+Again, if we have a small adjacent
+to a large, the sum doesn't change.
+
+85
+00:06:02.890 --> 00:06:05.220
+Plus epsilon, minus epsilon, that's 0.
+
+86
+00:06:05.220 --> 00:06:11.240
+If we have a small adjacent to 1,
+well the small decreases.
+
+87
+00:06:11.240 --> 00:06:16.490
+But then the value was one plus something,
+so it was strictly more than one and
+
+88
+00:06:16.490 --> 00:06:21.420
+so it's still strictly more than one
+afterwards, for epsilon small enough.
+
+89
+00:06:21.420 --> 00:06:23.580
+And if both were large, then it increases,
+
+90
+00:06:23.580 --> 00:06:26.690
+so it satisfies the constraints
+even more than before.
+
+91
+00:06:27.870 --> 00:06:29.830
+So what this means is that, for
+
+92
+00:06:29.830 --> 00:06:33.860
+epsilon small enough,
+this factor z is still feasible.
+
+93
+00:06:36.200 --> 00:06:38.570
+So we have two new solutions.
+
+94
+00:06:38.570 --> 00:06:42.090
+One where all the small items
+increase by epsilon, and
+
+95
+00:06:42.090 --> 00:06:44.390
+the large items decrease by epsilon.
+
+96
+00:06:44.390 --> 00:06:48.730
+And one where we do the opposite,
+the small decrease, the large increase.
+
+97
+00:06:50.470 --> 00:06:51.580
+They're both feasible.
+
+98
+00:06:53.640 --> 00:06:58.470
+Y is feasible but x* is the optimal value.
+
+99
+00:06:58.470 --> 00:07:02.780
+So we know the value of y is less
+than the value, less than or
+
+100
+00:07:02.780 --> 00:07:05.160
+equal to the value of x*.
+
+101
+00:07:05.160 --> 00:07:06.180
+Same thing for z.
+
+102
+00:07:06.180 --> 00:07:11.199
+The value of z, because it's feasible,
+is less than or equal to the value of x*.
+
+103
+00:07:12.420 --> 00:07:18.370
+But, y and z are so close,
+they're so close to one another.
+
+104
+00:07:20.030 --> 00:07:24.930
+If you look at the average of y and z, on
+
+105
+00:07:24.930 --> 00:07:29.920
+average we get x*, plus epsilon
+minus epsilon the average is zero.
+
+106
+00:07:29.920 --> 00:07:33.890
+Minus epsilon plus epsilon
+the average is a change in zero.
+
+107
+00:07:33.890 --> 00:07:38.540
+In other words The value of y
+plus the value of z over 2,
+
+108
+00:07:38.540 --> 00:07:43.410
+the average between the two
+is exactly value of x*.
+
+109
+00:07:43.410 --> 00:07:48.090
+And they're both less than or
+equal to x*, so they have to be equal.
+
+110
+00:07:49.390 --> 00:07:52.950
+If we have two values, both less than or
+
+111
+00:07:52.950 --> 00:07:57.540
+equal to the value of x*, and on average,
+they are equal to the value of x*.
+
+112
+00:07:57.540 --> 00:07:59.130
+Then they all have to be equal.
+
+113
+00:08:01.200 --> 00:08:03.230
+Y and z are feasible.
+
+114
+00:08:03.230 --> 00:08:08.460
+Their value is the same as the value of
+x*, so they're also optimal solutions.
+
+115
+00:08:12.500 --> 00:08:15.360
+They're also optimal solutions.
+
+116
+00:08:15.360 --> 00:08:16.090
+So what do we do?
+
+117
+00:08:17.650 --> 00:08:18.413
+We take y.
+
+118
+00:08:18.413 --> 00:08:19.461
+We take z.
+
+119
+00:08:19.461 --> 00:08:23.780
+We think of epsilon as being small.
+
+120
+00:08:23.780 --> 00:08:25.440
+Small enough.
+
+121
+00:08:25.440 --> 00:08:26.590
+What does that mean, small enough?
+
+122
+00:08:28.760 --> 00:08:32.110
+What happens if we try to
+start from a very small,
+
+123
+00:08:32.110 --> 00:08:36.040
+an infinitesimal epsilon,
+and we increase it?
+
+124
+00:08:36.040 --> 00:08:38.740
+Increase it, increase it,
+increase it, until something happens.
+
+125
+00:08:38.740 --> 00:08:39.370
+What can happen?
+
+126
+00:08:41.010 --> 00:08:44.240
+What may happen is that this small x*,
+
+127
+00:08:44.240 --> 00:08:49.840
+it was strictly between zero and
+0.5, we keep increasing it,
+
+128
+00:08:49.840 --> 00:08:56.390
+eventually it might reach 0.5 or
+this large value.
+
+129
+00:08:56.390 --> 00:08:58.260
+We decreased it, decreased it.
+
+130
+00:08:58.260 --> 00:08:59.660
+It was between 0.5 and 1.
+
+131
+00:08:59.660 --> 00:09:02.950
+Eventually, it may reach 0.5.
+
+132
+00:09:02.950 --> 00:09:06.440
+Or this small value here we decreased it,
+decreased it,
+
+133
+00:09:06.440 --> 00:09:09.510
+decreased it eventually we may reach zero.
+
+134
+00:09:09.510 --> 00:09:13.440
+Or this large value increased it,
+increased it, eventually we may reach one.
+
+135
+00:09:14.600 --> 00:09:20.690
+So as epsilon increases,
+one of these events is going to happen.
+
+136
+00:09:20.690 --> 00:09:23.950
+Whichever one happens first,
+that's when we stop.
+
+137
+00:09:25.200 --> 00:09:28.930
+We stop, we look at the variable
+that just reached 0, or 0.5, or 1.
+
+138
+00:09:28.930 --> 00:09:31.560
+We freeze it.
+
+139
+00:09:33.800 --> 00:09:38.391
+Now we have one more variable,
+with value 0.501.
+
+140
+00:09:38.391 --> 00:09:43.337
+And we have this optimal solution,
+either y or z, depending on which
+
+141
+00:09:43.337 --> 00:09:48.840
+of those events happens,
+that has all these frozen variables.
+
+142
+00:09:48.840 --> 00:09:50.930
+And we can repeat the construction.
+
+143
+00:09:52.320 --> 00:09:55.730
+In each iteration one more
+variable will be frozen.
+
+144
+00:09:56.840 --> 00:09:58.420
+When does this end?
+
+145
+00:09:58.420 --> 00:10:01.370
+It ends when every variable is frozen.
+
+146
+00:10:02.430 --> 00:10:05.750
+At this point,
+every variable has value 0.5 or 1,
+
+147
+00:10:05.750 --> 00:10:10.900
+and we still, we worked only in
+the space of optimal solutions.
+
+148
+00:10:12.560 --> 00:10:17.843
+And so, what we have done here is we have
+proved that there's an optimal solution
+
+149
+00:10:17.843 --> 00:10:22.346
+of the vertex cover LP relaxation,
+whose coordinates are all in 0,
+
+150
+00:10:22.346 --> 00:10:27.335
+one-half, and 1, and we gave an algorithm
+to find it in polynomial time.

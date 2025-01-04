@@ -1,0 +1,363 @@
+WEBVTT
+
+1
+00:00:04.291 --> 00:00:09.400
+We have seen the definition of an integer
+program for the vertex cover problem.
+
+2
+00:00:10.660 --> 00:00:15.410
+Now I want to discuss a related
+linear programming formulation.
+
+3
+00:00:17.600 --> 00:00:19.890
+What is an integer program in general?
+
+4
+00:00:20.950 --> 00:00:23.360
+The general form is as follows.
+
+5
+00:00:23.360 --> 00:00:28.620
+Minimize or
+maximize an objective of the form
+
+6
+00:00:28.620 --> 00:00:33.350
+c1x1 plus c2x2 plus plus cnxn
+
+7
+00:00:33.350 --> 00:00:39.170
+subject to the constraints such as
+
+8
+00:00:39.170 --> 00:00:43.895
+A 1 1 x1 + a 1 2 x 2+ + a 1n xn >b1 for
+
+9
+00:00:43.895 --> 00:00:48.660
+the first constraint and
+
+10
+00:00:48.660 --> 00:00:52.370
+a whole set of say m constraints.
+
+11
+00:00:54.540 --> 00:00:59.970
+In this course all of our problems will
+be modeled by integer programs where
+
+12
+00:00:59.970 --> 00:01:06.030
+you can add the constraint that for every
+i Variable xi must be between 0 and 1.
+
+13
+00:01:06.030 --> 00:01:11.697
+Finally, for every i,
+vertex i must be an integer.
+
+14
+00:01:11.697 --> 00:01:16.690
+An integer, that's why it's
+called integer programming.
+
+15
+00:01:17.950 --> 00:01:20.670
+So we have this perfect integer
+program for vertex cover.
+
+16
+00:01:21.830 --> 00:01:27.100
+If only we could use an algorithm for
+solving integer programming, we'd be done.
+
+17
+00:01:27.100 --> 00:01:28.800
+But of course it's not possible.
+
+18
+00:01:28.800 --> 00:01:32.450
+Integer programming is NP-hard.
+
+19
+00:01:32.450 --> 00:01:33.480
+Why then?
+
+20
+00:01:33.480 --> 00:01:36.700
+Why are people so
+interested in integer programs?
+
+21
+00:01:36.700 --> 00:01:38.630
+Because they provide inspiration.
+
+22
+00:01:38.630 --> 00:01:43.210
+They provide initial
+tools to use to design
+
+23
+00:01:43.210 --> 00:01:47.030
+better algorithms for related Problems.
+
+24
+00:01:48.210 --> 00:01:51.390
+In particular,
+let me show you a related linear program.
+
+25
+00:01:53.570 --> 00:01:58.310
+This linear program is the same
+as the integer program.
+
+26
+00:01:58.310 --> 00:02:03.590
+Minimize the same objective with
+the same first constraint with the one,
+
+27
+00:02:03.590 --> 00:02:08.830
+same second constraint Same last
+constraint except for the last line.
+
+28
+00:02:11.470 --> 00:02:14.650
+X i, that no longer has to be an integer.
+
+29
+00:02:14.650 --> 00:02:17.830
+X i now is just any real number.
+
+30
+00:02:19.180 --> 00:02:20.800
+With this apparently small,
+
+31
+00:02:20.800 --> 00:02:25.950
+apparently harmless modification,
+suddenly the capacity of the prime changes
+
+32
+00:02:25.950 --> 00:02:28.500
+Linear programming can be
+solved in polynomial time.
+
+33
+00:02:29.620 --> 00:02:32.130
+This was discovered about 30 years ago.
+
+34
+00:02:32.130 --> 00:02:37.480
+And since then linear programming has
+been a basic tool for the design of many,
+
+35
+00:02:37.480 --> 00:02:42.965
+many problems,
+many solutions for optimization.
+
+36
+00:02:42.965 --> 00:02:46.820
+There are two ways to
+present a linear program.
+
+37
+00:02:46.820 --> 00:02:50.980
+One is more detailed,
+the other one is more abstract, but
+
+38
+00:02:50.980 --> 00:02:54.130
+both of them are equally valid.
+
+39
+00:02:54.130 --> 00:02:57.670
+The same linear program can be
+represented by writing c one,
+
+40
+00:02:57.670 --> 00:03:01.516
+c two, c n, a one one, a one two,
+b one, b two n and so on.
+
+41
+00:03:01.516 --> 00:03:04.434
+Everything.
+
+42
+00:03:04.434 --> 00:03:12.210
+Or in a more compact fashion by saying
+Minimize the dot product of C and X.
+
+43
+00:03:12.210 --> 00:03:12.940
+What is C?
+
+44
+00:03:13.950 --> 00:03:19.580
+C is a vector in RN with
+Coordinants C1C2CN.
+
+45
+00:03:19.580 --> 00:03:21.180
+What is X?
+
+46
+00:03:21.180 --> 00:03:25.520
+X is also a vector is RN with coordinates
+
+47
+00:03:25.520 --> 00:03:32.600
+X1X2XN What is the dot product
+of vector c with vector x?
+
+48
+00:03:32.600 --> 00:03:37.750
+It is c1x1 plus c2x2 plus cnxn.
+
+49
+00:03:37.750 --> 00:03:42.060
+So, by writing c dot product x,
+
+50
+00:03:42.060 --> 00:03:46.400
+we just have a more compact notation for
+the same objective function.
+
+51
+00:03:47.740 --> 00:03:50.950
+Similarly, if we look at the constraints,
+
+52
+00:03:50.950 --> 00:03:54.680
+their constraints can be written
+more compactly using a matrix.
+
+53
+00:03:54.680 --> 00:03:59.418
+Matrix a with m rows, n columns,
+
+54
+00:03:59.418 --> 00:04:03.108
+coordinates a-i-j.
+
+55
+00:04:03.108 --> 00:04:06.780
+Matrix a, apply to vector x.
+
+56
+00:04:06.780 --> 00:04:11.110
+Must be greater than a recall to vector b.
+
+57
+00:04:11.110 --> 00:04:15.880
+B is a vector in our m dimensional space.
+
+58
+00:04:15.880 --> 00:04:17.220
+Vector b one b two b m.
+
+59
+00:04:18.590 --> 00:04:21.540
+Greater than recall means
+coordinate per coordinate.
+
+60
+00:04:23.000 --> 00:04:28.820
+X must be in the hyper cube zero one to
+the n Meaning every size between 0 and
+
+61
+00:04:28.820 --> 00:04:33.990
+1 and x is a vector of RN meaning
+every [INAUDIBLE] is a real number.
+
+62
+00:04:33.990 --> 00:04:38.660
+Thus these are two completely
+equivalent notations for
+
+63
+00:04:38.660 --> 00:04:42.480
+the same linear program,
+no one is better than the other.
+
+64
+00:04:42.480 --> 00:04:47.420
+Depending on your taste you can choose to
+write it in the first or the second form.
+
+65
+00:04:47.420 --> 00:04:49.694
+It's two presentations for the same thing.
+
+66
+00:04:51.907 --> 00:04:54.699
+Thus, if you have an integer program,
+
+67
+00:04:54.699 --> 00:05:00.453
+you have a similar linear program that
+looks identical except for the last line,
+
+68
+00:05:00.453 --> 00:05:06.370
+replacing the constraint xi integer
+by the constraint xi real number.
+
+69
+00:05:06.370 --> 00:05:11.310
+The complicity changes drastically,
+when IP is at the home,
+
+70
+00:05:11.310 --> 00:05:14.690
+the corresponding LP is
+solvable in polynomial time.
+
+71
+00:05:16.180 --> 00:05:19.260
+So, we have an integer program,
+for vertex cover.
+
+72
+00:05:20.440 --> 00:05:23.720
+Therefore, we can write
+the corresponding linear program.
+
+73
+00:05:25.280 --> 00:05:31.030
+Every vertex u, The corresponding
+variable, xu, must be between 0 and 1.
+
+74
+00:05:31.030 --> 00:05:36.170
+Every edge {u,v}, we must have xu
++ xv greater than or equal to 1.
+
+75
+00:05:36.170 --> 00:05:41.040
+And the objective is still the same as for
+the integer program it came from.
+
+76
+00:05:43.180 --> 00:05:48.910
+We now have a linear program related to
+the integer program For vertex cover.
+
+77
+00:05:49.980 --> 00:05:51.700
+Now comes that crucial step.
+
+78
+00:05:51.700 --> 00:05:56.510
+We are going to use this
+linear program to design
+
+79
+00:05:56.510 --> 00:06:00.780
+a good approximation algorithm finally for
+vertex cover
