@@ -1,0 +1,565 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.520
+[MUSIC]
+
+2
+00:00:06.520 --> 00:00:09.518
+Now that we have the good algorithm,
+
+3
+00:00:09.518 --> 00:00:15.240
+when all I are at least the big
+capacity times epsilon.
+
+4
+00:00:15.240 --> 00:00:20.190
+Let us analyze this algorithm and
+show that its value is close to optimum.
+
+5
+00:00:22.300 --> 00:00:24.010
+Recall the algorithm.
+
+6
+00:00:24.010 --> 00:00:25.950
+Solve the item sizes.
+
+7
+00:00:25.950 --> 00:00:29.585
+Make groups of and.
+
+8
+00:00:29.585 --> 00:00:34.700
+In each group, round the item sizes,
+max item size in the group.
+
+9
+00:00:34.700 --> 00:00:39.700
+Then we have a reduction and
+we can solve the rounded problem.
+
+10
+00:00:39.700 --> 00:00:44.450
+Let's call it, "u." I is the input, U is
+
+11
+00:00:44.450 --> 00:00:50.460
+the rounded problem where every
+item value is rounded upwards.
+
+12
+00:00:50.460 --> 00:00:52.880
+And finally,
+output the corresponding packing.
+
+13
+00:00:55.380 --> 00:00:56.060
+How good is it?
+
+14
+00:00:58.280 --> 00:00:59.410
+The value of the output.
+
+15
+00:00:59.410 --> 00:01:00.500
+What is it?
+
+16
+00:01:00.500 --> 00:01:03.490
+If we use the optimal
+algorithm to solve this
+
+17
+00:01:03.490 --> 00:01:06.840
+then the value of
+the output is opt of view.
+
+18
+00:01:06.840 --> 00:01:11.080
+The optimal value for
+the rounded items rounded up.
+
+19
+00:01:12.460 --> 00:01:15.720
+So we must relate opt of
+view to opt of the input.
+
+20
+00:01:18.930 --> 00:01:22.000
+And this, this is the idea.
+
+21
+00:01:22.000 --> 00:01:26.520
+This is the most important slide for
+the analysis of our [INAUDIBLE].
+
+22
+00:01:26.520 --> 00:01:29.498
+Look at the input.
+
+23
+00:01:29.498 --> 00:01:33.360
+[INAUDIBLE]
+other groups.
+
+24
+00:01:33.360 --> 00:01:34.510
+Look at U.
+
+25
+00:01:34.510 --> 00:01:37.430
+We rounded every value upwards.
+
+26
+00:01:37.430 --> 00:01:39.000
+Up to the maximum of the group.
+
+27
+00:01:40.900 --> 00:01:44.300
+Consider a different kind of rounding.
+
+28
+00:01:45.890 --> 00:01:49.490
+Let's call it d.
+
+29
+00:01:49.490 --> 00:01:51.320
+D like down.
+
+30
+00:01:53.000 --> 00:01:57.350
+Down instead of rounding
+up we round items Down.
+
+31
+00:01:57.350 --> 00:01:58.680
+Down to what?
+
+32
+00:01:58.680 --> 00:02:03.050
+Down to the maximum item
+in the previous group.
+
+33
+00:02:04.260 --> 00:02:09.500
+The items in this group
+are rounded down to that size.
+
+34
+00:02:10.640 --> 00:02:16.050
+The items in that group
+are rounded down to that size,
+
+35
+00:02:16.050 --> 00:02:18.820
+and what about the items of this group?
+
+36
+00:02:18.820 --> 00:02:21.590
+They're rounded down to zero.
+
+37
+00:02:26.850 --> 00:02:28.250
+So what is D.
+
+38
+00:02:28.250 --> 00:02:29.355
+D looks like this.
+
+39
+00:02:29.355 --> 00:02:36.520
+Four items with this size, four items with
+that size, and four items with size zero.
+
+40
+00:02:39.640 --> 00:02:40.340
+How does this help?
+
+41
+00:02:41.520 --> 00:02:43.100
+Tt helps because?
+
+42
+00:02:43.100 --> 00:02:44.050
+is monotone.
+
+43
+00:02:45.410 --> 00:02:51.780
+the optimal value can only increase,
+when you increase an item size.
+
+44
+00:02:51.780 --> 00:02:54.910
+It can only decrease when
+you decrease an item size
+
+45
+00:02:58.400 --> 00:03:02.760
+So, we had our input which
+I now draw in the middle.
+
+46
+00:03:02.760 --> 00:03:04.950
+We have the upward rounding.
+
+47
+00:03:04.950 --> 00:03:07.190
+This item is rounded up.
+
+48
+00:03:07.190 --> 00:03:08.900
+We have the downwards rounding.
+
+49
+00:03:08.900 --> 00:03:10.753
+This item is rounded down.
+
+50
+00:03:12.890 --> 00:03:14.480
+I is our input.
+
+51
+00:03:14.480 --> 00:03:17.650
+U is the rounded input upwards.
+
+52
+00:03:17.650 --> 00:03:20.250
+D is the rounded input downwards.
+
+53
+00:03:20.250 --> 00:03:24.520
+We don't use D in the algorithm,
+we use D for the analysis only.
+
+54
+00:03:27.660 --> 00:03:28.160
+Observe.
+
+55
+00:03:29.200 --> 00:03:32.160
+Since increasing sizes
+can only increase opt,
+
+56
+00:03:33.780 --> 00:03:37.040
+when we round down Opt cannot increase.
+
+57
+00:03:37.040 --> 00:03:40.040
+Opt of d is less than or
+equal to opt of i.
+
+58
+00:03:40.040 --> 00:03:42.440
+When we round up opt can only increase.
+
+59
+00:03:42.440 --> 00:03:44.590
+Opt of i is less than or
+equal to opt of u.
+
+60
+00:03:45.860 --> 00:03:50.220
+We have sandwiched opt of i
+between opt of d and opt of u.
+
+61
+00:03:52.420 --> 00:03:53.330
+Why is this good?
+
+62
+00:03:57.750 --> 00:03:58.880
+Now I erase I.
+
+63
+00:03:58.880 --> 00:04:02.820
+I only look at U and D,
+the two rounded inputs.
+
+64
+00:04:04.450 --> 00:04:07.820
+Look at them, look at this, look at that,
+look at this, look at that.
+
+65
+00:04:07.820 --> 00:04:11.670
+They're almost the same.
+
+66
+00:04:11.670 --> 00:04:13.400
+It's almost the same input.
+
+67
+00:04:13.400 --> 00:04:16.790
+Of course this And that correspond,
+
+68
+00:04:16.790 --> 00:04:19.710
+because they came from
+the same input item.
+
+69
+00:04:19.710 --> 00:04:20.680
+But we can forget about that.
+
+70
+00:04:22.390 --> 00:04:23.258
+What happens in the end?
+
+71
+00:04:23.258 --> 00:04:28.254
+U contains n epsilon squared items of
+
+72
+00:04:28.254 --> 00:04:32.780
+this size, as does input D.
+
+73
+00:04:32.780 --> 00:04:36.430
+Item of that size, as does input D.
+
+74
+00:04:36.430 --> 00:04:39.770
+It's almost the same with backing inputs.
+
+75
+00:04:39.770 --> 00:04:41.120
+What is the difference?
+
+76
+00:04:41.120 --> 00:04:44.180
+The difference is that
+D in addition contains
+
+77
+00:04:44.180 --> 00:04:47.380
+items of size zero that U does not have.
+
+78
+00:04:47.380 --> 00:04:50.030
+Well, that's irrelevant,
+we don't care about that.
+
+79
+00:04:50.030 --> 00:04:52.760
+Items of size zero,
+they don't change a lot.
+
+80
+00:04:52.760 --> 00:04:53.750
+And, U...
+
+81
+00:04:55.080 --> 00:04:57.770
+U also contains some big items.
+
+82
+00:04:57.770 --> 00:05:01.860
+These items they have size
+how much is that size.
+
+83
+00:05:01.860 --> 00:05:02.540
+We don't know.
+
+84
+00:05:02.540 --> 00:05:06.100
+It could be at most could
+be the maximum size.
+
+85
+00:05:06.100 --> 00:05:14.112
+The bin capacity, but what we know is the
+number of items there is at most squared.
+
+86
+00:05:14.112 --> 00:05:20.130
+And so What we can write is that
+OPT(U) and OPT(D) are almost equal.
+
+87
+00:05:21.520 --> 00:05:26.450
+Once we have a packing for D, we can
+deduce a packing for U that uses as most n
+
+88
+00:05:26.450 --> 00:05:31.490
+epsilon squared of additional bins,
+one for each of these special items here.
+
+89
+00:05:31.490 --> 00:05:36.296
+And so OPT(U)- OPT(D) is at most And
+epsilon squared.
+
+90
+00:05:38.630 --> 00:05:43.545
+So let's combine these ideas.
+
+91
+00:05:43.545 --> 00:05:47.535
+OPT(I) is sandwiched between OPT(D) and
+OPT(U).
+
+92
+00:05:47.535 --> 00:05:53.580
+OPT(D) and OPT(U) are very close to one
+another, they differ by n epsilon squared.
+
+93
+00:05:53.580 --> 00:06:00.180
+Therefore OPT of U is at most
+OPT of I plus n epsilon squared.
+
+94
+00:06:01.540 --> 00:06:06.820
+OPT of U, the optimal value of
+the rounded items used by the algorithm
+
+95
+00:06:06.820 --> 00:06:11.480
+is at most the optimal value that
+we are hoping to get close to.
+
+96
+00:06:11.480 --> 00:06:13.390
+Plus n epsilon squared.
+
+97
+00:06:13.390 --> 00:06:16.470
+So what this shows is that our algorithm
+
+98
+00:06:16.470 --> 00:06:19.680
+is an approximation algorithm
+that is almost optimal.
+
+99
+00:06:19.680 --> 00:06:22.130
+The additive error is at
+most n epsilon squared.
+
+100
+00:06:24.170 --> 00:06:24.680
+Additive error.
+
+101
+00:06:26.050 --> 00:06:28.189
+So we still have one step
+left in the analysis.
+
+102
+00:06:29.340 --> 00:06:34.610
+One step left which is to have a relative
+error instead of additive error.
+
+103
+00:06:34.610 --> 00:06:38.460
+So, we need to relate of
+X to square opt to I.
+
+104
+00:06:38.460 --> 00:06:39.410
+That's the last step.
+
+105
+00:06:40.660 --> 00:06:45.260
+But we are past, at this point,
+we're past the main difficulty.
+
+106
+00:06:45.260 --> 00:06:48.040
+We have related opt of U to opt of I.
+
+107
+00:06:48.040 --> 00:06:49.610
+This was the main step.
+
+108
+00:06:49.610 --> 00:06:50.460
+The rest is standard.
+
+109
+00:06:51.900 --> 00:06:52.962
+But let's do it anyway.
+
+110
+00:06:54.878 --> 00:07:00.200
+All right, all the items have
+values between B and epsilon B.
+
+111
+00:07:01.270 --> 00:07:02.350
+There are n items.
+
+112
+00:07:03.650 --> 00:07:08.310
+Because these sizes are large, because
+the items are all bigger than epsilon B,
+
+113
+00:07:08.310 --> 00:07:13.590
+we know that every bin Has at
+most one of our epsilon items.
+
+114
+00:07:13.590 --> 00:07:19.710
+Therefore the number of bins to fit
+all the items is at least epsilon n.
+
+115
+00:07:20.910 --> 00:07:23.486
+OPT has at least epsilon n bins.
+
+116
+00:07:23.486 --> 00:07:27.360
+And so this term n epsilon squared here.
+
+117
+00:07:28.770 --> 00:07:33.060
+It's epsilon Times n epsilon.
+
+118
+00:07:33.060 --> 00:07:39.783
+Except most epsilon times OPT, and
+so our is at most epsilon times OPT.
+
+119
+00:07:41.750 --> 00:07:44.055
+What can we finally Joyfully conclude.
+
+120
+00:07:45.345 --> 00:07:50.625
+When all sizes are at least epsilon B,
+our algorithm, in polynomial time,
+
+121
+00:07:50.625 --> 00:07:58.790
+gives us a packing with value
+at most OPT x 1 + epsilon.
+
+122
+00:07:58.790 --> 00:08:01.920
+So we have done the analysis
+to prove that our algorithm
+
+123
+00:08:01.920 --> 00:08:04.060
+gives us a near optimal solution.
+
+124
+00:08:04.060 --> 00:08:07.110
+One plus epsilon times OPT
+when all items are large.
+
+125
+00:08:07.110 --> 00:08:12.100
+In the next section we will finish
+this development of algorithms
+
+126
+00:08:12.100 --> 00:08:15.270
+by getting an approximation algorithm for
+the full general case.

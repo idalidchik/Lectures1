@@ -1,0 +1,830 @@
+WEBVTT
+
+1
+00:00:00.254 --> 00:00:04.421
+[MUSIC]
+
+2
+00:00:04.421 --> 00:00:08.040
+Welcome back to the course
+on Approximation Algorithms.
+
+3
+00:00:09.050 --> 00:00:12.960
+We are are now going to turn to
+one of the most famous problems
+
+4
+00:00:12.960 --> 00:00:17.060
+of commonital optimization,
+the bin packing problem.
+
+5
+00:00:17.060 --> 00:00:19.109
+One of the first NP-hard problems.
+
+6
+00:00:20.380 --> 00:00:24.600
+This is a problem that you've had to
+face many times probably in your life,
+
+7
+00:00:24.600 --> 00:00:27.560
+without knowing that you
+were faced with bin packing.
+
+8
+00:00:28.830 --> 00:00:33.480
+Whenever you have to move, you need
+to pack your items into boxes, and
+
+9
+00:00:33.480 --> 00:00:37.760
+before hand, you have to order
+the right number of boxes.
+
+10
+00:00:37.760 --> 00:00:41.069
+So you have to figure out how many
+boxes you need to pack your items.
+
+11
+00:00:42.250 --> 00:00:46.610
+The aim of the bin packing
+problem is given a set of items,
+
+12
+00:00:46.610 --> 00:00:49.010
+pack them into as few bins as possible.
+
+13
+00:00:50.250 --> 00:00:52.850
+In real life this is
+complicated by the fact that
+
+14
+00:00:52.850 --> 00:00:58.040
+the objects you pack have various shapes,
+dimensions, weight.
+
+15
+00:00:58.040 --> 00:01:01.780
+Here we will study the most
+basic version of the problem,
+
+16
+00:01:01.780 --> 00:01:04.430
+a simplified version of the problem.
+
+17
+00:01:04.430 --> 00:01:11.330
+Where your input has n items, and each
+item has a single parameter describing it.
+
+18
+00:01:11.330 --> 00:01:12.750
+Its size.
+
+19
+00:01:12.750 --> 00:01:16.510
+Let's say the size is si, for item i.
+
+20
+00:01:17.790 --> 00:01:22.070
+And let's assume by convention,
+that every item has size at most 1.
+
+21
+00:01:22.070 --> 00:01:28.730
+Then your goal is to pack your items
+into the fewest unit capacity bins.
+
+22
+00:01:28.730 --> 00:01:30.620
+That's the bin packing problem.
+
+23
+00:01:32.850 --> 00:01:38.550
+Let us describe an algorithm to
+solve this, a very naive algorithm.
+
+24
+00:01:38.550 --> 00:01:42.430
+Probably the first algorithm
+you would come up with.
+
+25
+00:01:42.430 --> 00:01:45.510
+In fact,
+you might even discount that algorithm and
+
+26
+00:01:45.510 --> 00:01:48.210
+try right away to get a better algorithm.
+
+27
+00:01:48.210 --> 00:01:50.980
+But let's try to be as naive as possible.
+
+28
+00:01:52.580 --> 00:01:55.100
+It's called the Next Fit algorithm.
+
+29
+00:01:56.530 --> 00:01:58.390
+What is this algorithm?
+
+30
+00:01:58.390 --> 00:02:00.760
+We just work one bin at a time.
+
+31
+00:02:01.890 --> 00:02:07.090
+At any time we have one open bin that
+we are trying to fill with items.
+
+32
+00:02:07.090 --> 00:02:10.570
+We take the items one by one in any order,
+arbitrary order.
+
+33
+00:02:12.030 --> 00:02:15.560
+For the current item we try
+to place it in the bin, and
+
+34
+00:02:15.560 --> 00:02:18.700
+then maybe it fits maybe it doesn't.
+
+35
+00:02:18.700 --> 00:02:20.820
+If it fits we put it in.
+
+36
+00:02:20.820 --> 00:02:26.840
+If it doesn't fit we close the bin, open
+a new bin, and put the item in a new bin.
+
+37
+00:02:28.160 --> 00:02:29.040
+That's it.
+
+38
+00:02:29.040 --> 00:02:30.770
+It doesn't get much simpler than that,
+does it?
+
+39
+00:02:32.700 --> 00:02:33.720
+See this example.
+
+40
+00:02:35.040 --> 00:02:39.254
+In this example we have six items.
+
+41
+00:02:39.254 --> 00:02:43.934
+Of size, 7, 0.7, 0.6, 0.4,
+
+42
+00:02:43.934 --> 00:02:47.711
+0.3, 0.45, and 0.5.
+
+43
+00:02:47.711 --> 00:02:50.128
+Let's take them in that order.
+
+44
+00:02:50.128 --> 00:02:52.796
+First s1, 0.7.
+
+45
+00:02:52.796 --> 00:02:56.840
+We put it into the first bin.
+
+46
+00:02:56.840 --> 00:02:57.523
+There it is.
+
+47
+00:02:57.523 --> 00:03:04.900
+Next comes item 0.6, there it is.
+
+48
+00:03:04.900 --> 00:03:07.590
+We try to put it in the first bin,
+but it doesn't fit.
+
+49
+00:03:07.590 --> 00:03:12.781
+So we close the first bin,
+open the second bin and put 0.6 in there.
+
+50
+00:03:12.781 --> 00:03:14.070
+Then .3 arrives.
+
+51
+00:03:14.070 --> 00:03:18.998
+We can put it on top of 0.6 because
+0.6 plus 0.3 is less than 1,
+
+52
+00:03:18.998 --> 00:03:20.244
+so we put that in.
+
+53
+00:03:20.244 --> 00:03:21.430
+And so on.
+
+54
+00:03:21.430 --> 00:03:25.760
+And so you see that the result
+is you have four bins.
+
+55
+00:03:25.760 --> 00:03:28.520
+You have used four bins
+to pack your six items.
+
+56
+00:03:30.950 --> 00:03:33.140
+All right, so that's the algorithm.
+
+57
+00:03:33.140 --> 00:03:37.620
+Clearly this algorithm runs in time.
+
+58
+00:03:37.620 --> 00:03:38.610
+It is quick to do.
+
+59
+00:03:39.610 --> 00:03:42.180
+And does it do a good job?
+
+60
+00:03:42.180 --> 00:03:44.060
+It does pack all the items.
+
+61
+00:03:44.060 --> 00:03:47.180
+But doesn't it waste some bins?
+
+62
+00:03:47.180 --> 00:03:47.950
+How bad is it?
+
+63
+00:03:49.530 --> 00:03:52.040
+So, to answer that question,
+
+64
+00:03:52.040 --> 00:03:56.910
+we have to turn to the analysis
+of the Next Fit algorithm.
+
+65
+00:03:58.590 --> 00:04:00.280
+How do we analyse such an algorithm?
+
+66
+00:04:01.320 --> 00:04:06.260
+In approximation algorithm,
+we want bound the value of next fit,
+
+67
+00:04:06.260 --> 00:04:08.830
+the number of bins used by next fit,
+
+68
+00:04:08.830 --> 00:04:14.330
+compared to the optimal number of bins by,
+used by a professional
+
+69
+00:04:14.330 --> 00:04:18.389
+mover who would know exactly what
+is the best way to pack the items.
+
+70
+00:04:20.970 --> 00:04:26.390
+So let's try some example
+to develop some intuition.
+
+71
+00:04:26.390 --> 00:04:29.640
+Let me scale things to I
+can deal with integers.
+
+72
+00:04:29.640 --> 00:04:31.510
+Let's say we have a capacity 100.
+
+73
+00:04:31.510 --> 00:04:36.620
+I'm going to take some items,
+so let's say random sizes.
+
+74
+00:04:36.620 --> 00:04:39.660
+So I have sequence of items.
+
+75
+00:04:39.660 --> 00:04:42.330
+That all have sizes between 1 and 99.
+
+76
+00:04:42.330 --> 00:04:45.760
+I used next fit to pack them.
+
+77
+00:04:45.760 --> 00:04:48.480
+And in this example, I used 31 bins.
+
+78
+00:04:48.480 --> 00:04:52.180
+Now I look at the result.
+
+79
+00:04:52.180 --> 00:04:56.470
+And I try to see if there is
+any kind of structure that
+
+80
+00:04:57.550 --> 00:05:02.590
+arises from this input, can we see
+
+81
+00:05:02.590 --> 00:05:07.150
+from this that there is some structure
+exhibited by the next fit algorithm?
+
+82
+00:05:08.630 --> 00:05:10.740
+Let's focus on bin number seven.
+
+83
+00:05:11.820 --> 00:05:18.989
+Bin number seven contains three items,
+25, 14, 25.
+
+84
+00:05:20.030 --> 00:05:24.560
+The next items arrives, 61.
+
+85
+00:05:24.560 --> 00:05:28.700
+But 25 plus 14 plus 25 plus
+61 is greater than 100.
+
+86
+00:05:28.700 --> 00:05:33.450
+So, we close bin seven,
+open a new bin, bin number eight,
+
+87
+00:05:33.450 --> 00:05:34.960
+and put item 61 in bin eight.
+
+88
+00:05:37.080 --> 00:05:38.950
+So what have we seen?
+
+89
+00:05:38.950 --> 00:05:44.690
+We've seen that 25 + 14 + 25
++ 61 is greater than 100.
+
+90
+00:05:44.690 --> 00:05:51.040
+The content of bin 7 plus
+
+91
+00:05:51.040 --> 00:05:56.420
+part of the content of bin
+8 is greater than 100.
+
+92
+00:05:56.420 --> 00:06:01.760
+In general the content of bin 2i-
+
+93
+00:06:01.760 --> 00:06:07.170
+1 plus the next item is greater than 100.
+
+94
+00:06:07.170 --> 00:06:08.770
+Why?
+
+95
+00:06:08.770 --> 00:06:11.600
+Because that was the rule for
+closing a bin.
+
+96
+00:06:11.600 --> 00:06:17.160
+You would not close bin 2i- 1
+unless the next item didn't fit,
+
+97
+00:06:17.160 --> 00:06:21.700
+unless adding the next item didn't
+make it overflow, exceed its capacity.
+
+98
+00:06:23.160 --> 00:06:28.370
+Since the next item goes in to bin 2i,
+what we know is that the items
+
+99
+00:06:29.640 --> 00:06:36.090
+in bins 2i- 1 or 2i all together
+have size greater than 100.
+
+100
+00:06:36.090 --> 00:06:41.910
+So in this example,
+next we've used 31 bins.
+
+101
+00:06:41.910 --> 00:06:44.120
+What can we infer from this?
+
+102
+00:06:44.120 --> 00:06:46.370
+We can infer that bins 1 and
+
+103
+00:06:46.370 --> 00:06:50.530
+2 together, the sizes of the items
+placed there is at least 100.
+
+104
+00:06:50.530 --> 00:06:53.740
+3 and 4 together?
+
+105
+00:06:53.740 --> 00:06:54.860
+At least 100.
+
+106
+00:06:54.860 --> 00:06:56.598
+Bins 5 and 6 together?
+
+107
+00:06:56.598 --> 00:06:58.780
+At least 100.
+
+108
+00:06:58.780 --> 00:07:01.800
+And so on until 29 + 30.
+
+109
+00:07:01.800 --> 00:07:10.480
+All together, the total item sizes
+must be greater than 15 times 100.
+
+110
+00:07:10.480 --> 00:07:15.570
+So, we have now proved a bound relating
+
+111
+00:07:15.570 --> 00:07:20.360
+the number of bins used by next
+fit to the total item sizes.
+
+112
+00:07:20.360 --> 00:07:22.750
+The sum of all the item sizes.
+
+113
+00:07:22.750 --> 00:07:26.450
+This is half of the analysis of Next Fit.
+
+114
+00:07:28.820 --> 00:07:31.960
+In general if Next Fit uses k bins.
+
+115
+00:07:32.970 --> 00:07:40.004
+The sum of the item sizes must be
+at least (k-1) over 2 times 100.
+
+116
+00:07:40.004 --> 00:07:41.160
+Why.
+
+117
+00:07:41.160 --> 00:07:43.760
+The minus one is bi-parative.
+
+118
+00:07:43.760 --> 00:07:46.170
+The loss of bin is special.
+
+119
+00:07:46.170 --> 00:07:50.790
+And then all the previous bins,
+you pair them up two by two and
+
+120
+00:07:50.790 --> 00:07:55.720
+each pair of consecutive bins
+the item sizes is greater than 100.
+
+121
+00:07:55.720 --> 00:07:58.020
+And there are k- 1 over 2 of them.
+
+122
+00:08:02.570 --> 00:08:06.770
+That is the other half of
+the analysis of Next Fit.
+
+123
+00:08:06.770 --> 00:08:11.987
+So far we have given abound on k
+the number of bins used by Next Fit.
+
+124
+00:08:13.120 --> 00:08:17.550
+Now, we need a bound on opt
+the number of bins used
+
+125
+00:08:17.550 --> 00:08:22.519
+by the omniscient professional mover
+who knows the optimal number of bins.
+
+126
+00:08:23.680 --> 00:08:27.790
+Well, even if opt packs
+each bin perfectly,
+
+127
+00:08:27.790 --> 00:08:31.740
+it cannot do more than
+fill each bin up to 100.
+
+128
+00:08:31.740 --> 00:08:36.950
+And in that case, OPT uses at least
+
+129
+00:08:36.950 --> 00:08:42.554
+a number of bins equal to the total
+item sizes divided by 100.
+
+130
+00:08:43.780 --> 00:08:48.910
+The sum of the item sizes
+is at most OPT times 100.
+
+131
+00:08:48.910 --> 00:08:50.670
+With that,
+
+132
+00:08:50.670 --> 00:08:57.100
+we have related the unknown optimal
+number of bins to the total item sizes.
+
+133
+00:08:57.100 --> 00:08:58.950
+So we have two relations.
+
+134
+00:08:58.950 --> 00:09:02.140
+On the one hand,
+the number of bins used by Next Fit,
+
+135
+00:09:02.140 --> 00:09:04.600
+compared to the total item sizes.
+
+136
+00:09:04.600 --> 00:09:10.600
+On the other hand the number of bins used
+by OPT compared to the total item sizes.
+
+137
+00:09:10.600 --> 00:09:13.403
+All that remains is to combine them.
+
+138
+00:09:13.403 --> 00:09:15.901
+Let's combine.
+
+139
+00:09:15.901 --> 00:09:23.392
+OPT times 100 is at least
+(k-1) over 2 times 100.
+
+140
+00:09:25.070 --> 00:09:26.440
+What does this mean?
+
+141
+00:09:26.440 --> 00:09:31.260
+Eliminate the 100,
+rearrange and we get that k,
+
+142
+00:09:31.260 --> 00:09:39.220
+that is the number of bins used by
+next fit is at most 1 + 2 times OPT.
+
+143
+00:09:39.220 --> 00:09:44.370
+The number of bins used by this
+very naive algorithm is at
+
+144
+00:09:44.370 --> 00:09:49.630
+most twice as many as the optimal
+number of bins plus one.
+
+145
+00:09:51.260 --> 00:09:57.160
+So it's, if the plus one was not there,
+we would call this a two approximation.
+
+146
+00:09:57.160 --> 00:10:02.066
+It's not quite a two approximation because
+of this plus one, this additional bin.
+
+147
+00:10:02.066 --> 00:10:06.220
+This annoying additional factor.
+
+148
+00:10:06.220 --> 00:10:12.290
+But it's still essentially almost a factor
+of two at least when opt is large.
+
+149
+00:10:12.290 --> 00:10:16.340
+At least when the items require many bins.
+
+150
+00:10:17.380 --> 00:10:21.490
+So that's what we call
+an asymptotic two approximation.
+
+151
+00:10:21.490 --> 00:10:24.610
+Asymptotic, as the value of Opt,
+goes to infinity.
+
+152
+00:10:26.880 --> 00:10:28.230
+Is this tight?
+
+153
+00:10:28.230 --> 00:10:30.250
+Is Next Fit better than this?
+
+154
+00:10:30.250 --> 00:10:35.070
+We have proof that it is
+roughly effective too, roughly.
+
+155
+00:10:35.070 --> 00:10:37.950
+But maybe it's better than this?
+
+156
+00:10:37.950 --> 00:10:39.150
+Actually, no.
+
+157
+00:10:40.600 --> 00:10:46.690
+It's not hard to come up with an example
+where the optimal number of bins is 501.
+
+158
+00:10:46.690 --> 00:10:50.770
+But next fit uses 1,000 bins.
+
+159
+00:10:52.720 --> 00:10:54.582
+This is a good exercise.
+
+160
+00:10:54.582 --> 00:10:58.140
+What about non-asymptotic?
+
+161
+00:10:58.140 --> 00:10:59.970
+What about the case when OPT is small?
+
+162
+00:11:01.020 --> 00:11:03.280
+Then it's hopeless.
+
+163
+00:11:03.280 --> 00:11:08.910
+It's hopeless distinguishing between
+instances such that OPT equals 2,
+
+164
+00:11:08.910 --> 00:11:10.970
+2 bins suffice.
+
+165
+00:11:10.970 --> 00:11:18.930
+And instances such as OPT is 3, 3 bins
+are necessary, this is an NP-hard problem.
+
+166
+00:11:21.290 --> 00:11:25.050
+So what have we learned in this section?
+
+167
+00:11:25.050 --> 00:11:30.850
+We have learned that even very crude
+algorithms can give very good bounds.
+
+168
+00:11:30.850 --> 00:11:35.020
+The message is to try to solve
+a common item optimization problem,
+
+169
+00:11:35.020 --> 00:11:40.600
+you should first try
+the simplest possible algorithm.
+
+170
+00:11:40.600 --> 00:11:46.130
+Simplest can perform badly, but sometimes
+it's already a pretty good algorithm.
+
+171
+00:11:46.130 --> 00:11:51.320
+And the advantage of simplicity is
+that it tends to be easier to analyze.
+
+172
+00:11:51.320 --> 00:11:53.290
+So if you want to prove theorems,
+
+173
+00:11:53.290 --> 00:11:57.410
+you should always start with
+the simplest possibility.
+
+174
+00:11:57.410 --> 00:11:59.950
+Keep it simple, is the principle.
+
+175
+00:11:59.950 --> 00:12:01.320
+For a algorithmic design.
+
+176
+00:12:02.580 --> 00:12:07.860
+What about analysis, how can you
+prove something about your algorithm.
+
+177
+00:12:07.860 --> 00:12:10.590
+You have to first develop intuition, and
+
+178
+00:12:10.590 --> 00:12:15.600
+the message here is that in order to
+develop intuition, first you have to
+
+179
+00:12:15.600 --> 00:12:20.490
+try executing the algorithm
+on some concrete examples.
+
+180
+00:12:22.940 --> 00:12:27.150
+So, we have seen the definition
+of the bin packing problem.
+
+181
+00:12:27.150 --> 00:12:30.940
+A simple algorithm to try
+to solve this problem.
+
+182
+00:12:30.940 --> 00:12:34.836
+The Next Fit algorithm we
+have analyzed Next Fit and
+
+183
+00:12:34.836 --> 00:12:38.924
+proved that it is asymptotically
+to approximation.
+
+184
+00:12:38.924 --> 00:12:44.350
+To get a better algorithm, we will
+next try to use linear programming.

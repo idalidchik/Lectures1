@@ -1,0 +1,535 @@
+WEBVTT
+
+1
+00:00:00.287 --> 00:00:04.722
+[MUSIC]
+
+2
+00:00:06.788 --> 00:00:10.419
+We have solved bin packing in the case
+when all items sizes are large,
+
+3
+00:00:10.419 --> 00:00:13.610
+larger than the bin
+capacity times epsilon.
+
+4
+00:00:13.610 --> 00:00:18.450
+Now, let us move onto
+the fully general case and
+
+5
+00:00:18.450 --> 00:00:22.919
+design an algorithm when there are no
+assumptions about the item sizes.
+
+6
+00:00:24.910 --> 00:00:27.940
+We're going to do a reduction
+to the previous case.
+
+7
+00:00:27.940 --> 00:00:28.600
+How do we do it?
+
+8
+00:00:29.620 --> 00:00:31.940
+We want items to be large.
+
+9
+00:00:31.940 --> 00:00:33.580
+So what do we do?
+
+10
+00:00:33.580 --> 00:00:36.600
+We look at which items are small and
+which items are large.
+
+11
+00:00:38.650 --> 00:00:45.820
+Here is the general algorithm We will set
+aside all the items that we don't want.
+
+12
+00:00:45.820 --> 00:00:50.860
+The items with sizes are less
+than the bin capacity times that.
+
+13
+00:00:50.860 --> 00:00:52.870
+Let's call these items small.
+
+14
+00:00:55.070 --> 00:00:56.800
+We set the small items aside.
+
+15
+00:00:58.570 --> 00:01:01.250
+And then what do we do
+with the remaining items?
+
+16
+00:01:01.250 --> 00:01:04.590
+They're all large, they're all larger
+than the capacity times epsilon.
+
+17
+00:01:04.590 --> 00:01:10.540
+So, in the next four lines
+here what we do is we apply
+
+18
+00:01:10.540 --> 00:01:15.100
+the previous algorithm, the algorithm
+in the case when all items are large.
+
+19
+00:01:15.100 --> 00:01:19.910
+So this is a reduction from the general
+case to the case of large items.
+
+20
+00:01:19.910 --> 00:01:21.170
+The case of large items,
+
+21
+00:01:21.170 --> 00:01:25.900
+as a reminder, is a reduction to a case
+when the sides are, are rounded.
+
+22
+00:01:25.900 --> 00:01:30.450
+When all items are large and
+there are a few distinct sizes.
+
+23
+00:01:30.450 --> 00:01:33.170
+So it's like, ration dolls.
+
+24
+00:01:33.170 --> 00:01:37.090
+You know, we solve a special,
+special case, then a special case.
+
+25
+00:01:37.090 --> 00:01:38.680
+Than the general case.
+
+26
+00:01:38.680 --> 00:01:43.660
+We open the box, solve it, then we close
+the box again, close the door again, and
+
+27
+00:01:43.660 --> 00:01:47.240
+use it as a black box for
+the next more general problem.
+
+28
+00:01:48.360 --> 00:01:52.180
+Okay, so once we have solved
+the problem when the items are large,
+
+29
+00:01:52.180 --> 00:01:54.500
+it remains to deal with the small items.
+
+30
+00:01:54.500 --> 00:01:56.230
+What do we do with them?
+
+31
+00:01:56.230 --> 00:01:58.200
+We do something simple.
+
+32
+00:01:58.200 --> 00:01:59.830
+There's no big difficulty here.
+
+33
+00:01:59.830 --> 00:02:04.170
+We just greedily add
+the small sizes in the bins.
+
+34
+00:02:06.280 --> 00:02:08.060
+So let me do this in pictures.
+
+35
+00:02:10.100 --> 00:02:11.110
+Here's the input.
+
+36
+00:02:12.270 --> 00:02:15.520
+I have a bunch of items,
+some of them are small.
+
+37
+00:02:15.520 --> 00:02:19.390
+The ones that are less than
+epsilon B The others are large.
+
+38
+00:02:20.800 --> 00:02:21.370
+Small, large.
+
+39
+00:02:23.630 --> 00:02:27.660
+Set aside the small items, whoosh.
+
+40
+00:02:29.130 --> 00:02:29.630
+Here we go.
+
+41
+00:02:30.830 --> 00:02:33.950
+New input, no small items, miracle.
+
+42
+00:02:37.050 --> 00:02:40.560
+Solve the problem for the large items.
+
+43
+00:02:40.560 --> 00:02:41.490
+Black box.
+
+44
+00:02:41.490 --> 00:02:42.950
+We saw this before.
+
+45
+00:02:42.950 --> 00:02:43.950
+What do we get?
+
+46
+00:02:43.950 --> 00:02:46.540
+A certain packing of
+the large items into bins.
+
+47
+00:02:48.770 --> 00:02:50.110
+Okay.
+I drew this abstractly.
+
+48
+00:02:51.470 --> 00:02:53.720
+I did not distinguish between
+which items went where.
+
+49
+00:02:53.720 --> 00:02:56.710
+I only look at how much
+the bins are filled.
+
+50
+00:02:58.510 --> 00:03:01.740
+And then we add the small items back in.
+
+51
+00:03:01.740 --> 00:03:03.050
+So what do we do?
+
+52
+00:03:03.050 --> 00:03:04.740
+Look at the small items.
+
+53
+00:03:04.740 --> 00:03:06.685
+Look at these bins
+packing the large items.
+
+54
+00:03:08.260 --> 00:03:12.609
+We greedily add the little
+items there in those bins,
+
+55
+00:03:12.609 --> 00:03:17.840
+as much as we can here and there,
+and maybe they don't fit here.
+
+56
+00:03:17.840 --> 00:03:18.710
+So, let's put them there.
+
+57
+00:03:20.140 --> 00:03:21.980
+This looks familiar.
+
+58
+00:03:21.980 --> 00:03:27.340
+This is where we reuse the intuition we
+got earlier on when all items were small.
+
+59
+00:03:27.340 --> 00:03:28.280
+It's a similar idea.
+
+60
+00:03:30.150 --> 00:03:33.279
+And that's the algorithm, that's it.
+
+61
+00:03:35.144 --> 00:03:41.490
+Okay, so now this is too short for
+a section, so let me do the analysis.
+
+62
+00:03:41.490 --> 00:03:44.360
+I will do the complete analysis
+in just a couple of slides.
+
+63
+00:03:46.090 --> 00:03:46.590
+Analysis.
+
+64
+00:03:48.330 --> 00:03:49.310
+Why is this good?
+
+65
+00:03:49.310 --> 00:03:51.140
+Why is this near optimal?
+
+66
+00:03:51.140 --> 00:03:54.970
+Now input I is divided into two parts.
+
+67
+00:03:54.970 --> 00:03:58.170
+The small items and the large items.
+
+68
+00:03:58.170 --> 00:04:04.860
+I is S union L Two cases in analysis.
+
+69
+00:04:06.860 --> 00:04:12.380
+When I added the small items back
+into my blue packing, either
+
+70
+00:04:13.380 --> 00:04:18.219
+I did not open any new bin,
+or I opened some new bins.
+
+71
+00:04:19.740 --> 00:04:25.330
+If I did not open any new bin,
+then what is the value of the output?
+
+72
+00:04:25.330 --> 00:04:28.190
+It did not change in the last step.
+
+73
+00:04:28.190 --> 00:04:33.800
+So it's exactly the value of the packing
+of the large items, packing of L.
+
+74
+00:04:33.800 --> 00:04:37.470
+And what is that That we know
+from the previous section,
+
+75
+00:04:37.470 --> 00:04:40.890
+is at most 1 + epsilon times OPT(L).
+
+76
+00:04:40.890 --> 00:04:44.090
+And what do we know about
+this L is just a subset of I.
+
+77
+00:04:44.090 --> 00:04:46.720
+Is just the larger items are just
+a subset of the input items.
+
+78
+00:04:46.720 --> 00:04:51.160
+So by monotonicity,
+this is OPT(L) is less than OPT(I).
+
+79
+00:04:51.160 --> 00:04:58.520
+In this case, our output has value at
+most 1 + epsilon times OPT Very good.
+
+80
+00:05:00.010 --> 00:05:03.490
+When no new bins are open in the last
+step our algorithm is near optimal.
+
+81
+00:05:05.210 --> 00:05:06.790
+Case 2.
+
+82
+00:05:06.790 --> 00:05:10.400
+Some new bins are open by S.
+
+83
+00:05:10.400 --> 00:05:13.850
+When we creatively added the small
+items in our blue backing,
+
+84
+00:05:13.850 --> 00:05:17.100
+we have to open some
+new bin at some point.
+
+85
+00:05:17.100 --> 00:05:18.960
+So now we have more bins then before.
+
+86
+00:05:20.300 --> 00:05:25.680
+But now what we are going to do is get
+intuition from what we looked at early on.
+
+87
+00:05:25.680 --> 00:05:28.290
+When all of the items are small
+
+88
+00:05:28.290 --> 00:05:31.320
+all the bins except the last
+one are filled to a high level.
+
+89
+00:05:32.350 --> 00:05:36.450
+Namely to a level at least one minus
+epsilon times the bin capacity.
+
+90
+00:05:38.270 --> 00:05:38.770
+Why?
+
+91
+00:05:39.840 --> 00:05:45.230
+Because we only open a new bin if an item
+doesn't fit in any of the existing bins.
+
+92
+00:05:46.380 --> 00:05:53.270
+So, every existing bin have to be
+filled to at least B minus Xn of B.
+
+93
+00:05:53.270 --> 00:05:55.970
+The antispace must be less than Xn of B.
+
+94
+00:05:58.710 --> 00:05:59.210
+Alright.
+
+95
+00:06:02.080 --> 00:06:08.630
+So from this statement, we can deduce
+that some of the sizes is at least,
+
+96
+00:06:09.780 --> 00:06:13.150
+the number of bins minus one,
+times one minus epsilon.
+
+97
+00:06:15.410 --> 00:06:19.530
+the sum of the sizes is the sum
+of the volumes of the bins.
+
+98
+00:06:19.530 --> 00:06:23.160
+And if we look at all the bins other
+than the last one they're all filled
+
+99
+00:06:23.160 --> 00:06:27.267
+to at least one minus epsilon times b.
+
+100
+00:06:27.267 --> 00:06:34.250
+Okay so on the other hand we know that
+the sum of all the sizes is at most opt.
+
+101
+00:06:34.250 --> 00:06:35.560
+So what does this mean?
+
+102
+00:06:35.560 --> 00:06:38.700
+Putting this together the value
+of the output is at least
+
+103
+00:06:38.700 --> 00:06:43.650
+one over one minus epsilon times opt
+Plus one for that single last bin.
+
+104
+00:06:45.910 --> 00:06:49.580
+All right, so
+in both cases the output is good.
+
+105
+00:06:51.420 --> 00:06:53.460
+Looking at both cases and
+putting them together,
+
+106
+00:06:53.460 --> 00:06:58.290
+what we see is that the algorithm in
+polynomial time gives us a packing
+
+107
+00:06:58.290 --> 00:07:03.530
+into the bins such that the value of
+the output Is less than is at most
+
+108
+00:07:03.530 --> 00:07:07.430
+times 1 plus a big O epsilon plus 1.
+
+109
+00:07:07.430 --> 00:07:11.920
+I said big O epsilon because of
+the 1 over 1 minus epsilon here.
+
+110
+00:07:11.920 --> 00:07:16.840
+1 over 1 minus epsilon is 1 plus
+epsilon plus epsilon squared plus
+
+111
+00:07:16.840 --> 00:07:20.160
+epsilon cubed plus epsilon to
+the fourth plus, and so on.
+
+112
+00:07:20.160 --> 00:07:24.620
+Which is (1 + O(epsilon)).
+
+113
+00:07:24.620 --> 00:07:26.410
+So what have we done here?
+
+114
+00:07:26.410 --> 00:07:30.150
+We have designed an asymptotic
+approximation scheme for
+
+115
+00:07:30.150 --> 00:07:31.970
+the bin packing problem.
+
+116
+00:07:31.970 --> 00:07:35.109
+And now,
+if you're tired of technical stuff,
+
+117
+00:07:35.109 --> 00:07:40.063
+let us stand back a little bit and
+review some of the history of bin packing.

@@ -1,0 +1,739 @@
+WEBVTT
+
+1
+00:00:01.240 --> 00:00:07.063
+[MUSIC]
+
+2
+00:00:07.063 --> 00:00:12.180
+We have seen how to solve bin
+packing when item sizes are small.
+
+3
+00:00:12.180 --> 00:00:17.650
+Small as in there's an upper bound on the
+maximum size relative to the bin capacity.
+
+4
+00:00:18.800 --> 00:00:20.959
+Now, let us look at the opposite case.
+
+5
+00:00:21.960 --> 00:00:25.818
+When items sizes are large, that is,
+
+6
+00:00:25.818 --> 00:00:31.255
+when there's a lower bound
+on the minimum item size.
+
+7
+00:00:31.255 --> 00:00:33.900
+This is still a fairly hard problem.
+
+8
+00:00:33.900 --> 00:00:37.410
+In fact, it is kind of a head scratcher.
+
+9
+00:00:38.710 --> 00:00:40.600
+So how do we solve this?
+
+10
+00:00:41.730 --> 00:00:45.960
+It's still too hard for
+us to solve right away in one shot so
+
+11
+00:00:45.960 --> 00:00:49.090
+we go to a special, special case.
+
+12
+00:00:49.090 --> 00:00:51.080
+At this point, you should be used to this.
+
+13
+00:00:53.200 --> 00:00:58.780
+Special, special case,
+large items, few distinct sizes.
+
+14
+00:01:00.210 --> 00:01:02.290
+All items are large, and
+
+15
+00:01:02.290 --> 00:01:07.250
+all item sizes are drawn from a small set,
+a set of small commonality.
+
+16
+00:01:08.450 --> 00:01:10.260
+In this section,
+we get to solve this problem.
+
+17
+00:01:11.340 --> 00:01:13.471
+How do we go about it?
+
+18
+00:01:13.471 --> 00:01:15.550
+You know how to do this.
+
+19
+00:01:15.550 --> 00:01:20.420
+There's a technique for this to design
+algorithms for this kind of situation.
+
+20
+00:01:20.420 --> 00:01:23.160
+First we try an example.
+
+21
+00:01:23.160 --> 00:01:29.350
+Then we gain some intuition from solving
+this example, and we derive a solution for
+
+22
+00:01:29.350 --> 00:01:33.090
+the general setting of large items and
+few distinct sizes.
+
+23
+00:01:34.300 --> 00:01:36.145
+So, let's take an example.
+
+24
+00:01:37.949 --> 00:01:40.920
+Consider this.
+
+25
+00:01:40.920 --> 00:01:44.597
+Bin capacity 12,
+
+26
+00:01:44.597 --> 00:01:48.927
+item sizes, 3 and 4.
+
+27
+00:01:48.927 --> 00:01:49.930
+What is our input?
+
+28
+00:01:51.360 --> 00:01:58.040
+Let's say that we have 10 items of size 3,
+10 items of size 4 10 of size 3,
+
+29
+00:01:58.040 --> 00:02:03.290
+10 of size 4, we want to pack
+them in bins of capacity 12.
+
+30
+00:02:03.290 --> 00:02:09.780
+How convenient,
+12 is 3 times 4, is 4 times 3.
+
+31
+00:02:09.780 --> 00:02:12.180
+How very convenient.
+
+32
+00:02:12.180 --> 00:02:12.900
+Look at this.
+
+33
+00:02:14.740 --> 00:02:21.075
+Consider this example, think about it,
+and a solution emerges.
+
+34
+00:02:21.075 --> 00:02:22.547
+Naturally.
+
+35
+00:02:22.547 --> 00:02:24.665
+How?
+
+36
+00:02:24.665 --> 00:02:27.610
+Well we have ten items of size three.
+
+37
+00:02:27.610 --> 00:02:34.210
+But four items of size three fill
+exactly a bin exactly to capacity.
+
+38
+00:02:34.210 --> 00:02:39.920
+So let's have two bins with four
+items of size three in each of them.
+
+39
+00:02:41.430 --> 00:02:43.190
+We have two items left over.
+
+40
+00:02:44.700 --> 00:02:46.510
+Then take the items of size four.
+
+41
+00:02:47.800 --> 00:02:49.840
+Three of them fit a bin exactly.
+
+42
+00:02:50.840 --> 00:02:56.010
+So let's have three bins like
+that using up nine of our items.
+
+43
+00:02:56.010 --> 00:02:57.070
+What is left over?
+
+44
+00:02:58.095 --> 00:03:05.980
+What's left over are, two items of
+size three, one item of size four.
+
+45
+00:03:05.980 --> 00:03:09.120
+Three plus, three plus, four is ten.
+
+46
+00:03:10.640 --> 00:03:13.790
+The left over items fit
+in one additional bin.
+
+47
+00:03:17.210 --> 00:03:19.139
+That's our solution.
+
+48
+00:03:19.139 --> 00:03:24.350
+Two bins filled with four
+items of size three each.
+
+49
+00:03:25.360 --> 00:03:28.850
+Three bins filled with three
+items of size four in each, and
+
+50
+00:03:28.850 --> 00:03:31.550
+one bin with the leftover items.
+
+51
+00:03:31.550 --> 00:03:32.790
+Total, six bins.
+
+52
+00:03:35.180 --> 00:03:38.340
+A little thought reveals
+this has to be optimal.
+
+53
+00:03:40.390 --> 00:03:42.280
+So what is the idea?
+
+54
+00:03:42.280 --> 00:03:44.630
+What idea did we use for this?
+
+55
+00:03:44.630 --> 00:03:49.000
+The idea we used is that there
+are not that many ways to fill a bin.
+
+56
+00:03:50.120 --> 00:03:52.960
+When items are large, you
+
+57
+00:03:54.000 --> 00:04:00.020
+cannot put that many items in the bin, and
+there are only so many different bins.
+
+58
+00:04:00.020 --> 00:04:03.070
+Let's call those configurations.
+
+59
+00:04:05.400 --> 00:04:07.390
+We have a few possible configurations.
+
+60
+00:04:08.410 --> 00:04:11.980
+We can have bins that contain
+items of size four only.
+
+61
+00:04:11.980 --> 00:04:16.340
+Three of them, or two of them, or
+just one of them that I didn't draw.
+
+62
+00:04:17.620 --> 00:04:21.860
+Or we can have bins that contain
+items of size three only.
+
+63
+00:04:21.860 --> 00:04:27.540
+Four of them, or three of them,
+or two of them, or one of them.
+
+64
+00:04:27.540 --> 00:04:30.390
+Or we can have a bin
+that contains a mixture.
+
+65
+00:04:30.390 --> 00:04:34.340
+It could contain two items of
+size four and one of size three,
+
+66
+00:04:35.810 --> 00:04:39.750
+two items of size three and
+one of size four, or one of each.
+
+67
+00:04:41.620 --> 00:04:44.960
+And that's it,
+these are all the bin types.
+
+68
+00:04:44.960 --> 00:04:46.960
+These are the only
+possible configurations.
+
+69
+00:04:49.450 --> 00:04:52.360
+So what does this suggest in general?
+
+70
+00:04:52.360 --> 00:04:56.010
+Whenever we have large items and
+few distinct item sizes,
+
+71
+00:04:56.010 --> 00:05:01.680
+let us define C As the set of
+all possible bin configurations.
+
+72
+00:05:02.910 --> 00:05:10.740
+In configuration C, let us look at how
+may times we have a slot of size s.
+
+73
+00:05:10.740 --> 00:05:13.768
+Let's call this a sub s,c.
+
+74
+00:05:13.768 --> 00:05:17.023
+For example, here, for
+
+75
+00:05:17.023 --> 00:05:22.449
+this configuration C a sub 3c equals 1.
+
+76
+00:05:22.449 --> 00:05:29.780
+There's one possibility for
+an item of size three and a 4c equals 2.
+
+77
+00:05:29.780 --> 00:05:34.914
+There at two slots of size
+4 in this configuration.
+
+78
+00:05:34.914 --> 00:05:38.000
+All right, then what?
+
+79
+00:05:38.000 --> 00:05:43.540
+Now we are going towards something that
+you probably guessed, an integer program.
+
+80
+00:05:45.150 --> 00:05:45.770
+Integer program.
+
+81
+00:05:46.840 --> 00:05:51.060
+So we have our set of sizes
+that has constant cardinality.
+
+82
+00:05:52.480 --> 00:05:55.790
+The input gives us
+the number items of size s.
+
+83
+00:05:55.790 --> 00:05:57.420
+Let's call it n sub s.
+
+84
+00:05:58.850 --> 00:06:04.330
+The output chooses among
+the set of configurations
+
+85
+00:06:04.330 --> 00:06:06.640
+how many bins we have
+in each configuration.
+
+86
+00:06:07.890 --> 00:06:14.100
+Let x sub c denote the number of bins that
+are filled according to configuration c.
+
+87
+00:06:15.760 --> 00:06:16.820
+That's a variable.
+
+88
+00:06:18.210 --> 00:06:21.070
+These are the variables
+of our integer program.
+
+89
+00:06:21.070 --> 00:06:22.680
+And what are the constraints?
+
+90
+00:06:22.680 --> 00:06:26.210
+The constraints are that
+everything must fit.
+
+91
+00:06:26.210 --> 00:06:27.840
+Everything must fit in somewhere.
+
+92
+00:06:27.840 --> 00:06:31.820
+In other words if we look at the items
+of size s how many do we have?
+
+93
+00:06:31.820 --> 00:06:33.240
+N sub s of m.
+
+94
+00:06:33.240 --> 00:06:36.060
+There have to be enough slots for
+all of them.
+
+95
+00:06:36.060 --> 00:06:39.330
+How many slots do we have for
+items of size s?
+
+96
+00:06:39.330 --> 00:06:43.920
+Sum over c over all
+configurations of x sub c,
+
+97
+00:06:43.920 --> 00:06:49.960
+the number of bins in
+configuration c times a sub s,
+
+98
+00:06:49.960 --> 00:06:55.170
+c, the number of slots in that
+configuration for items of size s.
+
+99
+00:06:55.170 --> 00:06:59.200
+That has to be large enough to
+fit all the items of size s.
+
+100
+00:06:59.200 --> 00:07:00.400
+That's our constraints.
+
+101
+00:07:01.630 --> 00:07:04.229
+And finally, what is the objective
+of the integer program?
+
+102
+00:07:04.229 --> 00:07:09.167
+We want to minimize the number of bins,
+that is sum over c of x sub c.
+
+103
+00:07:09.167 --> 00:07:12.140
+Of course, x sub c must be an integer.
+
+104
+00:07:13.770 --> 00:07:15.880
+That's the integer program for
+
+105
+00:07:15.880 --> 00:07:20.830
+bin packing when all items are large and
+there are only a few distinct item sizes.
+
+106
+00:07:22.510 --> 00:07:23.900
+So what do we do with this?
+
+107
+00:07:26.160 --> 00:07:28.860
+We have to figure out how
+many configurations we have.
+
+108
+00:07:30.570 --> 00:07:32.180
+Easy, not that many.
+
+109
+00:07:33.532 --> 00:07:38.730
+If every item size is at least 10% of
+
+110
+00:07:38.730 --> 00:07:44.570
+the bin capacity then obviously,
+we can fit at most nine items per bin.
+
+111
+00:07:45.790 --> 00:07:49.050
+Each configuration has at most nine items.
+
+112
+00:07:50.880 --> 00:07:52.970
+And, if we have less than,
+
+113
+00:07:52.970 --> 00:07:57.060
+say, 10 different sizes,
+then how many configurations do we have?
+
+114
+00:07:57.060 --> 00:07:59.337
+At most, 10^10.
+
+115
+00:07:59.337 --> 00:08:00.450
+So what do we do?
+
+116
+00:08:00.450 --> 00:08:07.660
+10^10 is, 10 is a constant, 10.
+
+117
+00:08:07.660 --> 00:08:09.913
+10% of capacity.
+
+118
+00:08:09.913 --> 00:08:13.071
+Ten is another constant.
+
+119
+00:08:13.071 --> 00:08:17.030
+The number of distinct sizes.
+
+120
+00:08:17.030 --> 00:08:22.220
+Okay, here it so happened that these
+two parameters are both equal to 10,
+
+121
+00:08:22.220 --> 00:08:23.640
+but that's a coincidence.
+
+122
+00:08:23.640 --> 00:08:29.903
+In general, this size is at minimum
+some alpha times the bin capacity and
+
+123
+00:08:29.903 --> 00:08:34.022
+the number sizes is at
+most some k equals O of 1.
+
+124
+00:08:34.022 --> 00:08:37.000
+All right, at most 10^10 configurations.
+
+125
+00:08:37.000 --> 00:08:41.820
+So we can solve the LP relaxation
+that has a number of constraints
+
+126
+00:08:41.820 --> 00:08:44.509
+equal to the number of sizes, ten.
+
+127
+00:08:44.509 --> 00:08:49.664
+A number of variables equal to
+the number of configurations, 10^10.
+
+128
+00:08:49.664 --> 00:08:51.750
+10^10 is a constant.
+
+129
+00:08:53.080 --> 00:08:54.500
+It's a O of 1.
+
+130
+00:08:54.500 --> 00:08:57.270
+That's the beauty of theory.
+
+131
+00:08:59.360 --> 00:09:03.810
+And once we have solved this, we can round
+up to the nearest integer each variable.
+
+132
+00:09:03.810 --> 00:09:08.010
+This adds at most plus 1 per variable,
+plus 10^10.
+
+133
+00:09:08.010 --> 00:09:12.470
+So, the output gives us
+a weight of pack items
+
+134
+00:09:12.470 --> 00:09:16.830
+with a number of bins at most
+equal to opt plus 10^10.
+
+135
+00:09:16.830 --> 00:09:18.220
+Almost optimal.
+
+136
+00:09:19.470 --> 00:09:25.159
+Or, let's say you don't like 10^10, you
+want something that is exactly optimal.
+
+137
+00:09:25.159 --> 00:09:27.295
+You can do it.
+
+138
+00:09:27.295 --> 00:09:28.595
+How?
+
+139
+00:09:28.595 --> 00:09:29.560
+Exhaustive search.
+
+140
+00:09:30.590 --> 00:09:33.840
+Easy, look at all possibilities.
+
+141
+00:09:33.840 --> 00:09:36.018
+You know that for each continuation c,
+
+142
+00:09:36.018 --> 00:09:39.230
+the number of bins in
+consideration c is at most n.
+
+143
+00:09:39.230 --> 00:09:39.950
+Why?
+
+144
+00:09:39.950 --> 00:09:41.570
+Because you only have n items to pack.
+
+145
+00:09:41.570 --> 00:09:45.880
+So even if you put one in each bin,
+that's at most n bins.
+
+146
+00:09:45.880 --> 00:09:51.470
+So the total number of collections of
+configurations of conceivable solutions
+
+147
+00:09:51.470 --> 00:09:56.570
+is at most N + 1,
+all possibilities 0 through n,
+
+148
+00:09:56.570 --> 00:10:01.390
+to the probability of c,
+number of considerations, to the 10^10.
+
+149
+00:10:01.390 --> 00:10:07.150
+For each such considerable
+possibility you can check whether for
+
+150
+00:10:07.150 --> 00:10:09.000
+every size S, things fit.
+
+151
+00:10:09.000 --> 00:10:12.840
+You have enough slots to fit
+all the items of size s, and
+
+152
+00:10:12.840 --> 00:10:16.010
+then output the solution
+with the min number of bins.
+
+153
+00:10:16.010 --> 00:10:17.250
+That's exhaustive search.
+
+154
+00:10:18.590 --> 00:10:21.078
+It gives you the exact optimal solution.
+
+155
+00:10:21.078 --> 00:10:26.200
+And the runtime is at most size of S,
+
+156
+00:10:26.200 --> 00:10:32.230
+number of distant sizes,
+times n to the size of S to the 10.
+
+157
+00:10:32.230 --> 00:10:33.930
+That's polynomial time.
+
+158
+00:10:33.930 --> 00:10:35.480
+Of course it's kind of big.
+
+159
+00:10:35.480 --> 00:10:38.770
+And it's possible to do much better
+than this using linear programming, but
+
+160
+00:10:38.770 --> 00:10:40.760
+still, it's polynomial time.
+
+161
+00:10:42.840 --> 00:10:47.005
+So in this section we have seen how
+to solve the problem exactly, or
+
+162
+00:10:47.005 --> 00:10:50.860
+near-optimally when all
+the items are large and
+
+163
+00:10:50.860 --> 00:10:53.190
+there are few distinct item sizes.
+
+164
+00:10:53.190 --> 00:10:57.648
+Next we work on removing the assumption
+that there are few distinct sizes.
