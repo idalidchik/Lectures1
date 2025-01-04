@@ -1,0 +1,468 @@
+WEBVTT
+
+1
+00:00:01.088 --> 00:00:07.108
+[MUSIC]
+
+2
+00:00:07.108 --> 00:00:10.620
+We have designed an algorithm for
+the general knapsack problem.
+
+3
+00:00:10.620 --> 00:00:13.994
+We have proved that it
+runs in polynomial time.
+
+4
+00:00:13.994 --> 00:00:18.360
+Now, it remains to do what will
+be the climax of this chapter
+
+5
+00:00:18.360 --> 00:00:19.820
+technically speaking.
+
+6
+00:00:19.820 --> 00:00:22.750
+Proving that it has a good
+approximation ratio.
+
+7
+00:00:24.250 --> 00:00:29.085
+So in this section, we will do an analysis
+of the approximation ratio of our
+
+8
+00:00:29.085 --> 00:00:30.793
+algorithm for knapsack.
+
+9
+00:00:32.616 --> 00:00:34.950
+First, we need a little bit of notation.
+
+10
+00:00:37.170 --> 00:00:39.510
+Our output set of items.
+
+11
+00:00:39.510 --> 00:00:42.642
+Let's call it S.
+
+12
+00:00:42.642 --> 00:00:44.306
+Here's S.
+
+13
+00:00:44.306 --> 00:00:46.070
+What do we know about S?
+
+14
+00:00:46.070 --> 00:00:51.170
+We know that S is optimal for
+the scaled rounded input.
+
+15
+00:00:51.170 --> 00:00:55.048
+It's a solution that was given us
+from solving the dynamic problem.
+
+16
+00:00:55.048 --> 00:00:58.527
+Second notation,
+
+17
+00:00:58.527 --> 00:01:04.260
+S* The optimal set of items for
+the original input.
+
+18
+00:01:04.260 --> 00:01:09.870
+Since we know that scaling does not
+change a structure of optimal solutions,
+
+19
+00:01:11.010 --> 00:01:15.820
+well, S* is also optimal for
+the scaled unrounded inputs.
+
+20
+00:01:16.970 --> 00:01:21.578
+So we now need to relate the value of S,
+which is optimal for
+
+21
+00:01:21.578 --> 00:01:26.376
+scaled rounded inputs to the value
+of S* which is optimal for
+
+22
+00:01:26.376 --> 00:01:28.555
+scaled unrounded inputs.
+
+23
+00:01:29.774 --> 00:01:36.895
+First, we have done a reduction, so
+we really have two values to worry about.
+
+24
+00:01:36.895 --> 00:01:43.533
+The value of S for the original input And
+the value of S for the modified inputs.
+
+25
+00:01:43.533 --> 00:01:45.537
+Let us relate these two values.
+
+26
+00:01:48.236 --> 00:01:49.280
+The value of S.
+
+27
+00:01:50.640 --> 00:01:51.860
+Sum of VI over S.
+
+28
+00:01:53.200 --> 00:01:56.810
+Scale multiply by alpha divided by alpha.
+
+29
+00:01:56.810 --> 00:01:58.690
+Sum over S over scaled inputs.
+
+30
+00:02:00.190 --> 00:02:01.590
+Round.
+
+31
+00:02:01.590 --> 00:02:07.930
+When you round you round
+down to the nearest integer.
+
+32
+00:02:07.930 --> 00:02:12.334
+And so, alpha vi is greater then or
+equal to v prime i.
+
+33
+00:02:12.334 --> 00:02:17.110
+And so, the value of s is at least 1
+over alpha times the sum of v prime i.
+
+34
+00:02:17.110 --> 00:02:20.470
+That is the value of s for
+the scale rounded input.
+
+35
+00:02:23.200 --> 00:02:28.140
+Next, we now look at
+the modified input and
+
+36
+00:02:28.140 --> 00:02:30.790
+on that input let us relate
+the value of s to r.
+
+37
+00:02:30.790 --> 00:02:35.260
+What do we know about that value
+of S on the modified input?
+
+38
+00:02:36.430 --> 00:02:42.350
+We know that s is optimal so
+it's value is maximum possible.
+
+39
+00:02:42.350 --> 00:02:48.350
+So it's value is at least as good as
+the value of S* on the modified input.
+
+40
+00:02:48.350 --> 00:02:53.460
+This we can write as
+Sum of e prime i over s
+
+41
+00:02:53.460 --> 00:02:58.195
+is greater than the recall of
+the sum of e prime i over S*.
+
+42
+00:02:58.195 --> 00:03:03.772
+S, S*, S, S*.
+
+43
+00:03:05.980 --> 00:03:07.270
+Now what do we do?
+
+44
+00:03:08.460 --> 00:03:13.270
+Now we have managed to go from S to S*,
+but
+
+45
+00:03:13.270 --> 00:03:17.650
+what we have is not the value of S* on the
+original input, but on the modified input.
+
+46
+00:03:17.650 --> 00:03:20.660
+So we need to go back
+to the original input.
+
+47
+00:03:20.660 --> 00:03:26.180
+We went from S on the original
+input to S on the modified input.
+
+48
+00:03:26.180 --> 00:03:29.550
+From there to S star on
+the modified input and
+
+49
+00:03:29.550 --> 00:03:33.479
+we need to go back up to S
+star on the original input.
+
+50
+00:03:35.952 --> 00:03:40.240
+All right, so how did the rounding work?
+
+51
+00:03:40.240 --> 00:03:41.960
+We rounded down to the nearest integer.
+
+52
+00:03:43.210 --> 00:03:48.440
+So the rounded value is
+
+53
+00:03:48.440 --> 00:03:53.520
+less than the scale value,
+but by one at most.
+
+54
+00:03:53.520 --> 00:03:55.570
+Nearest integer is at most one away.
+
+55
+00:03:56.830 --> 00:04:03.650
+So when we sum, the effect of
+rounding is the sum of the v prime is
+
+56
+00:04:03.650 --> 00:04:10.720
+are at least Alpha times the sum of vis
+minus one minus one minus one minus one.
+
+57
+00:04:10.720 --> 00:04:14.230
+Five of S star times,
+that is at worst n times.
+
+58
+00:04:15.930 --> 00:04:17.610
+And what do we see appearing here?
+
+59
+00:04:19.040 --> 00:04:23.550
+We see Sum of over S* of Vi.
+
+60
+00:04:24.660 --> 00:04:25.384
+What is this?
+
+61
+00:04:25.384 --> 00:04:27.993
+OPT.
+
+62
+00:04:27.993 --> 00:04:30.896
+We have OPT appear.
+
+63
+00:04:30.896 --> 00:04:34.390
+So now, we can combine everything,
+substitute.
+
+64
+00:04:35.900 --> 00:04:39.420
+Value of S is at least 1 over
+the sum of V times prime i.
+
+65
+00:04:39.420 --> 00:04:42.694
+Which is at least one of the [INAUDIBLE].
+
+66
+00:04:42.694 --> 00:04:46.290
+Which is at least [INAUDIBLE] vi minus n.
+
+67
+00:04:46.290 --> 00:04:49.770
+Which is at least [INAUDIBLE] is one.
+
+68
+00:04:49.770 --> 00:04:54.210
+So that's at least out minus n over alpha.
+
+69
+00:04:56.200 --> 00:04:57.790
+Substitute the value of alpha.
+
+70
+00:04:57.790 --> 00:05:00.898
+This is at least up minus n
+times max v over capital n.
+
+71
+00:05:00.898 --> 00:05:05.970
+We have found an additive error
+
+72
+00:05:05.970 --> 00:05:09.860
+of n times max v over capital n.
+
+73
+00:05:12.152 --> 00:05:14.780
+All right, now we have an additive error
+
+74
+00:05:14.780 --> 00:05:18.860
+which is often what we'd find when
+we study approximation algorithms.
+
+75
+00:05:18.860 --> 00:05:24.690
+We need to work on this to prove something
+about the relative error of our solution.
+
+76
+00:05:24.690 --> 00:05:28.710
+So, we need to work on this term and
+somehow, make up the peer.
+
+77
+00:05:28.710 --> 00:05:31.220
+For this,
+we will use another lower bound OPT.
+
+78
+00:05:32.850 --> 00:05:33.990
+How do we lower bound OPT?
+
+79
+00:05:35.060 --> 00:05:39.580
+Now, we go back to the preprocessing.
+
+80
+00:05:39.580 --> 00:05:43.400
+We had that little step that I
+didn't really say much about.
+
+81
+00:05:43.400 --> 00:05:45.680
+These can't be items that
+don't fit in a knapsack.
+
+82
+00:05:47.070 --> 00:05:49.320
+We can infer something from that.
+
+83
+00:05:49.320 --> 00:05:52.780
+We discarded the items
+whose sizes were too big.
+
+84
+00:05:52.780 --> 00:05:57.228
+So all the remaining items,
+if we take them alone,
+
+85
+00:05:57.228 --> 00:06:02.192
+they fit in a knapsack and so
+every vi Alone would fit and so
+
+86
+00:06:02.192 --> 00:06:06.862
+we know that OPT is at least
+the maximum of all of them.
+
+87
+00:06:08.986 --> 00:06:13.584
+Now we could substitute OPT for
+max of vi and
+
+88
+00:06:13.584 --> 00:06:18.691
+we get the value of S is
+at least OPT minus little n
+
+89
+00:06:18.691 --> 00:06:25.490
+over capital N times OPT Finally,
+remember what is capital N?
+
+90
+00:06:25.490 --> 00:06:26.860
+One hundred capital N?
+
+91
+00:06:26.860 --> 00:06:29.810
+We haven't used this yet, it's time.
+
+92
+00:06:29.810 --> 00:06:31.720
+Substitute, and what do you get?
+
+93
+00:06:31.720 --> 00:06:33.570
+The value of S is at
+this point .99 times OPT.
+
+94
+00:06:33.570 --> 00:06:36.480
+99 percent times OPT.
+
+95
+00:06:38.240 --> 00:06:40.030
+We have a one percent error.
+
+96
+00:06:41.080 --> 00:06:42.210
+We're almost optimal.
+
+97
+00:06:43.480 --> 00:06:49.110
+What we have proved is our algorithm gives
+us a solution to the knapsack problem
+
+98
+00:06:49.110 --> 00:06:51.790
+that can be computed in polynomial time.
+
+99
+00:06:51.790 --> 00:06:54.720
+And whose value is at least
+99% of the optimal value.
+
+100
+00:06:54.720 --> 00:06:55.220
+Excellent.
+
+101
+00:07:00.500 --> 00:07:01.990
+Excellent but we are not quite done yet.
+
+102
+00:07:03.330 --> 00:07:08.040
+In the next and final section we will
+extend this to design an approximation
+
+103
+00:07:08.040 --> 00:07:10.220
+scheme for the knapsack problem.

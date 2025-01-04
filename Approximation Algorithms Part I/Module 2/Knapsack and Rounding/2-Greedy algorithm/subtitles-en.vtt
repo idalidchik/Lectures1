@@ -1,0 +1,399 @@
+WEBVTT
+
+1
+00:00:00.171 --> 00:00:04.325
+[MUSIC]
+
+2
+00:00:04.325 --> 00:00:09.768
+We have defined the knapsack problem and
+we have decided to temporarily
+
+3
+00:00:09.768 --> 00:00:15.500
+focus on that special case where every
+item has its size equal to its value.
+
+4
+00:00:16.570 --> 00:00:19.150
+Let us design an algorithm for
+this special case.
+
+5
+00:00:22.520 --> 00:00:23.960
+This case seems easy.
+
+6
+00:00:25.220 --> 00:00:27.610
+We want to maximize the value
+of what we take in.
+
+7
+00:00:27.610 --> 00:00:31.640
+How about just trying to take
+the items by decreasing value,
+
+8
+00:00:31.640 --> 00:00:34.780
+starting with the most valuable item?
+
+9
+00:00:34.780 --> 00:00:37.270
+How good is that algorithm?
+
+10
+00:00:37.270 --> 00:00:40.400
+This is another version
+of a greedy algorithm.
+
+11
+00:00:40.400 --> 00:00:44.020
+The greedy algorithm that takes
+item by order of decreasing value.
+
+12
+00:00:46.440 --> 00:00:50.840
+Graphically the case when,
+size equals value,
+
+13
+00:00:50.840 --> 00:00:56.620
+is the case when every item is
+a square instead of just a rectangle.
+
+14
+00:00:56.620 --> 00:01:02.260
+And our algorithm is sort
+the squares by decreasing size.
+
+15
+00:01:02.260 --> 00:01:08.190
+And then take it down one by one,
+gradually, if they fit in the knapsack.
+
+16
+00:01:08.190 --> 00:01:11.040
+If the sum of their
+heights is less than B.
+
+17
+00:01:13.160 --> 00:01:13.660
+Observe.
+
+18
+00:01:16.060 --> 00:01:22.770
+The total height is less than B for every
+solution, including the optimal solution.
+
+19
+00:01:23.960 --> 00:01:28.054
+So, OPT is also less than B.
+
+20
+00:01:28.054 --> 00:01:32.300
+The optimal solution has
+value equal to its height.
+
+21
+00:01:32.300 --> 00:01:36.980
+That is, at most B.
+
+22
+00:01:36.980 --> 00:01:38.260
+OPT is less than B.
+
+23
+00:01:40.380 --> 00:01:42.000
+That's the first observation.
+
+24
+00:01:42.000 --> 00:01:46.540
+We have seen in previous
+lectures that one way to
+
+25
+00:01:46.540 --> 00:01:51.010
+analyze an approximation algorithm
+is to relate up to some parameter.
+
+26
+00:01:51.010 --> 00:01:54.180
+Then relate our output
+solution to that parameter.
+
+27
+00:01:54.180 --> 00:01:58.770
+So now, we need to look at our output and
+compute it's value as a function of B.
+
+28
+00:02:01.240 --> 00:02:01.740
+Observe.
+
+29
+00:02:03.350 --> 00:02:07.995
+If we take the output and
+we add any item that's been rejected.
+
+30
+00:02:07.995 --> 00:02:10.520
+It's been rejected because it did not fit.
+
+31
+00:02:10.520 --> 00:02:12.610
+Because the sum of the values
+was greater than B.
+
+32
+00:02:14.200 --> 00:02:17.920
+We can assume that the output
+has a least 1 item.
+
+33
+00:02:17.920 --> 00:02:22.465
+We can assume that in this picture,
+where the items and the output are blue,
+
+34
+00:02:22.465 --> 00:02:26.710
+and one of the rejected items is red,
+
+35
+00:02:28.180 --> 00:02:32.600
+we can see that there's
+at least one blue item.
+
+36
+00:02:32.600 --> 00:02:33.100
+Why?
+
+37
+00:02:34.140 --> 00:02:37.550
+Why, because if there were no blue items.
+
+38
+00:02:37.550 --> 00:02:38.730
+What would it mean?
+
+39
+00:02:38.730 --> 00:02:42.800
+It would mean that nothing
+fits in their knapsack.
+
+40
+00:02:42.800 --> 00:02:46.110
+And then also OPT also would
+put nothing in the knapsack.
+
+41
+00:02:46.110 --> 00:02:49.700
+And so, our output would be zero.
+
+42
+00:02:51.350 --> 00:02:54.554
+OPT would be also zero,
+so just more optimal.
+
+43
+00:02:54.554 --> 00:02:58.780
+Observe that we can also assume
+there's at least one red item.
+
+44
+00:02:58.780 --> 00:03:03.610
+There exists some item that does
+not fit in the knapsack for
+
+45
+00:03:03.610 --> 00:03:06.050
+the solution that we are constructing.
+
+46
+00:03:06.050 --> 00:03:07.340
+Why not?
+
+47
+00:03:07.340 --> 00:03:13.280
+Well, if the knapsack contained every
+item then of course it could be optimal.
+
+48
+00:03:13.280 --> 00:03:15.740
+How could it do better
+than take everything?
+
+49
+00:03:15.740 --> 00:03:19.326
+So, we can assume that
+the output has at least 1 item.
+
+50
+00:03:19.326 --> 00:03:23.740
+And the non-output has at least 1 item.
+
+51
+00:03:25.960 --> 00:03:28.380
+And then,
+there's at least one red rectangle.
+
+52
+00:03:28.380 --> 00:03:30.020
+There's a bunch of blue rectangles.
+
+53
+00:03:30.020 --> 00:03:32.060
+The Output+1 item is greater than B.
+
+54
+00:03:34.940 --> 00:03:39.483
+Okay, so then think about the order
+in which we took the items.
+
+55
+00:03:39.483 --> 00:03:43.383
+What was the first item
+we put in the output?
+
+56
+00:03:43.383 --> 00:03:45.566
+The first item.
+
+57
+00:03:45.566 --> 00:03:50.628
+Look at it, it's big.
+
+58
+00:03:50.628 --> 00:03:52.030
+It's bigger than this one.
+
+59
+00:03:54.170 --> 00:03:59.073
+The first item in the output is bigger
+than any item not in the output.
+
+60
+00:03:59.073 --> 00:03:59.839
+Why?
+
+61
+00:03:59.839 --> 00:04:01.907
+Proof by picture.
+
+62
+00:04:01.907 --> 00:04:03.330
+Why?
+
+63
+00:04:03.330 --> 00:04:10.265
+Because the first item is the largest
+item that can fit in the knapsack.
+
+64
+00:04:12.850 --> 00:04:16.720
+So, the output plus the red
+item is greater than B.
+
+65
+00:04:17.790 --> 00:04:20.770
+The first output item is
+greater than the red item.
+
+66
+00:04:22.340 --> 00:04:27.137
+Therefore, combining,
+we can deduce that the output
+
+67
+00:04:27.137 --> 00:04:31.107
+has value at least half of B,
+at least B/2.
+
+68
+00:04:31.107 --> 00:04:35.772
+And now remember, output louder than B/2.
+
+69
+00:04:37.482 --> 00:04:41.940
+OPT less than the recall to B.
+
+70
+00:04:41.940 --> 00:04:46.630
+Combined, output larger than OPT/2.
+
+71
+00:04:46.630 --> 00:04:50.880
+There is a factor of 2.
+
+72
+00:04:50.880 --> 00:04:52.200
+We have proved the theorem!
+
+73
+00:04:54.020 --> 00:04:56.820
+In a special case where
+the size is equal to the value,
+
+74
+00:04:56.820 --> 00:04:59.500
+this greedy algorithm
+is a 2-approximation.
+
+75
+00:04:59.500 --> 00:05:01.350
+Obviously it's paradigm of time.
+
+76
+00:05:01.350 --> 00:05:03.710
+It's basically the time it takes to sort.
+
+77
+00:05:03.710 --> 00:05:04.810
+And it's correct.
+
+78
+00:05:04.810 --> 00:05:06.510
+It gives you something that
+does fit in a knapsack.
+
+79
+00:05:07.870 --> 00:05:08.400
+Not good enough.
+
+80
+00:05:09.520 --> 00:05:11.390
+I'm not happy with this.
+
+81
+00:05:11.390 --> 00:05:14.320
+I want better than a 2-approximation.
+
+82
+00:05:14.320 --> 00:05:15.270
+Can we do better?
+
+83
+00:05:15.270 --> 00:05:16.790
+How can we do better?
+
+84
+00:05:16.790 --> 00:05:19.140
+This will be the object
+of the next section.
+
+85
+00:05:19.140 --> 00:05:21.650
+So we have a seen 2-approximation for
+
+86
+00:05:21.650 --> 00:05:24.480
+the special case when the side
+is equal to the value.
+
+87
+00:05:24.480 --> 00:05:25.660
+And in the next section,
+
+88
+00:05:25.660 --> 00:05:29.965
+we will try to develop something much
+better than the 2-approximation.

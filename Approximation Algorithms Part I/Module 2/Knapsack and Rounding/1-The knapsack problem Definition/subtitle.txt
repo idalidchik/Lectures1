@@ -1,0 +1,89 @@
+[SOUND] Welcome back to the course
+on approximation algorithms. So far, we have studied the vertex
+cover problem in some detail. Now, we will turn to another problem which is a classic problem
+in approximation algorithms. Namely, the knapsack problem. This will be an opportunity for
+us to study another version of rounding. On nine vertex cover we are not going
+to round some fractional solution to get the output,but we
+will round the input values to get a simplified input
+that will be more tractable. So studying the knapsack problem
+will be an opportunity for us to work on input rounding. First, better start by
+defining the knapsack problem. It is a problem that
+comes up all the time, whenever you go on a trip,
+whenever you travel, whenever you go camping you have to
+decide which items to take with you. Which items to take in your knapsack? For example, let's say you're
+about to go camping somewhere, and you have put in your room you have taken
+out all of the items that you might consider taking with you. How can you do without your favorite cat? A hammock is good when
+you're going camping. You like this piece of jewelry,
+isn't it beautiful? Etc. But if you're going to carry everything
+on your back, you can only carry so much. Every item has a certain weight and
+you only have so much capacity. So, given how much value
+you give to each item, and given the maximum weight you're willing
+to carry, which items should you take? For example,
+the pocket knife is relatively light, but very, very valuable when
+you're going camping. It is very hard to go
+camping without a knife. In general, the classic knapsack
+problem given a capacity B, the maximum weight you can carry,
+given a set of n items where item i has a certain size or weight,
+s sub i and a certain value, v sub i, you have to choose which
+items to place in a knapsack, so as to maximize the value of what
+you take with you on your trip, while respecting
+the constraint capacity of B. This problem along with 20 other problems
+was proved to be NP-hard In Dikhof's famous paper on anti-completeness. So we cannot hope to solve it exactly
+in polynomial time in general. That is why this problem
+is a good candidate for designing an approximation algorithm. How to get started? Here's a general recipe for
+designing approximation algorithms. First, let's try to find a good
+representation for the problem. A good representation for
+the input and for the output. In this case,
+let's think of a graphical representation. Item i is defined by its size as si and
+its value, vi. Two numbers characterizing item i. It is therefore natural to represent item
+i as a rectangle of side length vi, si. When you choose to take several items, it means you choose to
+take several rectangles. The things we take have a certain
+total value, you sum the values. Total size, you sum their sizes. What does this mean? It means that you can represent
+your solution using two dimensions. One axis is for value,
+the other axis is for size. You put the rectangles side by side,
+or rather, corner by corner, each northeast corner of one rectangle touching
+the southwest corner or a next rectangle. And then, that defines, for
+a given set of items, that defines a way to represent the sum
+of the values of the items. And if you look at the vertical axis,
+the sizes, you can visualize the sum
+of the sizes of the items. What does it mean that
+you have a capacity of B? It means that the sort of staircase that
+you're building in this way has to have height at most B, given that you want
+it to go east as far as possible. That's a graphical representation for
+the knapsack problem. You're limited in height, you want to
+go to the right as far as possible. What you desire is small size, high value,
+rectangles that are very flat. These are clearly very
+desirable rectangles. You will want to take these
+rectangles more than others. What this suggests is that
+you should consider items by order of ratio size over value. You take them by increasing
+order of size over value, and then with how can you
+choose which ones to take? The first attempt,
+the naive greedy algorithm, is to just take them
+greedily in that order. So the algorithm is, it is sort the items by increasing
+size over value and then place them one by one,
+as long as they fit, in the knapsack. Unfortunately, this greedy algorithm
+is not a good approximation algorithm. It does produce something
+that fits in the knapsack. It's correct, it gives you a solution. It does run in polynomial time. It's basically the time it takes
+to sort the ratios si over vi. However, the solution could be quite bad. Let me give you an example. B = 100. You have a knapsack of capacity 100. n equals to one item. A little rectangle with value 1 size 1, and another item, a big rectangle, a huge rectangle,
+with value 99 and size 100. What happens then? If you look at the ratios, the little
+rectangle is slightly preferable. It has a slightly better ratio. So you will take it first, and it fits. So you put it in, and now you're doomed. Why? Because the next item does not fit. So that's it. Your output will be the little rectangle,
+value one. Whereas the optimal choice
+would have been to forget about the little one and
+take only the big rectangle, value 99. So the algorithm that works by increasing
+slope is bad, the greedy algorithm is bad. The ratio, we just gave
+an example is at least as bad as within a factor of 99 of opt. And it can be arbitrary really. So we have to design a better
+algorithm for knapsack. Here's another general recipe to try
+to design approximation algorithms. We need to develop more intuition. How do we do that? Let's try some special cases. Here are some simple special cases. What if all items have the same size? Then we know exactly how
+many of them will fit, and it's only a question of maximizing value,
+then it's easy. Greedy will take them by
+order of decreasing value. It's the correct algorithm,
+greedy is good. Too easy, this special case was too easy. Let's try again. What if all items have the same value? Then greedy will take them by order
+of increasing size, this is good. Too easy again. All right, let's try again. What if all items have
+size equal to value? Then all the ratios are equal to one, and the greedy algorithm, as we've defined it,
+doesn't really distinguish between them. It takes them in arbitrary order. So now this is becoming interesting. And so, we now need to design a new
+algorithm to deal with the special case when all items have
+size equal to their value. So we have defined the knapsack problem, we have tried to define an algorithm,
+the increasing slope algorithm. And because of its failure to give a good
+approximation ratio, we have decided to temporarily focus on the special case
+when all items have size equal to value. This will be the object
+of the next section.

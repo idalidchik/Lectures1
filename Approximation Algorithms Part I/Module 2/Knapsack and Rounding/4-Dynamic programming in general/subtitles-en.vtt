@@ -1,0 +1,586 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.170
+[MUSIC]
+
+2
+00:00:04.170 --> 00:00:09.640
+So far we have solved the Knapsack problem
+for a special, special, special case.
+
+3
+00:00:09.640 --> 00:00:12.050
+It doesn't seem very interesting, but
+
+4
+00:00:12.050 --> 00:00:17.239
+we get to use the same ideas to try to
+solve a slightly more general case.
+
+5
+00:00:19.000 --> 00:00:23.066
+What will be this less special,
+special case?
+
+6
+00:00:23.066 --> 00:00:27.500
+The case when the item
+values are small integers.
+
+7
+00:00:27.500 --> 00:00:31.510
+So every item, as before,
+has a size and a value, but
+
+8
+00:00:31.510 --> 00:00:34.200
+the size is no longer equal to the value.
+
+9
+00:00:34.200 --> 00:00:39.382
+Their size can be arbitrary,
+but the item values are small
+
+10
+00:00:39.382 --> 00:00:44.797
+integers in the range one through
+N where N is could be fixed.
+
+11
+00:00:47.650 --> 00:00:49.315
+How are we going to solve this?
+
+12
+00:00:49.315 --> 00:00:54.240
+Well, we will extend previous ideas
+from the special, special case.
+
+13
+00:00:55.830 --> 00:00:57.750
+How did we solve the special,
+special case?
+
+14
+00:00:57.750 --> 00:00:59.660
+We used dynamic programming.
+
+15
+00:00:59.660 --> 00:01:01.670
+So let's start again
+with dynamic programming.
+
+16
+00:01:04.120 --> 00:01:08.780
+The idea of dynamic programming, we have
+to figure out what interface to define
+
+17
+00:01:09.960 --> 00:01:14.129
+given a partial solution for
+the first i items.
+
+18
+00:01:15.250 --> 00:01:19.590
+We want to remember enough
+of the partial solution so
+
+19
+00:01:19.590 --> 00:01:23.400
+that we're able to complete
+the solution optimally.
+
+20
+00:01:23.400 --> 00:01:24.860
+So what will we do?
+
+21
+00:01:24.860 --> 00:01:29.129
+We'll add some stuff to this spot.
+
+22
+00:01:29.129 --> 00:01:33.190
+We'll complete things optimally here for
+an arbitrary beginning.
+
+23
+00:01:33.190 --> 00:01:37.796
+So we need an interface that
+tells us what to remember here.
+
+24
+00:01:40.460 --> 00:01:42.004
+What to remember.
+
+25
+00:01:42.004 --> 00:01:46.904
+Before, we remembered for
+every i, for the first i items,
+
+26
+00:01:46.904 --> 00:01:52.294
+whether there was a subset that
+could achieve a certain value v for
+
+27
+00:01:52.294 --> 00:01:54.360
+every possible value v.
+
+28
+00:01:56.040 --> 00:02:00.090
+Now again we're interested
+in the first i items and
+
+29
+00:02:00.090 --> 00:02:03.010
+we are interested in a particular value v.
+
+30
+00:02:03.010 --> 00:02:08.599
+But in order to figure out
+whether we can add some
+
+31
+00:02:08.599 --> 00:02:14.629
+stuff on top of a solution,
+what are we going to do?
+
+32
+00:02:14.629 --> 00:02:19.481
+We're going to add some stuff,
+add some stuff here, and for
+
+33
+00:02:19.481 --> 00:02:22.250
+this we need to remember the size.
+
+34
+00:02:23.500 --> 00:02:26.360
+So, we must remember the size.
+
+35
+00:02:26.360 --> 00:02:27.670
+How are we going to remember the size?
+
+36
+00:02:28.910 --> 00:02:31.840
+The size can be arbitrary, can be small,
+
+37
+00:02:31.840 --> 00:02:35.690
+can be large, can be long numbers,
+difficult things.
+
+38
+00:02:35.690 --> 00:02:39.260
+The sums there are many,
+an exponential number of possibilities.
+
+39
+00:02:39.260 --> 00:02:41.040
+So what we'll do is,
+
+40
+00:02:41.040 --> 00:02:46.870
+we'll remember the interesting
+sizes inside the table entries.
+
+41
+00:02:46.870 --> 00:02:51.750
+Inside A[i,v] we'll remember the size.
+
+42
+00:02:51.750 --> 00:02:56.039
+Let's be more specific, in A[i,v],
+
+43
+00:02:56.039 --> 00:03:00.450
+we will remember the size
+is achievable for
+
+44
+00:03:00.450 --> 00:03:04.504
+subsets of our first i items of value v.
+
+45
+00:03:04.504 --> 00:03:05.948
+Really?
+
+46
+00:03:05.948 --> 00:03:09.260
+Not quite.
+
+47
+00:03:09.260 --> 00:03:11.480
+For any subset of our
+first items of value v,
+
+48
+00:03:11.480 --> 00:03:14.310
+there could be many
+different sizes achievable.
+
+49
+00:03:14.310 --> 00:03:19.170
+All we need to remember is the minimum,
+the minimum of these values.
+
+50
+00:03:19.170 --> 00:03:19.890
+Why?
+
+51
+00:03:19.890 --> 00:03:24.940
+Because if for the same value we can
+achieve it with this size, this size, this
+
+52
+00:03:24.940 --> 00:03:31.598
+size inside our Knapsack, then we might
+as well use the minimum possible size.
+
+53
+00:03:31.598 --> 00:03:36.560
+So in A[i,v] we define
+this entry of a table as
+
+54
+00:03:36.560 --> 00:03:41.151
+the minimum size achievable
+by any subset of
+
+55
+00:03:41.151 --> 00:03:45.754
+the first items whose
+total value equals v.
+
+56
+00:03:48.000 --> 00:03:52.895
+And now that we have the definition of
+our GP table, we need to figure out
+
+57
+00:03:52.895 --> 00:03:58.046
+a recurrence so that we'll be able to
+fill these entries in the algorithm.
+
+58
+00:03:58.046 --> 00:03:59.796
+When?
+
+59
+00:03:59.796 --> 00:04:04.741
+When there is some subset of
+the first i items some to size
+
+60
+00:04:04.741 --> 00:04:08.120
+s while having total value equal to v.
+
+61
+00:04:09.960 --> 00:04:13.330
+Well it depends, it depends on item i.
+
+62
+00:04:13.330 --> 00:04:19.020
+It depends on whether item
+i is in the subset or not.
+
+63
+00:04:19.020 --> 00:04:22.150
+Depends on whether
+the subset contains item i.
+
+64
+00:04:22.150 --> 00:04:24.350
+Two cases, two cases.
+
+65
+00:04:24.350 --> 00:04:27.880
+Case one, item i is not in the subset.
+
+66
+00:04:27.880 --> 00:04:30.890
+Then it's easy, we just have to
+look at the first i- 1 items.
+
+67
+00:04:30.890 --> 00:04:34.980
+And then we have to be able to
+reach 5f with total value v.
+
+68
+00:04:36.270 --> 00:04:40.340
+Case two, item i is in the subset.
+
+69
+00:04:40.340 --> 00:04:45.940
+Then it's easy,
+it uses size si of the Knapsack.
+
+70
+00:04:45.940 --> 00:04:50.490
+So the other items of the subset
+must sum to size s- si.
+
+71
+00:04:51.690 --> 00:04:53.560
+And it gives us value vi.
+
+72
+00:04:53.560 --> 00:04:58.378
+So the rest of our subset
+must give us value v- vi.
+
+73
+00:04:58.378 --> 00:05:05.550
+So this now gives us, this reasoning
+now gives us a recurrence formula.
+
+74
+00:05:05.550 --> 00:05:10.921
+Can be expressed algebraically as follows.
+
+75
+00:05:10.921 --> 00:05:15.416
+Let A[i,v] Denote the minimum
+size achievable by any
+
+76
+00:05:15.416 --> 00:05:18.960
+subset of our first i
+items of total value v.
+
+77
+00:05:20.590 --> 00:05:23.052
+If v is greater than or equal to vi,
+
+78
+00:05:23.052 --> 00:05:28.700
+then A[i,v] is the minimum
+of two possibilities.
+
+79
+00:05:28.700 --> 00:05:33.590
+The one when i Item i is in the subset,
+and a one when it's not.
+
+80
+00:05:34.910 --> 00:05:40.103
+The minimum of two possibilities,
+the first possibility is A[i- 1,v].
+
+81
+00:05:40.103 --> 00:05:47.870
+The second one is A[i- 1,v- vi].
+
+82
+00:05:47.870 --> 00:05:52.570
+That's the total size minimum achievable
+by a subset of first i minus some items
+
+83
+00:05:52.570 --> 00:05:58.090
+that sum with total value (v-vi)+si.
+
+84
+00:05:58.090 --> 00:06:01.150
+The size of item i.
+
+85
+00:06:01.150 --> 00:06:02.450
+What about the else?
+
+86
+00:06:02.450 --> 00:06:06.963
+Else, else, else.
+
+87
+00:06:06.963 --> 00:06:09.587
+If v is strictly less than vi, then what?
+
+88
+00:06:09.587 --> 00:06:17.090
+Then item i cannot go in a subset and
+then A[i,v], clearly is just A[i-1,v].
+
+89
+00:06:17.090 --> 00:06:17.590
+Simple.
+
+90
+00:06:18.740 --> 00:06:21.220
+So this gives us a recurrence.
+
+91
+00:06:21.220 --> 00:06:25.991
+We will use it to fill the table entries
+by order of increasing the value of i, and
+
+92
+00:06:25.991 --> 00:06:29.211
+that leads us to our algorithm for
+this special case.
+
+93
+00:06:31.750 --> 00:06:33.190
+Here's the algorithm.
+
+94
+00:06:33.190 --> 00:06:35.600
+I did not detail the initialization.
+
+95
+00:06:37.190 --> 00:06:39.657
+I did not detail the last part.
+
+96
+00:06:39.657 --> 00:06:41.320
+But this is easy.
+
+97
+00:06:41.320 --> 00:06:44.360
+You can check it yourselves,
+by yourselves that this works.
+
+98
+00:06:44.360 --> 00:06:47.110
+What's important is the line
+with the recurrence,
+
+99
+00:06:47.110 --> 00:06:49.290
+the line with the min, this line.
+
+100
+00:06:51.190 --> 00:06:55.878
+And what is the run time, run time?
+
+101
+00:06:55.878 --> 00:07:02.213
+Line one, O of nN.
+
+102
+00:07:02.213 --> 00:07:05.060
+Line two, constant.
+
+103
+00:07:05.060 --> 00:07:07.990
+Line three, a for
+loop with time big O of n.
+
+104
+00:07:07.990 --> 00:07:13.013
+This for loop includes some other loops,
+
+105
+00:07:13.013 --> 00:07:19.336
+two loops that together have
+v scanned from 0 to nN.
+
+106
+00:07:19.336 --> 00:07:19.836
+Why nN?
+
+107
+00:07:22.440 --> 00:07:25.260
+Because this is the maximum
+value conceivable.
+
+108
+00:07:25.260 --> 00:07:26.300
+Why?
+
+109
+00:07:26.300 --> 00:07:29.030
+Because every item has value at most N.
+
+110
+00:07:30.080 --> 00:07:33.010
+Even if every item is put in the Knapsack,
+
+111
+00:07:33.010 --> 00:07:37.660
+the total value will be nN,
+little n times capital N.
+
+112
+00:07:39.170 --> 00:07:42.140
+And so, because of these two for
+
+113
+00:07:42.140 --> 00:07:47.030
+loops, the runtime will be o(n^2N),
+
+114
+00:07:47.030 --> 00:07:50.935
+when capital N is a constant,
+
+115
+00:07:50.935 --> 00:07:56.360
+this is quadratic.
+
+116
+00:07:56.360 --> 00:08:00.300
+So, if we look at the main
+idea of this algorithm,
+
+117
+00:08:00.300 --> 00:08:02.230
+how did we design this algorithm?
+
+118
+00:08:02.230 --> 00:08:08.020
+We have to think of trying the method
+of dynamic programming, and
+
+119
+00:08:08.020 --> 00:08:13.650
+the main idea really came up in
+the definition of the DP array.
+
+120
+00:08:13.650 --> 00:08:17.480
+A definition that was chosen
+in just the right way so
+
+121
+00:08:17.480 --> 00:08:19.120
+that we would have a recurrence formula.
+
+122
+00:08:20.550 --> 00:08:25.060
+We look at this,
+we see that it works in polynomial time.
+
+123
+00:08:25.060 --> 00:08:30.960
+It gives us the optimal way to
+put items in our Knapsack so
+
+124
+00:08:30.960 --> 00:08:33.690
+as to maximize the value while
+respecting the capacity.
+
+125
+00:08:36.400 --> 00:08:38.960
+So at this point what have we done?
+
+126
+00:08:38.960 --> 00:08:43.220
+We have solved the Knapsack
+problem exactly in the case where
+
+127
+00:08:43.220 --> 00:08:45.820
+all the items had small value.
+
+128
+00:08:45.820 --> 00:08:50.528
+In the next part, what we will do is
+build on this to design an approximation
+
+129
+00:08:50.528 --> 00:08:52.713
+algorithm finally for Knapsack.

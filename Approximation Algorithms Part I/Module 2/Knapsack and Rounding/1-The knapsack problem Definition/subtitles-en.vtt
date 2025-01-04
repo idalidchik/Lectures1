@@ -1,0 +1,633 @@
+WEBVTT
+
+1
+00:00:00.025 --> 00:00:07.791
+[SOUND] Welcome back to the course
+on approximation algorithms.
+
+2
+00:00:07.791 --> 00:00:12.130
+So far, we have studied the vertex
+cover problem in some detail.
+
+3
+00:00:12.130 --> 00:00:14.840
+Now, we will turn to another
+
+4
+00:00:14.840 --> 00:00:18.180
+problem which is a classic problem
+in approximation algorithms.
+
+5
+00:00:18.180 --> 00:00:19.750
+Namely, the knapsack problem.
+
+6
+00:00:20.960 --> 00:00:26.210
+This will be an opportunity for
+us to study another version of rounding.
+
+7
+00:00:26.210 --> 00:00:31.150
+On nine vertex cover we are not going
+to round some fractional solution
+
+8
+00:00:31.150 --> 00:00:35.590
+to get the output,but we
+will round the input values
+
+9
+00:00:35.590 --> 00:00:39.120
+to get a simplified input
+that will be more tractable.
+
+10
+00:00:40.360 --> 00:00:43.730
+So studying the knapsack problem
+will be an opportunity for
+
+11
+00:00:43.730 --> 00:00:46.260
+us to work on input rounding.
+
+12
+00:00:47.570 --> 00:00:50.940
+First, better start by
+defining the knapsack problem.
+
+13
+00:00:53.300 --> 00:00:55.270
+It is a problem that
+comes up all the time,
+
+14
+00:00:55.270 --> 00:00:58.070
+whenever you go on a trip,
+whenever you travel,
+
+15
+00:00:58.070 --> 00:01:02.330
+whenever you go camping you have to
+decide which items to take with you.
+
+16
+00:01:02.330 --> 00:01:04.600
+Which items to take in your knapsack?
+
+17
+00:01:06.760 --> 00:01:11.560
+For example, let's say you're
+about to go camping somewhere, and
+
+18
+00:01:11.560 --> 00:01:15.600
+you have put in your room you have taken
+out all of the items that you might
+
+19
+00:01:15.600 --> 00:01:16.990
+consider taking with you.
+
+20
+00:01:18.490 --> 00:01:21.880
+How can you do without your favorite cat?
+
+21
+00:01:21.880 --> 00:01:24.990
+A hammock is good when
+you're going camping.
+
+22
+00:01:24.990 --> 00:01:28.320
+You like this piece of jewelry,
+isn't it beautiful?
+
+23
+00:01:28.320 --> 00:01:29.480
+Etc.
+
+24
+00:01:29.480 --> 00:01:35.140
+But if you're going to carry everything
+on your back, you can only carry so much.
+
+25
+00:01:35.140 --> 00:01:38.990
+Every item has a certain weight and
+you only have so much capacity.
+
+26
+00:01:40.220 --> 00:01:43.890
+So, given how much value
+you give to each item, and
+
+27
+00:01:43.890 --> 00:01:48.640
+given the maximum weight you're willing
+to carry, which items should you take?
+
+28
+00:01:50.290 --> 00:01:54.520
+For example,
+the pocket knife is relatively light, but
+
+29
+00:01:54.520 --> 00:01:57.460
+very, very valuable when
+you're going camping.
+
+30
+00:01:58.800 --> 00:02:00.930
+It is very hard to go
+camping without a knife.
+
+31
+00:02:02.930 --> 00:02:07.800
+In general, the classic knapsack
+problem given a capacity B,
+
+32
+00:02:07.800 --> 00:02:13.340
+the maximum weight you can carry,
+given a set of n items where
+
+33
+00:02:13.340 --> 00:02:18.730
+item i has a certain size or weight,
+s sub i and a certain value,
+
+34
+00:02:18.730 --> 00:02:24.010
+v sub i, you have to choose which
+items to place in a knapsack,
+
+35
+00:02:24.010 --> 00:02:28.510
+so as to maximize the value of what
+you take with you on your trip,
+
+36
+00:02:28.510 --> 00:02:32.300
+while respecting
+the constraint capacity of B.
+
+37
+00:02:34.100 --> 00:02:40.690
+This problem along with 20 other problems
+was proved to be NP-hard In Dikhof's
+
+38
+00:02:40.690 --> 00:02:45.150
+famous paper on anti-completeness.
+
+39
+00:02:45.150 --> 00:02:50.750
+So we cannot hope to solve it exactly
+in polynomial time in general.
+
+40
+00:02:50.750 --> 00:02:54.520
+That is why this problem
+is a good candidate for
+
+41
+00:02:54.520 --> 00:02:56.610
+designing an approximation algorithm.
+
+42
+00:02:58.730 --> 00:03:00.270
+How to get started?
+
+43
+00:03:00.270 --> 00:03:05.950
+Here's a general recipe for
+designing approximation algorithms.
+
+44
+00:03:05.950 --> 00:03:10.790
+First, let's try to find a good
+representation for the problem.
+
+45
+00:03:11.890 --> 00:03:14.800
+A good representation for
+the input and for the output.
+
+46
+00:03:16.370 --> 00:03:20.480
+In this case,
+let's think of a graphical representation.
+
+47
+00:03:21.860 --> 00:03:29.490
+Item i is defined by its size as si and
+its value, vi.
+
+48
+00:03:31.130 --> 00:03:34.730
+Two numbers characterizing item i.
+
+49
+00:03:34.730 --> 00:03:41.140
+It is therefore natural to represent item
+i as a rectangle of side length vi, si.
+
+50
+00:03:43.600 --> 00:03:47.220
+When you choose to take several items,
+
+51
+00:03:47.220 --> 00:03:49.830
+it means you choose to
+take several rectangles.
+
+52
+00:03:51.170 --> 00:03:56.820
+The things we take have a certain
+total value, you sum the values.
+
+53
+00:03:56.820 --> 00:03:59.720
+Total size, you sum their sizes.
+
+54
+00:03:59.720 --> 00:04:01.200
+What does this mean?
+
+55
+00:04:01.200 --> 00:04:05.470
+It means that you can represent
+your solution using two dimensions.
+
+56
+00:04:05.470 --> 00:04:09.260
+One axis is for value,
+the other axis is for size.
+
+57
+00:04:09.260 --> 00:04:14.810
+You put the rectangles side by side,
+or rather, corner by corner, each
+
+58
+00:04:14.810 --> 00:04:20.260
+northeast corner of one rectangle touching
+the southwest corner or a next rectangle.
+
+59
+00:04:20.260 --> 00:04:24.840
+And then, that defines, for
+a given set of items, that defines
+
+60
+00:04:26.350 --> 00:04:30.800
+a way to represent the sum
+of the values of the items.
+
+61
+00:04:30.800 --> 00:04:34.120
+And if you look at the vertical axis,
+the sizes,
+
+62
+00:04:36.010 --> 00:04:39.650
+you can visualize the sum
+of the sizes of the items.
+
+63
+00:04:40.870 --> 00:04:43.750
+What does it mean that
+you have a capacity of B?
+
+64
+00:04:43.750 --> 00:04:48.950
+It means that the sort of staircase that
+you're building in this way has to have
+
+65
+00:04:48.950 --> 00:04:55.610
+height at most B, given that you want
+it to go east as far as possible.
+
+66
+00:04:55.610 --> 00:04:59.570
+That's a graphical representation for
+the knapsack problem.
+
+67
+00:05:00.850 --> 00:05:04.770
+You're limited in height, you want to
+go to the right as far as possible.
+
+68
+00:05:06.630 --> 00:05:13.850
+What you desire is small size, high value,
+rectangles that are very flat.
+
+69
+00:05:13.850 --> 00:05:16.970
+These are clearly very
+desirable rectangles.
+
+70
+00:05:16.970 --> 00:05:19.570
+You will want to take these
+rectangles more than others.
+
+71
+00:05:20.570 --> 00:05:24.280
+What this suggests is that
+you should consider items
+
+72
+00:05:24.280 --> 00:05:27.040
+by order of ratio size over value.
+
+73
+00:05:28.175 --> 00:05:32.620
+You take them by increasing
+order of size over value, and
+
+74
+00:05:32.620 --> 00:05:35.830
+then with how can you
+choose which ones to take?
+
+75
+00:05:35.830 --> 00:05:39.180
+The first attempt,
+the naive greedy algorithm,
+
+76
+00:05:39.180 --> 00:05:41.750
+is to just take them
+greedily in that order.
+
+77
+00:05:43.100 --> 00:05:47.790
+So the algorithm is, it is
+
+78
+00:05:47.790 --> 00:05:52.170
+sort the items by increasing
+size over value and
+
+79
+00:05:52.170 --> 00:05:56.530
+then place them one by one,
+as long as they fit, in the knapsack.
+
+80
+00:05:57.830 --> 00:06:03.540
+Unfortunately, this greedy algorithm
+is not a good approximation algorithm.
+
+81
+00:06:05.560 --> 00:06:08.250
+It does produce something
+that fits in the knapsack.
+
+82
+00:06:08.250 --> 00:06:09.720
+It's correct, it gives you a solution.
+
+83
+00:06:10.960 --> 00:06:12.910
+It does run in polynomial time.
+
+84
+00:06:12.910 --> 00:06:18.010
+It's basically the time it takes
+to sort the ratios si over vi.
+
+85
+00:06:19.080 --> 00:06:23.880
+However, the solution could be quite bad.
+
+86
+00:06:23.880 --> 00:06:25.576
+Let me give you an example.
+
+87
+00:06:25.576 --> 00:06:28.530
+B = 100.
+
+88
+00:06:28.530 --> 00:06:31.474
+You have a knapsack of capacity 100.
+
+89
+00:06:32.640 --> 00:06:36.038
+n equals to one item.
+
+90
+00:06:36.038 --> 00:06:40.839
+A little rectangle with value 1 size 1,
+
+91
+00:06:40.839 --> 00:06:45.090
+and another item, a big rectangle,
+
+92
+00:06:45.090 --> 00:06:51.138
+a huge rectangle,
+with value 99 and size 100.
+
+93
+00:06:53.360 --> 00:06:55.120
+What happens then?
+
+94
+00:06:55.120 --> 00:07:00.810
+If you look at the ratios, the little
+rectangle is slightly preferable.
+
+95
+00:07:00.810 --> 00:07:02.600
+It has a slightly better ratio.
+
+96
+00:07:02.600 --> 00:07:04.500
+So you will take it first, and it fits.
+
+97
+00:07:04.500 --> 00:07:08.847
+So you put it in, and now you're doomed.
+
+98
+00:07:08.847 --> 00:07:10.080
+Why?
+
+99
+00:07:10.080 --> 00:07:12.240
+Because the next item does not fit.
+
+100
+00:07:12.240 --> 00:07:13.330
+So that's it.
+
+101
+00:07:13.330 --> 00:07:17.690
+Your output will be the little rectangle,
+value one.
+
+102
+00:07:18.715 --> 00:07:23.474
+Whereas the optimal choice
+would have been to forget about
+
+103
+00:07:23.474 --> 00:07:28.439
+the little one and
+take only the big rectangle, value 99.
+
+104
+00:07:28.439 --> 00:07:34.860
+So the algorithm that works by increasing
+slope is bad, the greedy algorithm is bad.
+
+105
+00:07:34.860 --> 00:07:40.630
+The ratio, we just gave
+an example is at least as bad as
+
+106
+00:07:40.630 --> 00:07:42.630
+within a factor of 99 of opt.
+
+107
+00:07:42.630 --> 00:07:45.240
+And it can be arbitrary really.
+
+108
+00:07:45.240 --> 00:07:49.410
+So we have to design a better
+algorithm for knapsack.
+
+109
+00:07:52.270 --> 00:07:57.280
+Here's another general recipe to try
+to design approximation algorithms.
+
+110
+00:07:57.280 --> 00:07:59.610
+We need to develop more intuition.
+
+111
+00:07:59.610 --> 00:08:00.840
+How do we do that?
+
+112
+00:08:00.840 --> 00:08:02.280
+Let's try some special cases.
+
+113
+00:08:03.490 --> 00:08:06.170
+Here are some simple special cases.
+
+114
+00:08:08.750 --> 00:08:11.540
+What if all items have the same size?
+
+115
+00:08:13.330 --> 00:08:17.620
+Then we know exactly how
+many of them will fit, and
+
+116
+00:08:17.620 --> 00:08:21.550
+it's only a question of maximizing value,
+then it's easy.
+
+117
+00:08:22.560 --> 00:08:25.760
+Greedy will take them by
+order of decreasing value.
+
+118
+00:08:25.760 --> 00:08:27.760
+It's the correct algorithm,
+greedy is good.
+
+119
+00:08:29.260 --> 00:08:32.630
+Too easy, this special case was too easy.
+
+120
+00:08:33.700 --> 00:08:34.710
+Let's try again.
+
+121
+00:08:34.710 --> 00:08:38.551
+What if all items have the same value?
+
+122
+00:08:38.551 --> 00:08:47.820
+Then greedy will take them by order
+of increasing size, this is good.
+
+123
+00:08:47.820 --> 00:08:48.590
+Too easy again.
+
+124
+00:08:50.190 --> 00:08:51.950
+All right, let's try again.
+
+125
+00:08:51.950 --> 00:08:56.100
+What if all items have
+size equal to value?
+
+126
+00:08:57.340 --> 00:09:00.100
+Then all the ratios are equal to one, and
+
+127
+00:09:00.100 --> 00:09:04.400
+the greedy algorithm, as we've defined it,
+doesn't really distinguish between them.
+
+128
+00:09:04.400 --> 00:09:06.880
+It takes them in arbitrary order.
+
+129
+00:09:06.880 --> 00:09:09.420
+So now this is becoming interesting.
+
+130
+00:09:09.420 --> 00:09:14.200
+And so, we now need to design a new
+algorithm to deal with the special
+
+131
+00:09:14.200 --> 00:09:18.790
+case when all items have
+size equal to their value.
+
+132
+00:09:21.050 --> 00:09:24.190
+So we have defined the knapsack problem,
+
+133
+00:09:24.190 --> 00:09:30.020
+we have tried to define an algorithm,
+the increasing slope algorithm.
+
+134
+00:09:30.020 --> 00:09:35.165
+And because of its failure to give a good
+approximation ratio, we have decided to
+
+135
+00:09:35.165 --> 00:09:41.440
+temporarily focus on the special case
+when all items have size equal to value.
+
+136
+00:09:41.440 --> 00:09:44.539
+This will be the object
+of the next section.

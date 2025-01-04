@@ -1,0 +1,377 @@
+WEBVTT
+
+1
+00:00:00.145 --> 00:00:07.238
+[MUSIC]
+
+2
+00:00:07.238 --> 00:00:12.780
+We have seen an algorithm for a special
+special case of the knapsack problem.
+
+3
+00:00:14.270 --> 00:00:19.210
+We have seen an algorithm for
+special case of the knapsack problem.
+
+4
+00:00:20.510 --> 00:00:26.170
+Now has finally come the time to see what
+you have been waiting for impatiently.
+
+5
+00:00:27.220 --> 00:00:31.560
+An algorithm for
+the general case of the knapsack problem.
+
+6
+00:00:33.090 --> 00:00:35.980
+Why have we been wasting all this time?
+
+7
+00:00:35.980 --> 00:00:39.850
+Because we can now leverage all
+the work we have done previously.
+
+8
+00:00:41.880 --> 00:00:46.350
+We know how to solve the problem
+when all values are small integers.
+
+9
+00:00:47.670 --> 00:00:50.450
+We have an algorithm for that case.
+
+10
+00:00:50.450 --> 00:00:53.120
+So, how do we solve that general case?
+
+11
+00:00:53.120 --> 00:00:54.430
+The idea is simple.
+
+12
+00:00:54.430 --> 00:00:56.110
+We will just do a reduction.
+
+13
+00:00:57.120 --> 00:01:01.870
+We will take our general input and
+we will modify it, so
+
+14
+00:01:01.870 --> 00:01:06.830
+that the values become small integers,
+integers between 0 and N.
+
+15
+00:01:06.830 --> 00:01:10.270
+And then, once we're there, we can just
+
+16
+00:01:10.270 --> 00:01:14.920
+leverage the algorithm we designed it for
+and use it as a black box.
+
+17
+00:01:16.090 --> 00:01:18.480
+That's an algorithm by reduction.
+
+18
+00:01:20.830 --> 00:01:24.580
+How do we modify the input so
+that the values are small integers?
+
+19
+00:01:25.810 --> 00:01:28.310
+We do the most natural
+thing you could imagine.
+
+20
+00:01:29.840 --> 00:01:34.684
+First, we want them to be small,
+so we scale.
+
+21
+00:01:34.684 --> 00:01:38.618
+Second, we want them to be integers.
+
+22
+00:01:38.618 --> 00:01:43.870
+So we round.
+
+23
+00:01:43.870 --> 00:01:48.170
+That's, these are not big ideas and
+yet that is going to suffice.
+
+24
+00:01:50.350 --> 00:01:53.020
+So here is the general algorithm.
+
+25
+00:01:55.140 --> 00:01:57.920
+Initially some pre processing step
+
+26
+00:01:57.920 --> 00:02:01.740
+let us discard the items that
+don't fit in a knapsack.
+
+27
+00:02:01.740 --> 00:02:06.145
+If an item has a size that is too big to
+fit in a knapsack, we just throw it away.
+
+28
+00:02:07.643 --> 00:02:09.250
+Consider the remaining items.
+
+29
+00:02:10.410 --> 00:02:14.030
+Multiply each value by a scalar, so
+
+30
+00:02:14.030 --> 00:02:17.250
+that the resulting values
+are all less than or equal to n.
+
+31
+00:02:19.520 --> 00:02:25.000
+Then round all these scaled values
+down to the nearest integer.
+
+32
+00:02:26.890 --> 00:02:29.810
+Now, in this modified input,
+
+33
+00:02:29.810 --> 00:02:33.730
+we can apply the dynamic program
+seen in the previous section.
+
+34
+00:02:35.200 --> 00:02:36.940
+That's the general algorithm.
+
+35
+00:02:38.200 --> 00:02:38.902
+Simple.
+
+36
+00:02:41.700 --> 00:02:44.330
+Pictorially, you can see it this way.
+
+37
+00:02:44.330 --> 00:02:45.980
+This is the reduction.
+
+38
+00:02:45.980 --> 00:02:52.330
+Initially, we have a bunch of items,
+and here I plotted their values.
+
+39
+00:02:53.390 --> 00:02:59.370
+We scale them so that the maximum
+item size becomes exactly equal to N.
+
+40
+00:03:00.660 --> 00:03:04.250
+And then,
+we take all of these scale values, and
+
+41
+00:03:04.250 --> 00:03:07.890
+decrease them a little bit,
+so that they become integers.
+
+42
+00:03:07.890 --> 00:03:11.529
+1, 2, up to N.
+
+43
+00:03:16.010 --> 00:03:18.190
+What is the effect of scaling?
+
+44
+00:03:18.190 --> 00:03:20.460
+The maximum scale value is n.
+
+45
+00:03:21.460 --> 00:03:22.930
+What does it mean?
+
+46
+00:03:22.930 --> 00:03:27.690
+That we must have multiplied
+by n over the max value.
+
+47
+00:03:29.040 --> 00:03:34.620
+So we multiply every item by alpha
+defined to be capital n over max value.
+
+48
+00:03:36.000 --> 00:03:37.940
+But what is n?
+
+49
+00:03:40.630 --> 00:03:41.990
+How do we pick N?
+
+50
+00:03:41.990 --> 00:03:42.950
+I did not say it yet.
+
+51
+00:03:44.470 --> 00:03:45.730
+The answer is, we pick it small and large.
+
+52
+00:03:45.730 --> 00:03:53.800
+We pick it small enough that
+the runtime is polynomial.
+
+53
+00:03:55.080 --> 00:03:57.810
+The smaller N is, the smaller the runtime.
+
+54
+00:03:57.810 --> 00:04:01.398
+We know the runtime is
+linear in terms of N.
+
+55
+00:04:01.398 --> 00:04:09.410
+Large enough that we will
+still have an accurate output.
+
+56
+00:04:09.410 --> 00:04:11.330
+The value of the output
+will be close to optimum.
+
+57
+00:04:12.610 --> 00:04:16.700
+Now, is it possible to take capital N,
+both small and large?
+
+58
+00:04:18.210 --> 00:04:22.250
+That's the object of this algorithm and
+analysis.
+
+59
+00:04:22.250 --> 00:04:25.410
+Choose N just right that
+the run time is polynomial and
+
+60
+00:04:25.410 --> 00:04:26.700
+the value is close to optimum.
+
+61
+00:04:28.930 --> 00:04:31.380
+So here's the algorithm.
+
+62
+00:04:32.900 --> 00:04:34.196
+Discard items not fitting.
+
+63
+00:04:34.196 --> 00:04:40.140
+Let's define N = 100 times little n,
+let's say.
+
+64
+00:04:41.700 --> 00:04:47.320
+Define the prime i as a scaled rounded
+value, the floor of the i times alpha.
+
+65
+00:04:48.510 --> 00:04:54.380
+Apply the dominant program to the modified
+input where the knapsack is still d,
+
+66
+00:04:54.380 --> 00:04:58.330
+the sizes are still s i, but
+the values are v prime i.
+
+67
+00:04:59.800 --> 00:05:03.360
+This gives us, as a result,
+a collection of items and
+
+68
+00:05:03.360 --> 00:05:05.390
+we output the corresponding items.
+
+69
+00:05:06.560 --> 00:05:08.350
+That's the general algorithm.
+
+70
+00:05:09.780 --> 00:05:10.280
+Simple.
+
+71
+00:05:14.220 --> 00:05:16.490
+What is the runtime of this algorithm?
+
+72
+00:05:18.130 --> 00:05:24.010
+Well, for that we have to
+remember how the program worked.
+
+73
+00:05:24.010 --> 00:05:27.646
+What dominates the runtime?
+
+74
+00:05:27.646 --> 00:05:30.840
+What dominates the runtime
+are the two nested for loops.
+
+75
+00:05:31.960 --> 00:05:37.150
+One ranging up to little n,
+one ranging to 0 to -1 and
+
+76
+00:05:37.150 --> 00:05:41.936
+then vi Up to n times N.
+
+77
+00:05:41.936 --> 00:05:49.536
+In total multiply and
+we get n squared times N.
+
+78
+00:05:49.536 --> 00:05:54.691
+For this a choice of value of N,
+that gives 100n cubed.
+
+79
+00:05:54.691 --> 00:05:58.626
+We have a cubic time algorithm.
+
+80
+00:05:58.626 --> 00:06:03.629
+So we have seen an algorithm for
+the general knapsack problem, it runs in
+
+81
+00:06:03.629 --> 00:06:08.808
+cubic time, it outputs something that
+is correct that fits in a knapsack.
+
+82
+00:06:08.808 --> 00:06:12.928
+It only remains to analyze it to show
+that the value of the output is close to
+
+83
+00:06:12.928 --> 00:06:13.532
+optimum.

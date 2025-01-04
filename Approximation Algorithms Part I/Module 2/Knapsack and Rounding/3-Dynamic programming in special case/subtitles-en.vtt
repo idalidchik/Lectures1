@@ -1,0 +1,513 @@
+WEBVTT
+
+1
+00:00:00.050 --> 00:00:03.967
+[MUSIC]
+
+2
+00:00:03.967 --> 00:00:08.791
+So far we have designed a two
+approximation algorithm when
+
+3
+00:00:08.791 --> 00:00:13.250
+every item has its size
+equal to its value.
+
+4
+00:00:13.250 --> 00:00:14.910
+Now we want to do
+something better than two.
+
+5
+00:00:16.930 --> 00:00:20.959
+For that, we're going to study a special,
+special case.
+
+6
+00:00:22.260 --> 00:00:26.840
+A special case of the special case,
+a very special, special case.
+
+7
+00:00:28.180 --> 00:00:31.750
+All items have size equal
+to their value and,
+
+8
+00:00:31.750 --> 00:00:34.910
+in addition, there's one more assumption.
+
+9
+00:00:34.910 --> 00:00:36.811
+What is it?
+
+10
+00:00:36.811 --> 00:00:41.220
+The items have a value
+which is a small integer.
+
+11
+00:00:42.360 --> 00:00:49.610
+And the capacity of the knapsack is also
+a small integer, small with a small mean.
+
+12
+00:00:49.610 --> 00:00:52.550
+Small means polynomial, polynomial in n.
+
+13
+00:00:54.370 --> 00:01:00.888
+So, let's say that all items
+have value between 1 and B,
+
+14
+00:01:00.888 --> 00:01:06.088
+an integer value,
+size equal to their value.
+
+15
+00:01:06.088 --> 00:01:08.610
+And the capacity B is a small integer.
+
+16
+00:01:09.760 --> 00:01:15.950
+For that special, special case,
+I will now give you an optimal solution.
+
+17
+00:01:15.950 --> 00:01:20.130
+This problem is no longer it's
+possible to solve it optimally.
+
+18
+00:01:20.130 --> 00:01:20.630
+Let's see how.
+
+19
+00:01:23.548 --> 00:01:30.964
+The technique is a bit classic technique
+of algorithms, dynamic programming.
+
+20
+00:01:30.964 --> 00:01:35.140
+Dynamic programming,
+let's design a dynamic program for
+
+21
+00:01:35.140 --> 00:01:37.323
+this special, special case.
+
+22
+00:01:37.323 --> 00:01:44.175
+We have items already In the knapsack.
+
+23
+00:01:44.175 --> 00:01:49.830
+Given the items already there,
+we want to add more stuff to the knapsack.
+
+24
+00:01:49.830 --> 00:01:51.820
+We want to decide what to add.
+
+25
+00:01:52.930 --> 00:01:54.580
+So what is the question?
+
+26
+00:01:54.580 --> 00:02:00.080
+Dynamic programming is defined using
+an interface that relates what we have
+
+27
+00:02:00.080 --> 00:02:04.000
+decided to do in the past to what
+we will decide to do in the future.
+
+28
+00:02:05.220 --> 00:02:09.850
+Given a partial solution for
+the first I items,
+
+29
+00:02:09.850 --> 00:02:13.800
+what do we need to remember in order
+to complete the solution optimally?
+
+30
+00:02:14.900 --> 00:02:21.450
+If we have packed a certain subset on the
+first items in a knapsack, what do we need
+
+31
+00:02:21.450 --> 00:02:26.970
+to remember about them In order to be able
+to decide how to complete this optimally?
+
+32
+00:02:29.410 --> 00:02:30.370
+What to remember?
+
+33
+00:02:30.370 --> 00:02:32.910
+We don't need to remember
+the entire subset.
+
+34
+00:02:32.910 --> 00:02:38.790
+We don't need to remember exactly who
+we chose to place in the knapsack.
+
+35
+00:02:38.790 --> 00:02:46.290
+The only thing that matters is let's
+remember the total value so far.
+
+36
+00:02:46.290 --> 00:02:51.456
+Let's remember among the first i items,
+what is the total
+
+37
+00:02:51.456 --> 00:02:56.633
+value of the subset that we
+decided to place in a knapsack?
+
+38
+00:02:56.633 --> 00:03:01.406
+This leads us to define an array
+
+39
+00:03:01.406 --> 00:03:06.913
+indexed by i for the first i items and
+
+40
+00:03:06.913 --> 00:03:11.880
+v for the value achieved so far.
+
+41
+00:03:13.630 --> 00:03:18.840
+For the first i items, for
+a given value v, let's store
+
+42
+00:03:18.840 --> 00:03:24.450
+in an array the information of
+whether there exists of a subset
+
+43
+00:03:24.450 --> 00:03:29.870
+of the first i items whose
+sum is equal to exactly v.
+
+44
+00:03:30.870 --> 00:03:32.054
+v is what?
+
+45
+00:03:32.054 --> 00:03:36.070
+It's any integer between 1, 0, and v.
+
+46
+00:03:37.860 --> 00:03:42.440
+This defines our array, one of the key
+components of a dynamic program.
+
+47
+00:03:45.110 --> 00:03:50.040
+Now the next step in designing this
+dynamic program is to have some
+
+48
+00:03:50.040 --> 00:03:55.190
+recursive formula,
+some formula that tells us how to compute,
+
+49
+00:03:55.190 --> 00:03:57.866
+how to calculate, A of i, v.
+
+50
+00:03:57.866 --> 00:04:02.245
+A of i,
+v is whether value v can be achieved
+
+51
+00:04:02.245 --> 00:04:06.260
+with some subset of the first i items.
+
+52
+00:04:07.480 --> 00:04:09.010
+What is the condition?
+
+53
+00:04:09.010 --> 00:04:12.420
+When is value v achievable with
+a subset of a first i items?
+
+54
+00:04:14.390 --> 00:04:20.580
+v is achievable if and
+only if, if and only if what?
+
+55
+00:04:22.830 --> 00:04:23.570
+It depends.
+
+56
+00:04:25.850 --> 00:04:27.520
+It depends, let's see.
+
+57
+00:04:27.520 --> 00:04:31.849
+Is the ith item, is it in a subset or not?
+
+58
+00:04:31.849 --> 00:04:34.339
+Maybe, maybe not.
+
+59
+00:04:34.339 --> 00:04:37.225
+Maybe, maybe not.
+
+60
+00:04:37.225 --> 00:04:41.222
+That's two possibilities, two.
+
+61
+00:04:41.222 --> 00:04:44.638
+Let's look at the two possibilities.
+
+62
+00:04:44.638 --> 00:04:47.732
+If item i is not in a subset,
+
+63
+00:04:47.732 --> 00:04:52.981
+then we need to figure out
+whether value v can be
+
+64
+00:04:52.981 --> 00:04:58.650
+achieved using a subset
+of the first i-1 items.
+
+65
+00:05:01.430 --> 00:05:06.010
+This is an information that should be
+
+66
+00:05:06.010 --> 00:05:10.755
+in the entry A of v and i-1.
+
+67
+00:05:10.755 --> 00:05:17.100
+Second case,
+imagine that a subset contains item i.
+
+68
+00:05:17.100 --> 00:05:20.130
+Well of course,
+this can only happen if v i,
+
+69
+00:05:20.130 --> 00:05:23.280
+the value of item i,
+is at most v, our goal value.
+
+70
+00:05:24.560 --> 00:05:25.940
+And then, what?
+
+71
+00:05:25.940 --> 00:05:28.830
+Then, item i goes in the subset.
+
+72
+00:05:28.830 --> 00:05:33.800
+And then what we need to figure out is
+whether with some subset of the other i-1
+
+73
+00:05:33.800 --> 00:05:40.530
+items it's possible to
+add up to a value v- vi.
+
+74
+00:05:40.530 --> 00:05:45.805
+So now we can express this algebraically.
+
+75
+00:05:45.805 --> 00:05:51.090
+A[i,v] is whether value v is achievable
+with a subset of the first i items.
+
+76
+00:05:52.760 --> 00:05:57.545
+We have the formula A of i, v is a boolean
+
+77
+00:05:57.545 --> 00:06:02.481
+function, which is equal to either or.
+
+78
+00:06:02.481 --> 00:06:09.020
+It's true if A of i -1, v is true.
+
+79
+00:06:09.020 --> 00:06:12.804
+We can already achieve value
+v with the first i -1 items.
+
+80
+00:06:12.804 --> 00:06:17.866
+Or v is greater than or equal to vi,
+
+81
+00:06:17.866 --> 00:06:22.763
+and A[i-1, v-vi] is true.
+
+82
+00:06:22.763 --> 00:06:31.220
+This is our recursive formula to enable
+us to calculate the value of A[i,v].
+
+83
+00:06:31.220 --> 00:06:35.090
+Now we only have to decide in
+which order to fill the table.
+
+84
+00:06:35.090 --> 00:06:38.590
+And that is easy, order of increasing i.
+
+85
+00:06:40.040 --> 00:06:44.542
+So that leads us to our
+dynamic programming algorithm.
+
+86
+00:06:44.542 --> 00:06:48.200
+There's some initialization which
+I will skip, I will not detail it.
+
+87
+00:06:49.560 --> 00:06:57.340
+Then, for every i,
+we go through every v in term.
+
+88
+00:06:57.340 --> 00:07:01.807
+Every value v, from 0 to vi -1, and
+
+89
+00:07:01.807 --> 00:07:06.299
+we copy A[i-1,v] in A[i,v].
+
+90
+00:07:06.299 --> 00:07:11.390
+We consider all the remaining values of v,
+from vi to B.
+
+91
+00:07:11.390 --> 00:07:15.655
+And for them we have the or of two things,
+
+92
+00:07:15.655 --> 00:07:20.053
+entry i -1, v and entry i-1, v- vi.
+
+93
+00:07:20.053 --> 00:07:26.920
+Once we have done these for loops,
+we have filled the table A entirely.
+
+94
+00:07:26.920 --> 00:07:28.930
+And what will be the result?
+
+95
+00:07:28.930 --> 00:07:35.160
+The result will be for i equal to n,
+when we look at all n items,
+
+96
+00:07:35.160 --> 00:07:40.120
+the maximum value v among
+all these between 1 and
+
+97
+00:07:40.120 --> 00:07:44.830
+v, such that there exists
+a subset summing to v.
+
+98
+00:07:46.370 --> 00:07:51.760
+The maximum v such that A of nv is true,
+that gives us
+
+99
+00:07:51.760 --> 00:07:57.840
+the exact optimal solution of the knapsack
+problem in this special, special case.
+
+100
+00:07:59.670 --> 00:08:02.673
+What is the run time of this algorithm?
+
+101
+00:08:02.673 --> 00:08:10.279
+Well, it's basically big O of n times B,
+because of the two for loops.
+
+102
+00:08:11.430 --> 00:08:13.250
+So what have we done so far?
+
+103
+00:08:13.250 --> 00:08:18.680
+We have designed an optimal algorithm for
+this special, special case.
+
+104
+00:08:18.680 --> 00:08:22.964
+When every item has size equal to value,
+
+105
+00:08:22.964 --> 00:08:28.641
+the max capacity of the knapsack
+B is a small integer.
+
+106
+00:08:28.641 --> 00:08:33.790
+And every size, and therefore value,
+is an integer between 1 and B.
+
+107
+00:08:33.790 --> 00:08:39.130
+In that case we have an optimal
+algorithm with runtime big O of nB,
+
+108
+00:08:39.130 --> 00:08:40.127
+by dynamic programming.
+
+109
+00:08:41.200 --> 00:08:45.010
+In the next section we will
+study how to extend this
+
+110
+00:08:45.010 --> 00:08:48.240
+algorithm to less special cases.
+
+111
+00:08:48.240 --> 00:08:53.820
+We will try to get away from the special,
+special case and design an approximation
+
+112
+00:08:53.820 --> 00:08:57.610
+that works for more extended
+cases of the knapsack problem.
