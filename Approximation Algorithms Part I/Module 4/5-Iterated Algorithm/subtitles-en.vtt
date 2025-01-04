@@ -1,0 +1,295 @@
+WEBVTT
+
+1
+00:00:00.025 --> 00:00:07.183
+[MUSIC]
+
+2
+00:00:07.183 --> 00:00:10.578
+The algorithm we have so
+far is great in terms of cost,
+
+3
+00:00:10.578 --> 00:00:13.320
+it's average cost is at most opt.
+
+4
+00:00:13.320 --> 00:00:17.090
+But it's not so good in terms of coverage,
+it's got a set cover.
+
+5
+00:00:17.090 --> 00:00:21.590
+On average it only covers
+about 63% of the ailments.
+
+6
+00:00:21.590 --> 00:00:23.450
+So what are we going to do?
+
+7
+00:00:23.450 --> 00:00:27.200
+The idea is simple, iterate.
+
+8
+00:00:27.200 --> 00:00:31.260
+Repeat taking steps until
+you get a natural set cover.
+
+9
+00:00:31.260 --> 00:00:36.690
+And so here is a randomized
+rounding algorithm for set cover.
+
+10
+00:00:37.860 --> 00:00:40.860
+Let n denote the number of
+elements in a set cover.
+
+11
+00:00:41.890 --> 00:00:49.040
+We will repeat ln(n)+3 times
+the following operation.
+
+12
+00:00:49.040 --> 00:00:52.470
+For each set S, we put S in our cover
+
+13
+00:00:52.470 --> 00:00:56.788
+with probability x(S) if of
+course it's not there already.
+
+14
+00:00:56.788 --> 00:00:59.634
+Why +3?
+
+15
+00:00:59.634 --> 00:01:04.167
+Because e cubed is about 20.
+
+16
+00:01:04.167 --> 00:01:06.180
+So what do we do with this?
+
+17
+00:01:06.180 --> 00:01:06.790
+Let's see.
+
+18
+00:01:06.790 --> 00:01:07.520
+What does this mean?
+
+19
+00:01:09.300 --> 00:01:14.870
+The cost in expectation will
+be at most (ln(n) +3)OPT.
+
+20
+00:01:14.870 --> 00:01:16.650
+Very good.
+
+21
+00:01:16.650 --> 00:01:22.203
+This will give us a log(n)
+approximation if it's a set cover.
+
+22
+00:01:22.203 --> 00:01:23.940
+What about correctness?
+
+23
+00:01:23.940 --> 00:01:27.740
+What is the probability
+that the output is a cover?
+
+24
+00:01:27.740 --> 00:01:32.080
+It's one minus the probability
+that it's not a cover.
+
+25
+00:01:32.080 --> 00:01:35.350
+What is the probability
+that it's not a cover?
+
+26
+00:01:35.350 --> 00:01:40.244
+It's the probability that some
+element there exists an element
+
+27
+00:01:40.244 --> 00:01:41.882
+that is not covered.
+
+28
+00:01:41.882 --> 00:01:46.214
+The probability that there exists
+an element is at most a sum of
+
+29
+00:01:46.214 --> 00:01:51.298
+the probabilities, because probability
+of A or B is at most probability
+
+30
+00:01:51.298 --> 00:01:55.850
+of A plus probability of B,
+even if A and B are not independent.
+
+31
+00:01:55.850 --> 00:01:57.600
+This is a general fact.
+
+32
+00:01:57.600 --> 00:02:00.990
+So the probability that
+the output is not a cover
+
+33
+00:02:00.990 --> 00:02:05.860
+is at most the sum over every element E Of
+the probability that e is not covered.
+
+34
+00:02:06.910 --> 00:02:08.740
+What is that quantity?
+
+35
+00:02:08.740 --> 00:02:12.053
+What is the probability
+that e is not covered?
+
+36
+00:02:12.053 --> 00:02:16.128
+For one element e, fixed one element e,
+and for one iteration,
+
+37
+00:02:16.128 --> 00:02:19.750
+let's look at one iteration of the for
+loop.
+
+38
+00:02:19.750 --> 00:02:25.030
+We know from previous analysis that
+the probability that e is not covered,
+
+39
+00:02:25.030 --> 00:02:27.880
+is at most one over e.
+
+40
+00:02:27.880 --> 00:02:32.530
+If you put all iterations together,
+they are all independent.
+
+41
+00:02:33.880 --> 00:02:36.280
+So the probability that e is not covered,
+
+42
+00:02:36.280 --> 00:02:39.980
+is the probability that every
+iteration is not covered.
+
+43
+00:02:40.980 --> 00:02:43.470
+This is a product of the probabilities,
+
+44
+00:02:43.470 --> 00:02:47.900
+because all these events are independent
+from one iteration to the next.
+
+45
+00:02:47.900 --> 00:02:50.240
+And so
+each of them can be bounded by 1 over e.
+
+46
+00:02:51.290 --> 00:02:54.820
+It's the product there
+are log n plus 3 terms, so
+
+47
+00:02:54.820 --> 00:02:58.340
+that at most,
+1 over e to the log n plus 3.
+
+48
+00:02:58.340 --> 00:02:59.528
+What is that?
+
+49
+00:02:59.528 --> 00:03:02.860
+1/e cubed n.
+
+50
+00:03:02.860 --> 00:03:03.850
+About 1 over 20n.
+
+51
+00:03:06.020 --> 00:03:10.980
+Putting it together, the sum over
+every element e of the probability
+
+52
+00:03:10.980 --> 00:03:15.930
+that the element is not covered,
+is at most n times 1/e cubed n,
+
+53
+00:03:15.930 --> 00:03:19.730
+which is less than 0.05.
+
+54
+00:03:19.730 --> 00:03:26.803
+Therefore the output is a correct set
+cover with probability at least 95%.
+
+55
+00:03:26.803 --> 00:03:32.646
+In other words, what we have proved is
+that by doing randomized rounding and
+
+56
+00:03:32.646 --> 00:03:36.209
+iterating, iterated randomized rounding,
+
+57
+00:03:36.209 --> 00:03:39.975
+gives us a collection of
+sets that is a set cover.
+
+58
+00:03:39.975 --> 00:03:43.090
+With probability at least 95% and
+
+59
+00:03:43.090 --> 00:03:47.820
+with cost is on average,
+at most log n plus 3 times opt.
+
+60
+00:03:49.050 --> 00:03:50.172
+We're almost there.
+
+61
+00:03:50.172 --> 00:03:55.024
+We have something which is essentially
+a randomized algorithm for set cover, for
+
+62
+00:03:55.024 --> 00:03:59.400
+almost set cover, for something that
+95% of the time is the set cover.
+
+63
+00:04:00.900 --> 00:04:05.753
+In the next part, what we will see is
+how to transform this into an algorithm
+
+64
+00:04:05.753 --> 00:04:07.927
+that always returns a set cover.

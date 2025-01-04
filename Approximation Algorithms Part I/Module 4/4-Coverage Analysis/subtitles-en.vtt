@@ -1,0 +1,547 @@
+WEBVTT
+
+1
+00:00:00.378 --> 00:00:04.587
+[MUSIC]
+
+2
+00:00:07.640 --> 00:00:09.984
+We have an algorithm for set cover and
+
+3
+00:00:09.984 --> 00:00:15.920
+we have see that it outputs a collection
+of sets whose expected causes at most OPT.
+
+4
+00:00:15.920 --> 00:00:19.990
+Now we need to see whether or
+not it is a set cover.
+
+5
+00:00:19.990 --> 00:00:21.020
+Is it correct?
+
+6
+00:00:21.020 --> 00:00:22.680
+Is the output a cover?
+
+7
+00:00:22.680 --> 00:00:24.510
+Maybe, maybe not.
+
+8
+00:00:24.510 --> 00:00:26.970
+It depends on our random choices.
+
+9
+00:00:26.970 --> 00:00:29.360
+So let us look at this
+property more closely.
+
+10
+00:00:31.360 --> 00:00:35.090
+Let us analyze in particular
+the number of elements covered.
+
+11
+00:00:36.210 --> 00:00:41.650
+The number of elements covered by the sets
+that are chosen and placed in the output,
+
+12
+00:00:41.650 --> 00:00:47.580
+can be written as the sum over every
+element of the indicated function,
+
+13
+00:00:47.580 --> 00:00:50.770
+which is 1 if element e is covered,
+and 0 if not.
+
+14
+00:00:52.840 --> 00:00:55.010
+This is a random quantity.
+
+15
+00:00:55.010 --> 00:00:58.650
+So again,
+we are going to analyze it in expectation.
+
+16
+00:00:59.760 --> 00:01:01.640
+What is this sum on average?
+
+17
+00:01:03.400 --> 00:01:06.330
+Compute the expectation of the sum.
+
+18
+00:01:06.330 --> 00:01:08.150
+Expectation of the sum.
+
+19
+00:01:08.150 --> 00:01:10.890
+What do you do when you see
+an expectation of a sum?
+
+20
+00:01:10.890 --> 00:01:13.820
+You invert, summation and expectation.
+
+21
+00:01:13.820 --> 00:01:17.320
+Sum of the expectation of
+an indicated function.
+
+22
+00:01:17.320 --> 00:01:20.760
+What do you do when you have
+the expectation of an indicated function?
+
+23
+00:01:20.760 --> 00:01:23.000
+Replace it by a probability.
+
+24
+00:01:23.000 --> 00:01:24.170
+So what do you get?
+
+25
+00:01:24.170 --> 00:01:28.380
+By the same reasoning as what
+we saw earlier, the expected
+
+26
+00:01:28.380 --> 00:01:33.050
+number of elements covered is,
+the sum over every element
+
+27
+00:01:33.050 --> 00:01:37.940
+of the probability that element e is
+covered by the output collection of sets.
+
+28
+00:01:39.350 --> 00:01:44.370
+So, now to analyze this,
+we focus on one particular term.
+
+29
+00:01:45.610 --> 00:01:49.140
+Focus on one particular element e.
+
+30
+00:01:50.290 --> 00:01:55.510
+What is the probability that e is covered
+by the output collection of sets?
+
+31
+00:01:56.650 --> 00:02:01.660
+This is the more technical part
+of this chapter I have to say.
+
+32
+00:02:01.660 --> 00:02:02.930
+So hang on.
+
+33
+00:02:05.440 --> 00:02:06.908
+When is element e covered?
+
+34
+00:02:06.908 --> 00:02:14.710
+It's covered if there is a set in
+the output that covers element e.
+
+35
+00:02:14.710 --> 00:02:17.220
+Such as e belongs to S.
+
+36
+00:02:17.220 --> 00:02:21.210
+The probability that e is covered equals
+the probability that there exists
+
+37
+00:02:21.210 --> 00:02:23.410
+S in the output containing e.
+
+38
+00:02:23.410 --> 00:02:26.780
+And so, what is this?
+
+39
+00:02:28.390 --> 00:02:33.210
+The probability that there
+exists something is 1 minus
+
+40
+00:02:33.210 --> 00:02:35.288
+the probability that it does not exist.
+
+41
+00:02:35.288 --> 00:02:36.862
+That is,
+
+42
+00:02:36.862 --> 00:02:42.470
+the probability that none of the sets
+containing e are chosen in the output.
+
+43
+00:02:43.730 --> 00:02:46.980
+So the probability that there
+exists an s in the output
+
+44
+00:02:48.260 --> 00:02:53.720
+containing e is 1- the probability
+that for every set containing e,
+
+45
+00:02:53.720 --> 00:02:57.760
+S is not chosen, is not part of
+the output collection of sets.
+
+46
+00:02:59.040 --> 00:03:02.490
+So, now we need to
+analyze this probability.
+
+47
+00:03:02.490 --> 00:03:07.700
+We need to upperbound the probability
+that for every set S containing e,
+
+48
+00:03:07.700 --> 00:03:11.010
+S is not part of the output
+collection of sets.
+
+49
+00:03:12.940 --> 00:03:16.110
+So far elementary reasoning.
+
+50
+00:03:16.110 --> 00:03:19.730
+Now we're going to use independence.
+
+51
+00:03:19.730 --> 00:03:22.840
+We get to use a property that
+only holds when you have
+
+52
+00:03:22.840 --> 00:03:25.640
+an independent collection of events.
+
+53
+00:03:25.640 --> 00:03:31.080
+If you have two independent events A and
+B, then
+
+54
+00:03:31.080 --> 00:03:37.960
+the probability that both of them occur is
+equal to the product of the probabilities.
+
+55
+00:03:37.960 --> 00:03:41.370
+If they are not independent,
+this probability of A and
+
+56
+00:03:41.370 --> 00:03:43.510
+B could be less, could be more.
+
+57
+00:03:43.510 --> 00:03:47.080
+Depends on whether they're correlated,
+whether they're anti-correlated.
+
+58
+00:03:47.080 --> 00:03:49.480
+But if A and B are independent,
+
+59
+00:03:49.480 --> 00:03:53.750
+then this probability is exactly
+the product of the single probabilities.
+
+60
+00:03:55.400 --> 00:03:57.967
+So, what does the algorithm do?
+
+61
+00:03:57.967 --> 00:04:05.130
+The algorithm for every S, puts S in
+the output with probability x sub S.
+
+62
+00:04:05.130 --> 00:04:10.680
+And these probabilities are independent,
+independent for every S.
+
+63
+00:04:10.680 --> 00:04:15.935
+They're independent, so
+the probability that all of these events
+
+64
+00:04:15.935 --> 00:04:21.005
+occur simultaneously,
+that every S containing e is discarded,
+
+65
+00:04:21.005 --> 00:04:25.906
+is the product, is equal to
+the product of the probabilities.
+
+66
+00:04:25.906 --> 00:04:31.870
+So it's equal to the product
+over every set containing e,
+
+67
+00:04:31.870 --> 00:04:37.482
+of the probability of that
+set is not put in the output.
+
+68
+00:04:37.482 --> 00:04:42.125
+This thing the key thing
+here is independence.
+
+69
+00:04:42.125 --> 00:04:47.270
+And so, now we have to look at the
+probability that S is not in the output.
+
+70
+00:04:47.270 --> 00:04:51.700
+That probability we know is 1- x
+sub s by the choice of algorithm.
+
+71
+00:04:53.660 --> 00:04:58.651
+Now we just put everything together and
+we get, the probability
+
+72
+00:04:58.651 --> 00:05:04.270
+that element e is covered
+is 1 minus the product
+
+73
+00:05:04.270 --> 00:05:09.500
+over every set containing
+e of 1 minus x sub S.
+
+74
+00:05:09.500 --> 00:05:12.660
+This gives us an expression for
+
+75
+00:05:12.660 --> 00:05:17.700
+the probability that e is covered
+by the output collection of sets.
+
+76
+00:05:19.320 --> 00:05:24.580
+So, now we have to go back and
+see how we incorporate that
+
+77
+00:05:24.580 --> 00:05:28.020
+into the analysis of the number
+elements covered by the algorithm.
+
+78
+00:05:31.550 --> 00:05:33.040
+Now let's see.
+
+79
+00:05:33.040 --> 00:05:37.419
+We need to do a little bit more
+work on this product of 1- x sub s.
+
+80
+00:05:39.440 --> 00:05:45.670
+The first thing we will do is x
+is the expectation of log of x.
+
+81
+00:05:45.670 --> 00:05:47.944
+That's an identity.
+
+82
+00:05:47.944 --> 00:05:51.970
+ln of (XY) = log of X + ln Y.
+
+83
+00:05:51.970 --> 00:05:54.420
+That's almost the definition
+of a logarithm.
+
+84
+00:05:55.810 --> 00:05:57.768
+Apply this to this product.
+
+85
+00:05:57.768 --> 00:06:06.560
+This expression is the exponent
+of a log of this expression.
+
+86
+00:06:06.560 --> 00:06:09.540
+It's a product, so
+we can replace it by a sum.
+
+87
+00:06:09.540 --> 00:06:14.080
+Exchange product and
+logarithm after changing it in a sum.
+
+88
+00:06:14.080 --> 00:06:18.800
+This is the exponential of sum over
+
+89
+00:06:18.800 --> 00:06:23.680
+every set containing element e
+are the natural logarithm of 1- x s.
+
+90
+00:06:27.050 --> 00:06:29.420
+This is the beginning of
+an algebraic calculation.
+
+91
+00:06:31.230 --> 00:06:36.320
+The next thing we will use is the log
+of 1- x sub s can be replaced,
+
+92
+00:06:36.320 --> 00:06:39.920
+simplified, replaced by -x sub s.
+
+93
+00:06:39.920 --> 00:06:46.550
+It is well known that log
+of 1- x is at most -x.
+
+94
+00:06:46.550 --> 00:06:48.900
+And so we do this and what do we get?
+
+95
+00:06:48.900 --> 00:06:54.315
+We get that this exponential
+with that expression there
+
+96
+00:06:54.315 --> 00:07:01.698
+is at most e to the minus the sum over
+every s containing the element of x sub s.
+
+97
+00:07:04.228 --> 00:07:05.640
+Now we look at this.
+
+98
+00:07:05.640 --> 00:07:11.590
+The sum over every e containing S of
+x sub s, and what do we recognize?
+
+99
+00:07:12.850 --> 00:07:15.995
+We recognize a constraint
+of our linear program.
+
+100
+00:07:18.140 --> 00:07:23.350
+We have the constraint that for every
+element e, if we look at the sum of x sub
+
+101
+00:07:23.350 --> 00:07:29.860
+s, over all sets S containing
+e that sum must be at least 1.
+
+102
+00:07:29.860 --> 00:07:36.720
+Apply this and we deduce
+the exponential of minus that sum
+
+103
+00:07:36.720 --> 00:07:41.700
+is at most the exponential of -1.
+
+104
+00:07:41.700 --> 00:07:45.070
+So what does this tell us?
+
+105
+00:07:45.070 --> 00:07:52.932
+It tells us that the probability that an
+element e is covered is at least 1- 1/e.
+
+106
+00:07:52.932 --> 00:07:59.580
+Therefore, the average number of elements
+covered by the output collection of sets
+
+107
+00:07:59.580 --> 00:08:05.569
+is in expectation at least the total
+number of elements times 1- 1/e.
+
+108
+00:08:06.690 --> 00:08:08.778
+And what is 1-1/e?
+
+109
+00:08:08.778 --> 00:08:15.516
+It's approximately 63%,
+a little bit more than 63%, 63.2%.
+
+110
+00:08:15.516 --> 00:08:18.890
+And so what have we proved at this point?
+
+111
+00:08:18.890 --> 00:08:21.452
+We have proved that we've
+randomized rounding.
+
+112
+00:08:21.452 --> 00:08:28.050
+We have obtained a collection of sets
+whose cost is in expectation at most OPT.
+
+113
+00:08:28.050 --> 00:08:32.040
+And that cover, how many of the elements?
+
+114
+00:08:32.040 --> 00:08:34.620
+On average, at least 63% of the elements.
+
+115
+00:08:37.460 --> 00:08:40.460
+So, we do not have a set cover.
+
+116
+00:08:40.460 --> 00:08:44.660
+We do not yet have a set cover,
+but we are getting closer.
+
+117
+00:08:44.660 --> 00:08:49.495
+It only remains to modify the algorithm
+a little bit to turn it into a correct
+
+118
+00:08:49.495 --> 00:08:50.968
+set cover algorithm.

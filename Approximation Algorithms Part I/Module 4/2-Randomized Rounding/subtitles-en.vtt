@@ -1,0 +1,300 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:03.610
+[MUSIC]
+
+2
+00:00:06.562 --> 00:00:08.907
+We have defined the set cover problem,
+
+3
+00:00:08.907 --> 00:00:13.100
+we have seen that it was a generalization
+of the vertex cover problem,
+
+4
+00:00:13.100 --> 00:00:18.680
+we have tried to extend the algorithm,
+we had for vertex cover, and we failed.
+
+5
+00:00:18.680 --> 00:00:24.170
+Now we need to make another attempt
+at getting a set cover algorithm.
+
+6
+00:00:26.050 --> 00:00:29.000
+Here was our linear
+programming relaxation.
+
+7
+00:00:29.000 --> 00:00:30.830
+This we will keep.
+
+8
+00:00:30.830 --> 00:00:35.490
+The big question is, how do we round
+the solution of the linear program?
+
+9
+00:00:38.540 --> 00:00:42.320
+Now we are going to see an algorithm
+using randomized rounding.
+
+10
+00:00:45.090 --> 00:00:48.418
+If you think about
+a variable that equals 0.9,
+
+11
+00:00:48.418 --> 00:00:51.290
+when the variable is between zero and one.
+
+12
+00:00:51.290 --> 00:00:53.195
+And you want to make it an integer.
+
+13
+00:00:53.195 --> 00:00:56.654
+0.9 probably should be rounded to one.
+
+14
+00:00:56.654 --> 00:01:00.613
+On the other hand, if it's equal to 0.1,
+
+15
+00:01:00.613 --> 00:01:05.940
+then probably it should go to zero,
+be rounded down to zero.
+
+16
+00:01:05.940 --> 00:01:10.650
+But as we have seen,
+we cannot fix a particular threshold and
+
+17
+00:01:10.650 --> 00:01:13.540
+say that everything above that
+threshold goes to one and
+
+18
+00:01:13.540 --> 00:01:16.180
+everything below that
+threshold goes to zero.
+
+19
+00:01:16.180 --> 00:01:18.490
+So we need to be smarter.
+
+20
+00:01:18.490 --> 00:01:23.180
+And the idea here is to do
+it using randomization.
+
+21
+00:01:23.180 --> 00:01:24.450
+Using probability.
+
+22
+00:01:25.950 --> 00:01:27.650
+How do we do this?
+
+23
+00:01:27.650 --> 00:01:32.500
+Let's say that a variable equals .8,
+then we're
+
+24
+00:01:32.500 --> 00:01:36.920
+going to round it to one,
+not always but with some probability.
+
+25
+00:01:38.290 --> 00:01:44.051
+We flip some coins and
+then we round the variable
+
+26
+00:01:44.051 --> 00:01:48.964
+to one with probability .8, 80%.
+
+27
+00:01:48.964 --> 00:01:53.420
+This is how we will use the value,
+the fractional value and
+
+28
+00:01:53.420 --> 00:01:55.060
+transform it into an integer value.
+
+29
+00:01:57.120 --> 00:02:00.200
+So the new rounding
+algorithm is very simple.
+
+30
+00:02:01.260 --> 00:02:06.930
+For every set s, we look at the variable
+xs in the solution of the linear program.
+
+31
+00:02:08.180 --> 00:02:12.860
+With probability xs,
+we put s in the set cover.
+
+32
+00:02:13.870 --> 00:02:15.750
+With probability 1- Xs,
+
+33
+00:02:16.930 --> 00:02:21.920
+we do not put s in the cover and so
+when we do this for every set s.
+
+34
+00:02:21.920 --> 00:02:27.460
+We take a decision and then we output
+the resulting collection of sets.
+
+35
+00:02:27.460 --> 00:02:29.860
+That's a very simple rounding algorithm.
+
+36
+00:02:31.200 --> 00:02:35.340
+As always, for these kinds of algorithms,
+we have three questions to answer.
+
+37
+00:02:37.540 --> 00:02:39.730
+First question, is it efficient?
+
+38
+00:02:41.110 --> 00:02:42.340
+Second question.
+
+39
+00:02:42.340 --> 00:02:44.330
+Is the output a natural set cover?
+
+40
+00:02:44.330 --> 00:02:45.020
+Is it correct?
+
+41
+00:02:46.050 --> 00:02:47.070
+Third question.
+
+42
+00:02:47.070 --> 00:02:48.010
+How good is it?
+
+43
+00:02:48.010 --> 00:02:49.980
+What is the cost of the output cover?
+
+44
+00:02:51.440 --> 00:02:54.600
+These are the three questions
+that we always need to answer for
+
+45
+00:02:54.600 --> 00:02:55.890
+approximation algorithms.
+
+46
+00:02:57.300 --> 00:02:58.480
+The first question is easy.
+
+47
+00:03:00.640 --> 00:03:01.410
+Is it efficient?
+
+48
+00:03:03.310 --> 00:03:03.810
+Yes.
+
+49
+00:03:05.370 --> 00:03:06.810
+Why?
+
+50
+00:03:06.810 --> 00:03:10.140
+Because the time it takes is just
+the time to solve the linear program
+
+51
+00:03:10.140 --> 00:03:14.910
+which we know is minimal time, plus for
+each variable make one random choice.
+
+52
+00:03:14.910 --> 00:03:19.540
+Throw one random variable between zero and
+one and make one decision.
+
+53
+00:03:19.540 --> 00:03:22.150
+So this overall takes polynomial time.
+
+54
+00:03:22.150 --> 00:03:26.190
+Assuming, of course,
+that we have access to random numbers.
+
+55
+00:03:27.380 --> 00:03:28.920
+Which is true in practice.
+
+56
+00:03:31.690 --> 00:03:33.530
+Second, is the output a cover?
+
+57
+00:03:34.970 --> 00:03:35.670
+It depends.
+
+58
+00:03:37.970 --> 00:03:42.950
+It could be that it's not a cover because
+for every set we make some random choice.
+
+59
+00:03:42.950 --> 00:03:46.820
+It could be that for every set we
+decide not to put it in the cover and
+
+60
+00:03:46.820 --> 00:03:49.890
+that will have no set in the output and
+the other ones will not be covered.
+
+61
+00:03:51.240 --> 00:03:56.200
+So maybe it's a cover maybe not,
+and how good is it?
+
+62
+00:03:56.200 --> 00:03:57.680
+Well it depends.
+
+63
+00:03:57.680 --> 00:04:01.100
+Maybe we'll choose some expensive sets,
+or maybe not.
+
+64
+00:04:01.100 --> 00:04:04.440
+So these are the two things we need
+to analyze for this algorithm.
+
+65
+00:04:04.440 --> 00:04:08.460
+We need to analyze the probability
+that the output is a cover.
+
+66
+00:04:08.460 --> 00:04:12.400
+And we need to analyze the cost
+of the output collection of sets.

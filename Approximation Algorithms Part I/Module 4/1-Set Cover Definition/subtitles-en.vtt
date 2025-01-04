@@ -1,0 +1,895 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.466
+[MUSIC]
+
+2
+00:00:07.466 --> 00:00:11.050
+Welcome back to the course
+on approximation algorithms.
+
+3
+00:00:12.480 --> 00:00:15.250
+In this chapter,
+we will study the set cover problem.
+
+4
+00:00:16.440 --> 00:00:20.920
+This will be an opportunity for us to
+explore a new technique in the design of
+
+5
+00:00:20.920 --> 00:00:26.550
+approximation algorithms using
+the solution of a linear program and
+
+6
+00:00:26.550 --> 00:00:29.400
+rounding it using randomized rounding.
+
+7
+00:00:30.410 --> 00:00:34.350
+This will be our first randomized
+algorithm in this course.
+
+8
+00:00:35.620 --> 00:00:39.440
+But first, let us give the definition
+of the set cover problem.
+
+9
+00:00:40.520 --> 00:00:41.630
+Input and output.
+
+10
+00:00:43.640 --> 00:00:44.570
+What is the input?
+
+11
+00:00:45.940 --> 00:00:51.050
+The input to the set cover problem
+is collection of elements.
+
+12
+00:00:51.050 --> 00:00:56.955
+Here we have one, two, three, four,
+five, six elements in a universe.
+
+13
+00:00:56.955 --> 00:01:00.940
+And then,
+a collection of subsets of these elements.
+
+14
+00:01:00.940 --> 00:01:06.500
+For example, the blue subset contains
+both the orange and the green elements.
+
+15
+00:01:07.800 --> 00:01:09.720
+Each subset has a cost.
+
+16
+00:01:13.170 --> 00:01:16.650
+For example, what kind of
+situation does this correspond to?
+
+17
+00:01:16.650 --> 00:01:22.516
+Perhaps you want to buy
+a certain set of items.
+
+18
+00:01:22.516 --> 00:01:30.270
+You want to buy some various
+ingredients for cooking, let's say.
+
+19
+00:01:30.270 --> 00:01:32.750
+And then,
+you know that if you go to this store,
+
+20
+00:01:32.750 --> 00:01:35.010
+you will get this
+particular set of elements.
+
+21
+00:01:35.010 --> 00:01:37.930
+If you go to that store,
+you'll get another set of foods.
+
+22
+00:01:37.930 --> 00:01:39.820
+That store, another set of foods.
+
+23
+00:01:39.820 --> 00:01:42.320
+With certain prices in each set.
+
+24
+00:01:42.320 --> 00:01:48.200
+And then you have to decide which stores
+to visit, which bunches of items to buy.
+
+25
+00:01:48.200 --> 00:01:50.090
+So that in the end you
+have everything you need.
+
+26
+00:01:51.410 --> 00:01:55.140
+So, you have these elements,
+subsets of costs and
+
+27
+00:01:55.140 --> 00:01:58.780
+the output is a collection of subsets.
+
+28
+00:01:58.780 --> 00:02:03.010
+You choose certain of the subsets
+of the input, not all of them but
+
+29
+00:02:03.010 --> 00:02:07.170
+a few, so as to cover all the elements.
+
+30
+00:02:07.170 --> 00:02:10.890
+Every element in the universe
+must be covered,
+
+31
+00:02:10.890 --> 00:02:13.860
+must be in at least one of
+the subsets that you choose.
+
+32
+00:02:14.870 --> 00:02:18.510
+And your goal is to minimize
+the cost of the sets that you buy.
+
+33
+00:02:19.750 --> 00:02:24.180
+For example here,
+you bought three sets perhaps,
+
+34
+00:02:24.180 --> 00:02:27.750
+maybe, the three sets
+that are slightly shaded.
+
+35
+00:02:27.750 --> 00:02:32.749
+And these three sets have cost 4,
+2, and 2, for a total cost of 8.
+
+36
+00:02:32.749 --> 00:02:37.588
+And you can verify that every one
+of the elements is covered by at
+
+37
+00:02:37.588 --> 00:02:39.332
+least one of the sets.
+
+38
+00:02:43.144 --> 00:02:46.020
+Now, does this ring a bell?
+
+39
+00:02:46.020 --> 00:02:47.270
+Isn't this kind of familiar?
+
+40
+00:02:48.370 --> 00:02:49.530
+Yes, of course.
+
+41
+00:02:49.530 --> 00:02:52.700
+Even if you don't understand
+anything to what I'm saying,
+
+42
+00:02:52.700 --> 00:02:55.380
+you recognize one word, cover.
+
+43
+00:02:55.380 --> 00:02:57.242
+We've seen this word before.
+
+44
+00:02:57.242 --> 00:03:02.250
+Vertex cover, vertex cover, set cover.
+
+45
+00:03:02.250 --> 00:03:06.350
+Indeed, these two problems are closely
+related, and what is the relation?
+
+46
+00:03:07.540 --> 00:03:11.770
+The vertex cover is a special
+case of the set cover problem.
+
+47
+00:03:12.960 --> 00:03:17.050
+The set cover problem is a generalization
+of the vertex cover problem.
+
+48
+00:03:18.390 --> 00:03:19.483
+Let us see why.
+
+49
+00:03:22.854 --> 00:03:26.572
+This is an instance of
+the vertex cover problem.
+
+50
+00:03:26.572 --> 00:03:31.520
+Graph vertices, edges, you have to
+pick vertices to cover every edge.
+
+51
+00:03:31.520 --> 00:03:35.480
+It was the one that was in the picture
+with Charlie Brown in the first chapter.
+
+52
+00:03:37.200 --> 00:03:39.710
+We want to cover all edges
+with the fewest vertices.
+
+53
+00:03:40.800 --> 00:03:45.750
+Cover edges, so,
+the edges are the elements.
+
+54
+00:03:45.750 --> 00:03:50.060
+Using vertices, so
+that vertices are the sets.
+
+55
+00:03:50.060 --> 00:03:53.160
+What is the set associated to a vertex?
+
+56
+00:03:53.160 --> 00:03:58.430
+It is the set of all the edges
+adjacent to that vertex.
+
+57
+00:03:58.430 --> 00:04:00.550
+All the edges that touch that vertex.
+
+58
+00:04:01.580 --> 00:04:03.440
+What is the cost of a set?
+
+59
+00:04:03.440 --> 00:04:09.600
+If you just want the fewest vertices,
+then each set has cost one and you want
+
+60
+00:04:09.600 --> 00:04:14.860
+to minimize the total cost, ie, minimize
+the total number of sets that you choose.
+
+61
+00:04:16.410 --> 00:04:17.710
+So in this way,
+
+62
+00:04:17.710 --> 00:04:21.860
+you could reformulate the vertex cover
+problem as a a set cover problem.
+
+63
+00:04:22.860 --> 00:04:25.470
+The set cover problem is more general.
+
+64
+00:04:25.470 --> 00:04:29.490
+So it is at least as difficult
+as the vertex cover problem.
+
+65
+00:04:30.540 --> 00:04:37.760
+And so, we will now study an algorithm to
+solve approximately the set cover problem.
+
+66
+00:04:39.090 --> 00:04:40.390
+How did we solve vertex cover?
+
+67
+00:04:41.870 --> 00:04:47.570
+We wrote a linear programming
+relaxation and solved it by rounding.
+
+68
+00:04:49.510 --> 00:04:55.720
+So, they suggest that here we should use
+a similar approach, integer program.
+
+69
+00:04:55.720 --> 00:05:01.495
+Our integer program will be a natural
+extension of the integer program for
+
+70
+00:05:01.495 --> 00:05:02.070
+vertex cover.
+
+71
+00:05:03.220 --> 00:05:07.885
+So, let me now give you an integer
+programming formulation of the set cover
+
+72
+00:05:07.885 --> 00:05:08.561
+problem.
+
+73
+00:05:10.958 --> 00:05:14.460
+Integer program, we need variables.
+
+74
+00:05:14.460 --> 00:05:18.600
+In the case of vertex cover,
+we had one variable for each vertex,
+
+75
+00:05:20.210 --> 00:05:26.390
+which can be interpreted to mean
+whether or not we take this vertex.
+
+76
+00:05:26.390 --> 00:05:30.040
+In the set cover problem,
+we now have one variable for
+
+77
+00:05:30.040 --> 00:05:32.840
+each possible subset s given in the input.
+
+78
+00:05:33.860 --> 00:05:37.595
+The interpretation is,
+x sub s will be 0 or 1.
+
+79
+00:05:37.595 --> 00:05:43.570
+1 if s is put in the cover,
+and 0 if it isn't constraint.
+
+80
+00:05:44.890 --> 00:05:49.010
+As in the vertex cover problem,
+there's one constraint for each element.
+
+81
+00:05:49.010 --> 00:05:52.480
+In the vertex cover problem there
+was one constraint for each edge.
+
+82
+00:05:52.480 --> 00:05:57.180
+Seeing that for each edge you had
+to choose one or the other or
+
+83
+00:05:57.180 --> 00:05:59.870
+both of its endpoints and
+put them in the cover.
+
+84
+00:06:00.880 --> 00:06:04.120
+Here, we have one constraint for
+each element,
+
+85
+00:06:04.120 --> 00:06:06.370
+saying the element must be covered.
+
+86
+00:06:06.370 --> 00:06:11.099
+That is, if you look at all the x sub s
+variables, for all the sets containing s,
+
+87
+00:06:11.099 --> 00:06:13.586
+at least one of them
+must be in your cover.
+
+88
+00:06:13.586 --> 00:06:21.040
+At least one of them must be equal to 1.
+
+89
+00:06:21.040 --> 00:06:26.020
+If you sum the x sub s over all those
+sets, the sum must be at least 1.
+
+90
+00:06:28.590 --> 00:06:34.420
+Every vector x sub s that satisfies
+these constraints is a set cover.
+
+91
+00:06:35.480 --> 00:06:37.286
+For every set cover,
+
+92
+00:06:37.286 --> 00:06:43.150
+there is a corresponding vector
+where each x sub s is 0 or 1.
+
+93
+00:06:43.150 --> 00:06:45.530
+That satisfies all the constraints.
+
+94
+00:06:45.530 --> 00:06:46.910
+So with those variables and
+
+95
+00:06:46.910 --> 00:06:52.020
+constraints, we have captured
+every possible feasible solution.
+
+96
+00:06:52.020 --> 00:06:53.900
+And what is the objective?
+
+97
+00:06:53.900 --> 00:06:56.235
+The objective is to minimize the cost.
+
+98
+00:06:56.235 --> 00:06:57.745
+Every set has a cost.
+
+99
+00:06:57.745 --> 00:06:59.765
+Let's call it c sub s.
+
+100
+00:06:59.765 --> 00:07:03.835
+We want to minimize the sum
+of s of c sub s, x sub s.
+
+101
+00:07:03.835 --> 00:07:08.462
+This, when x sub s is 0 or
+1, is exactly the sum of
+
+102
+00:07:08.462 --> 00:07:12.995
+the costs of all the sets,
+such that x sub s is 1.
+
+103
+00:07:12.995 --> 00:07:17.410
+It is the sum of all the costs,
+of all the sets that are in the cover.
+
+104
+00:07:19.480 --> 00:07:24.020
+So with this, we have an integer
+program for the vertex cover problem.
+
+105
+00:07:24.020 --> 00:07:28.050
+Now let us continue imitating
+our solution for vertex cover.
+
+106
+00:07:30.600 --> 00:07:32.690
+Linear programming relaxation.
+
+107
+00:07:32.690 --> 00:07:38.059
+It is the same as the integer
+program except that instead of
+
+108
+00:07:38.059 --> 00:07:44.412
+positing that x sub s has to be 0 or
+1, we write a constraint that x sub
+
+109
+00:07:44.412 --> 00:07:49.472
+s has to be a real number in
+the closed interval 0, 1.
+
+110
+00:07:49.472 --> 00:07:52.760
+That is linear programming relaxation for
+set cover.
+
+111
+00:07:55.260 --> 00:08:00.596
+Next step, if we try to extend
+vertex cover, rounding up.
+
+112
+00:08:00.596 --> 00:08:02.540
+How did we round in vertex cover?
+
+113
+00:08:02.540 --> 00:08:07.341
+We said for every variable x
+sub u associated to vertex u,
+
+114
+00:08:07.341 --> 00:08:09.148
+we round x sub u to 1.
+
+115
+00:08:09.148 --> 00:08:16.971
+If and only if,
+in the solution of the linear program,
+
+116
+00:08:16.971 --> 00:08:23.300
+the real variable x sub u is at least 1/2.
+
+117
+00:08:23.300 --> 00:08:24.770
+What happens if we do this here?
+
+118
+00:08:26.450 --> 00:08:27.470
+We can do the same.
+
+119
+00:08:27.470 --> 00:08:32.590
+We can say, write the linear
+programming for set cover.
+
+120
+00:08:32.590 --> 00:08:37.345
+Solve it, and then each x sub s,
+if it's at least 1/2 we round it to 1.
+
+121
+00:08:38.710 --> 00:08:40.838
+But that fails.
+
+122
+00:08:40.838 --> 00:08:45.724
+It fails in the sense that it fails
+to give a solution that corresponds
+
+123
+00:08:45.724 --> 00:08:47.540
+to a set cover.
+
+124
+00:08:47.540 --> 00:08:48.300
+It may fail.
+
+125
+00:08:49.450 --> 00:08:52.920
+Let me show this to you by an example.
+
+126
+00:08:52.920 --> 00:08:55.910
+We take the same input
+that I discussed earlier.
+
+127
+00:08:55.910 --> 00:08:56.440
+This input.
+
+128
+00:08:58.468 --> 00:09:06.550
+I claimed that this vector of a variable x
+sub s is a solution to the linear program.
+
+129
+00:09:06.550 --> 00:09:08.150
+It satisfies all the constraints.
+
+130
+00:09:08.150 --> 00:09:09.072
+Why?
+
+131
+00:09:09.072 --> 00:09:13.401
+Look at the yellow element.
+
+132
+00:09:13.401 --> 00:09:19.231
+It's covered 1/3 by this set,
+1/3 by that set, 1/3 by that set.
+
+133
+00:09:19.231 --> 00:09:21.770
+Total, 100%.
+
+134
+00:09:21.770 --> 00:09:26.403
+Green, 2/3, 1/3, 1/2.
+
+135
+00:09:26.403 --> 00:09:28.597
+Total, more than 100%.
+
+136
+00:09:28.597 --> 00:09:30.271
+It's covered and well covered.
+
+137
+00:09:30.271 --> 00:09:35.269
+Yellow, 1/3, 1/3, 1/3.
+
+138
+00:09:35.269 --> 00:09:37.016
+It's covered to 100%.
+
+139
+00:09:37.016 --> 00:09:39.333
+Orange, 1/3 and 2/3.
+
+140
+00:09:39.333 --> 00:09:40.194
+We're good.
+
+141
+00:09:40.194 --> 00:09:44.930
+Blue, 1/3, 1/3, and 1/3.
+
+142
+00:09:44.930 --> 00:09:46.310
+Again, we're good.
+
+143
+00:09:46.310 --> 00:09:47.970
+Purple, and so on.
+
+144
+00:09:47.970 --> 00:09:54.490
+For every element the sum of the x
+sub s values is at least one.
+
+145
+00:09:54.490 --> 00:09:59.310
+And so,
+we a solution to the linear program here.
+
+146
+00:09:59.310 --> 00:10:02.790
+Now what happens when we round it to 1?
+
+147
+00:10:02.790 --> 00:10:05.350
+Look at the values of x sub s.
+
+148
+00:10:05.350 --> 00:10:08.418
+2/3 is rounded up to 1.
+
+149
+00:10:08.418 --> 00:10:11.384
+1/2 is rounded up to 1.
+
+150
+00:10:11.384 --> 00:10:18.028
+All the other variables, they're all
+at 1/3, they all get rounded down to 0.
+
+151
+00:10:18.028 --> 00:10:20.050
+What's going to happen now?
+
+152
+00:10:20.050 --> 00:10:23.754
+Look at the yellow element.
+
+153
+00:10:23.754 --> 00:10:25.670
+It belonged to three sets.
+
+154
+00:10:25.670 --> 00:10:29.820
+The values of the three sets were 1/3,
+1/3, 1/3.
+
+155
+00:10:29.820 --> 00:10:32.670
+This gets rounded down to zero,
+zero, zero.
+
+156
+00:10:34.030 --> 00:10:37.520
+None of these three sets
+belongs to the output cover.
+
+157
+00:10:37.520 --> 00:10:39.810
+The yellow element will not be covered.
+
+158
+00:10:41.320 --> 00:10:45.690
+Using this rounding here,
+we will not get a feasibly
+
+159
+00:10:48.220 --> 00:10:52.890
+set cover if we round this vector
+x sub s of x sub s values.
+
+160
+00:10:54.810 --> 00:10:55.570
+So what can we do?
+
+161
+00:10:56.870 --> 00:11:01.741
+Let's lower the threshold, to what?
+
+162
+00:11:01.741 --> 00:11:05.060
+To 1/3, obviously here.
+
+163
+00:11:05.060 --> 00:11:07.560
+If we lower the threshold to 1/3,
+
+164
+00:11:07.560 --> 00:11:13.670
+then all of the variables here,
+they do get rounded to one.
+
+165
+00:11:13.670 --> 00:11:17.610
+And so the result is a feasible set cover.
+
+166
+00:11:17.610 --> 00:11:22.840
+However, it is easy to
+imagine another input,
+
+167
+00:11:22.840 --> 00:11:27.200
+where there's a feasible solution where
+every x sub s has value one-quarter.
+
+168
+00:11:27.200 --> 00:11:35.509
+For example, let's say that we
+have a square, four elements.
+
+169
+00:11:35.509 --> 00:11:40.879
+Or maybe even a pentagon, five elements.
+
+170
+00:11:43.000 --> 00:11:45.569
+All possible subsets of size two.
+
+171
+00:11:45.569 --> 00:11:53.310
+And each set, let's say that in x
+sub s it has value one-quarter.
+
+172
+00:11:53.310 --> 00:11:57.393
+Five elements,
+all possible subsets of size two.
+
+173
+00:11:57.393 --> 00:12:00.055
+Each x sub s has value one-quarter.
+
+174
+00:12:00.055 --> 00:12:07.370
+Then each element belongs to four subsets.
+
+175
+00:12:07.370 --> 00:12:09.164
+Each of them has value one-quarter.
+
+176
+00:12:09.164 --> 00:12:14.873
+One-quarter plus one-quarter plus
+one-quarter plus one-quarter, that's one.
+
+177
+00:12:14.873 --> 00:12:18.870
+Every element if covered, but
+every variable has value one-quarter.
+
+178
+00:12:18.870 --> 00:12:21.554
+So if you threshold is one-third,
+
+179
+00:12:21.554 --> 00:12:25.110
+then, everything will be rounded to
+zero and this will not work again.
+
+180
+00:12:26.510 --> 00:12:29.730
+If you try to lower the threshold,
+you have the same problem again and
+
+181
+00:12:29.730 --> 00:12:31.070
+again and again.
+
+182
+00:12:31.070 --> 00:12:33.430
+For every choice of a threshold,
+
+183
+00:12:34.530 --> 00:12:39.501
+there exists an instance of set cover and
+a vector x sub s.
+
+184
+00:12:39.501 --> 00:12:44.036
+[INAUDIBLE] rounding using
+that threshold will fail.
+
+185
+00:12:44.036 --> 00:12:48.564
+Will give you something which is
+not a set cover, which does not
+
+186
+00:12:48.564 --> 00:12:53.630
+satisfy all the constraints,
+which does not cover all the elements.
+
+187
+00:12:53.630 --> 00:12:56.300
+So, we need to devise
+a better rounding now.
+
+188
+00:12:57.760 --> 00:13:02.250
+We need to devise a rounding that
+will not have a fixed threshold,
+
+189
+00:13:02.250 --> 00:13:07.490
+that will somehow adapt to our
+output of the linear program.
+
+190
+00:13:08.550 --> 00:13:10.170
+How do we do that?
+
+191
+00:13:10.170 --> 00:13:12.180
+We use randomized rounding.
+
+192
+00:13:13.690 --> 00:13:16.310
+We have seen the definition of set cover.
+
+193
+00:13:16.310 --> 00:13:19.850
+We have seen a linear programming
+relaxation for set cover.
+
+194
+00:13:19.850 --> 00:13:22.014
+We have seen how the rounding used for
+
+195
+00:13:22.014 --> 00:13:25.760
+the cover does not extend
+to solve this problem.
+
+196
+00:13:25.760 --> 00:13:30.498
+Now we are going to see a randomized
+rounding solution for a set cover.
